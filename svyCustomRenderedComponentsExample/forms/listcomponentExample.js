@@ -30,9 +30,7 @@ function renderEntry(entry) {
 		}
 	}
 	template += '</div>';
-	template + '<hr/>'
-	return template;
-		
+	template += '<hr/>';
 	return template;
 }
 /**
@@ -48,6 +46,6 @@ function renderEntry(entry) {
  * @properties={typeid:24,uuid:"21510734-141C-4E3B-ACEF-511EF9F3B4A7"}
  */
 function onClick(entry, index, dataTarget, event) {
-	plugins.dialogs
-
+	//show dialog
+	var thePressedButton = plugins.dialogs.showInfoDialog('Title', 'Clicked on dp1' + entry.dp1 + ' click dataTarget ' + dataTarget , 'OK');
 }
