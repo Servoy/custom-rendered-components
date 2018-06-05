@@ -4,6 +4,9 @@ Bundle-Name: Custom Rendered Components
 Bundle-Version: 1.0.0
 Package-Type: Web-Component
 
+Name: listcomponent/listcomponent.spec
+Web-Component: True
+
 Name: timeline/timeline.spec
 Web-Component: True
 
