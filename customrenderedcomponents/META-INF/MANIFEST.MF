@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: customrenderedcomponents
+Bundle-Name: Custom Rendered Components
+Bundle-Version: 1.0.0
+Package-Type: Web-Component
+
+Name: timeline/timeline.spec
+Web-Component: True
+
