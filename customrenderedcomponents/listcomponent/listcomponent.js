@@ -62,10 +62,10 @@ angular.module('customrenderedcomponentsListcomponent',['servoy']).directive('cu
 			$scope.onEntryClick = function(entry, index, event) {
 				if ($scope.handlers.onClick) {
 					var target = event.target;
-					var dataTarget = target.closest("[data-target]");
+					var dataTarget = $(target).closest("[data-target]");
 					var data;
-					if (dataTarget) {
-						data = dataTarget.getAttribute("data-target");
+					if (dataTarget && dataTarget[0]) {
+						data = dataTarget[0].getAttribute("data-target");
 					}
 					$scope.handlers.onClick(entry, index, data, data);
 				}

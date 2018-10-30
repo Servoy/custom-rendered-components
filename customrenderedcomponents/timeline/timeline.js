@@ -21,10 +21,17 @@ angular.module('customrenderedcomponentsTimeline', ['servoy']).directive('custom
 					});
 
 				$scope.getEntryStyleClass = function(entry) {
-					if (entryStyleClassFunc) {
-						return entryStyleClassFunc(entry);
+					var entryClass = '';
+					if ($scope.model.foundset) {
+						if (entry.foundsetIndex -1 == $scope.model.foundset.selectedRowIndexes[0]) {
+							entryClass = 'svy-extra-timeline-selected';
+						}
 					}
-					return '';
+					
+					if (entryStyleClassFunc) {
+						return entryStyleClassFunc(entry) + ' ' + entryClass;
+					}
+					return entryClass;
 				}
 
 				// var entryRendererFunc = function(entry) {
@@ -55,8 +62,23 @@ angular.module('customrenderedcomponentsTimeline', ['servoy']).directive('custom
 				}
 
 				$scope.onEntryClick = function(entry, e) {
+					
+					var entryObj = entry;
+					if ($scope.model.foundset) {
+						$scope.model.foundset.requestSelectionUpdate([entry.foundsetIndex -1 ]).then(function success() {}).catch(function error(e) {
+							$log.error('Timeline: cannot change foundset selection ' + e);
+						});
+						
+						// remove foundsetIndex from entryObj
+						entryObj = {};
+						for (var prop in entry) {
+							entryObj[prop] = entry[prop]
+						}
+						delete entryObj.foundsetIndex;
+					}
+					
 					if ($scope.handlers.onClick) {
-						$scope.handlers.onClick(entry, e.target.id);
+						$scope.handlers.onClick(entryObj, e.target.id);
 					}
 				}
 
@@ -104,7 +126,7 @@ angular.module('customrenderedcomponentsTimeline', ['servoy']).directive('custom
 								if (!lastDate || lastDate.toDateString() != time.toDateString()) {
 									var entryDateDivider = new Object()
 									entryDateDivider.time = time.toDateString();
-									entryDateDivider.subject = time.getDate() + ' ' + monthNames[time.getMonth()];
+									entryDateDivider.subject = time.getDate() + ' ' + monthNames[time.getMonth()] + ' ' + time.getFullYear();
 									entryDateDivider.data = {
 										isDivider: true
 									};
@@ -121,6 +143,7 @@ angular.module('customrenderedcomponentsTimeline', ['servoy']).directive('custom
 							entry['content'] = row['content'] != undefined ? row['content'] : '';
 							entry['tooltip'] = row['tooltip'] != undefined ? row['tooltip'] : '';
 							entry['data'] = row['data'] != undefined ? row['data'] : '';
+							entry['foundsetIndex'] = i + 1;
 							$scope.model.data.push(entry);
 						}
 					}
