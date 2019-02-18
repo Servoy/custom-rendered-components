@@ -38,7 +38,7 @@ angular.module('customrenderedcomponentsListcomponent',['servoy']).directive('cu
 				template += '<i class="pull-right fa fa-tag" data-target="icon"></i>';
 				for (var prop in entry) {
 					if (prop.indexOf("dp") === 0) {
-						template += '<div class="feed-subject" data-target="' + prop + '">' + entry[prop] + '</div>';
+						template += '<div class="feed-subject" data-target="' + prop + '" ng-bind-html="entry.' + prop + '"></div>';
 					}
 				}
 				template += '</div>';
