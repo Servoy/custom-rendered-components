@@ -1,4 +1,5 @@
-angular.module('customrenderedcomponentsListcomponent',['servoy']).directive('customrenderedcomponentsListcomponent', ['$log', '$foundsetTypeConstants', function($log, $foundsetTypeConstants) {
+angular.module('customrenderedcomponentsListcomponent',['servoy'])
+.directive('customrenderedcomponentsListcomponent', ['$log', '$foundsetTypeConstants', '$sce', function($log, $foundsetTypeConstants, $sce) {
 	return {
 		restrict: 'E',
 		scope: {
@@ -57,6 +58,16 @@ angular.module('customrenderedcomponentsListcomponent',['servoy']).directive('cu
 					return entryRendererFunc(entry);
 				}
 				return '';
+			}
+			
+			$scope.getSanitizedData = function (entry) {
+				var data = {};
+				for (var dp in entry) {
+					if (dp.indexOf("dp") === 0) {
+						data[dp] = $sce.getTrustedHtml(entry[dp]);
+					}
+				}
+				return data;
 			}
 
 			$scope.onEntryClick = function(entry, index, event) {
