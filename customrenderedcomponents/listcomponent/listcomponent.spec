@@ -7,7 +7,7 @@
 	"libraries": [{ "name": "listcomponent.css", "version": "1.0", "url": "customrenderedcomponents/listcomponent/listcomponent.css", "mimetype": "text/css" }],
 	"model":
 	{
-		"data": { "type": "object", "tags": {"scope" : "private"}},
+		"data": { "type": "object[]", "tags": {"scope" : "private"}},
 		"entryStyleClassFunc": { "type": "string"},
 		"entryRendererFunc": { "type": "string"},
 		"visible": "visible",
@@ -20,8 +20,7 @@
 			"parameters": [{
 				"name": "entry",
 				"type": "object"
-			}
-			,
+			},
 			{
 				"name": "index",
 				"type": "int"
@@ -44,7 +43,24 @@
             "returns": "object"
 		},
         "clear": {
-        }
+        },		
+        "getEntry": {
+			"parameters": [
+			 	{"name": "index", "type": "int"}
+			],
+            "returns": "object"
+		},
+		"removeEntry": {
+			"parameters": [
+				{"name": "index", "type": "int"}
+			],
+            "returns": "boolean"
+		},		
+		"getEntriesCount": {
+			"parameters": [
+			],
+            "returns": "int"
+		}
 	},
 	"types" : {
 
