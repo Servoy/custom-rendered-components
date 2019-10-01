@@ -63,7 +63,7 @@ angular.module('customrenderedcomponentsListcomponent',['servoy'])
 			$scope.getSanitizedData = function (entry) {
 				var data = {};
 				for (var dp in entry) {
-					if (dp.indexOf("dp") === 0) {
+					if (!$scope.model.foundset || dp.indexOf("dp") === 0) {
 						data[dp] = $sce.getTrustedHtml(entry[dp]);
 					}
 				}

@@ -12,7 +12,8 @@
 		"entryRendererFunc": { "type": "string"},
 		"visible": "visible",
 		"foundset": {"type": "foundset", "dynamicDataproviders": true, "default" : {"foundsetSelector":""} , "pushToServer": "allow", "initialPreferredViewPortSize": 130, "sendSelectionViewportInitially": true },
-		"responsiveHeight": {"type": "int", "default": 500}
+		"responsiveHeight": {"type": "int", "default": 500},
+		"styleClass" : { "type" :"styleclass", "tags": { "scope" :"design" }}
 	},
 	"handlers" : {
 		"onClick": {
