@@ -1,6 +1,6 @@
 {
 	"name": "customrenderedcomponents-listcomponent",
-	"displayName": "listcomponent",
+	"displayName": "List Component",
 	"version": 1,
 	"definition": "customrenderedcomponents/listcomponent/listcomponent.js",
 	"serverscript": "customrenderedcomponents/listcomponent/listcomponent_server.js",
