@@ -1,4 +1,4 @@
-<div class="svy-extra-listcomponent" id="{{::model.svyMarkupId}}" ng-style="getStyle()">
+<div class="svy-extra-listcomponent" ng-class="model.styleClass" id="{{::model.svyMarkupId}}" ng-style="getStyle()">
     <div class="list-item"
         ng-class="getEntryStyleClass(entry)"
         ng-repeat="entry in model.data"

@@ -63,7 +63,7 @@ angular.module('customrenderedcomponentsListcomponent',['servoy'])
 			$scope.getSanitizedData = function (entry) {
 				var data = {};
 				for (var dp in entry) {
-					if (dp.indexOf("dp") === 0) {
+					if (!$scope.model.foundset || dp.indexOf("dp") === 0) {
 						data[dp] = $sce.getTrustedHtml(entry[dp]);
 					}
 				}
@@ -78,7 +78,7 @@ angular.module('customrenderedcomponentsListcomponent',['servoy'])
 					if (dataTarget && dataTarget[0]) {
 						data = dataTarget[0].getAttribute("data-target");
 					}
-					$scope.handlers.onClick(entry, index, data, data);
+					$scope.handlers.onClick(entry, index, data, event);
 				}
 			}
 
@@ -93,7 +93,7 @@ angular.module('customrenderedcomponentsListcomponent',['servoy'])
 			};
 
 			$scope.$watch('model.foundset', function(oldValue, newValue) {
-					if ($scope.svyServoyapi.isInDesigner()) return;
+					if ($scope.svyServoyapi.isInDesigner() || !newValue) return;
 
 					// load data
 					loadDataFromFoundset();
