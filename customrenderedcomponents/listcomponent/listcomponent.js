@@ -11,51 +11,70 @@ angular.module('customrenderedcomponentsListcomponent',['servoy'])
 		controller: function($scope, $element, $attrs) {
 
 			var elementList = $element.find('.svy-extra-listcomponent');
+			
+			if ($scope.model.entryRendererFunc) {
+				$scope.model.entryRendererFunction = $scope.model.entryRendererFunc;
+			}
 
 			if ($scope.svyServoyapi.isInDesigner()) {
 				$scope.model.data = [{ dp0: "dp0", dp1: "dp1" }];
 			}
 
-			var entryStyleClassFunc = null;
+			/** @type {Function} */
+			var entryStyleClassFunction = null;
 			$scope.$watch("model.entryStyleClassFunc", function(newValue, oldValue) {
-					if ($scope.model.entryStyleClassFunc) {
-						entryStyleClassFunc = eval($scope.model.entryStyleClassFunc);
-					}
-				});
-
-			$scope.getEntryStyleClass = function(entry) {
-				if (entryStyleClassFunc) {
-					return entryStyleClassFunc(entry);
+				if ($scope.model.entryStyleClassFunc) {
+					entryStyleClassFunction = eval('(' + $scope.model.entryStyleClassFunc + ')');
 				}
-				return '';
+			});
+			
+			$scope.$watch("model.entryStyleClassFunction", function(newValue, oldValue) {
+				if ($scope.model.entryStyleClassFunction) {
+					entryStyleClassFunction = eval('(' + $scope.model.entryStyleClassFunction + ')');
+				}
+			});
+
+			$scope.getEntryStyleClass = function(entry, fsIndex) {
+				var result = '';
+				if (entryStyleClassFunction) {
+					result = entryStyleClassFunction(entry);
+				}
+				if ($scope.model.selectionClass && $scope.model.foundset.selectedRowIndexes) {
+					if ($scope.model.foundset.selectedRowIndexes.indexOf(fsIndex) != -1) {
+						result += ' ' + $scope.model.selectionClass;
+					}
+				}
+				return result;
 			}
 
-			// var entryRendererFunc = function(entry) {
-			// 	return '<div class="feed-icon"></div>' + '<div class="feed-subject" svy-tooltip="entry.tooltip">' + entry.subject + ' </div>' + '<div class="feed-content">' + entry.content + '</div>' + '<div class="feed-actions"><div class="pull-right"><i class="fa fa-clock-o"></i>' + entry.time + '</div></div>';
-			// }
-
-			var entryRendererFunc = function(entry) {
+			/** @type {Function} */
+			var entryRendererFunction = function(entry) {
 				var template = '<div>';
-				template += '<i class="pull-right fa fa-tag" data-target="icon"></i>';
 				for (var prop in entry) {
 					if (prop.indexOf("dp") === 0) {
-						template += '<div class="feed-subject" data-target="' + prop + '" ng-bind-html="entry.' + prop + '"></div>';
+						template += '<div data-target="' + prop + '" ng-bind-html="entry.' + prop + '"></div>';
 					}
 				}
 				template += '</div>';
-				template + '<hr/>'
+				template += '<hr/>'
 				return template;
 			}
 
 			$scope.$watch("model.entryRendererFunc", function(newValue, oldValue) {
-					if ($scope.model.entryRendererFunc) {
-						entryRendererFunc = eval($scope.model.entryRendererFunc);
-					}
-				});
+				if ($scope.model.entryRendererFunc) {
+					entryRendererFunction = eval('(' + $scope.model.entryRendererFunc + ')');
+				}
+			});
+
+			$scope.$watch("model.entryRendererFunction", function(newValue, oldValue) {
+				if ($scope.model.entryRendererFunction) {
+					entryRendererFunction = eval('(' + $scope.model.entryRendererFunction + ')');
+				}
+			});
 
 			$scope.getEntryRenderer = function(entry) {
-				if (entryRendererFunc) {
-					return entryRendererFunc(entry);
+				if (entryRendererFunction) {
+					return entryRendererFunction(entry);
 				}
 				return '';
 			}
@@ -64,13 +83,53 @@ angular.module('customrenderedcomponentsListcomponent',['servoy'])
 				var data = {};
 				for (var dp in entry) {
 					if (!$scope.model.foundset || dp.indexOf("dp") === 0) {
-						data[dp] = $sce.getTrustedHtml(entry[dp]);
+						if (!$scope.svyServoyapi.trustAsHtml()) {
+							data[dp] = $sce.getTrustedHtml(entry[dp]);
+						} else {
+							//allow html content
+							data[dp] = $sce.trustAsHtml(entry[dp]);
+						}
 					}
 				}
 				return data;
 			}
 
 			$scope.onEntryClick = function(entry, index, event) {
+				var newSelection = [index];
+				
+				if ($scope.model.foundset && event.ctrlKey) {
+					newSelection = $scope.model.foundset.selectedRowIndexes ? $scope.model.foundset.selectedRowIndexes.slice() : [];
+					var idxInSelected = newSelection.indexOf(index);
+					if (idxInSelected == -1) {
+						newSelection.push(index);
+					} else if (newSelection.length > 1) {
+						newSelection.splice(idxInSelected, 1);
+					}
+				} else if ($scope.model.foundset && event.shiftKey) {
+					var start = -1;
+					if ($scope.model.foundset.selectedRowIndexes) {
+						for (var j = 0; j < $scope.model.foundset.selectedRowIndexes.length; j++) {
+							if (start == -1 || start > $scope.model.foundset.selectedRowIndexes[j]) {
+								start = $scope.model.foundset.selectedRowIndexes[j];
+							}
+						}
+					}
+					var stop = index;
+					if (start > index) {
+						stop = start;
+						start = index;
+					}
+					newSelection = []
+					for (var n = start; n <= stop; n++) {
+						newSelection.push(n);
+					}
+				}
+
+				if ($scope.model.foundset) {
+					$scope.model.foundset.requestSelectionUpdate(newSelection);
+					index ++;
+				}
+				
 				if ($scope.handlers.onClick) {
 					var target = event.target;
 					var dataTarget = $(target).closest("[data-target]");
@@ -80,6 +139,28 @@ angular.module('customrenderedcomponentsListcomponent',['servoy'])
 					}
 					$scope.handlers.onClick(entry, index, data, event);
 				}
+			}
+			
+			/**
+			 * Adds the given style class to all items in the list's children that match the selector.
+			 * Note that tag selectors are not supported.
+			 *
+			 * @param {String} selector
+			 * @param {String} styleClass
+			 */
+			$scope.api.addStyleClassForSelector = function(selector, styleClass) {
+				$element.find(selector).addClass(styleClass);
+			}
+
+			/**
+			 * Removes the given style class from all items in the list's children that match the selector.
+			 * Note that tag selectors are not supported.
+			 *
+			 * @param {String} selector
+			 * @param {String} styleClass
+			 */
+			$scope.api.removeStyleClassForSelector = function(selector, styleClass) {
+				$element.find(selector).removeClass(styleClass);
 			}
 
 			var foundsetListener = function(changes) {
@@ -93,19 +174,14 @@ angular.module('customrenderedcomponentsListcomponent',['servoy'])
 			};
 
 			$scope.$watch('model.foundset', function(oldValue, newValue) {
-					if ($scope.svyServoyapi.isInDesigner() || !newValue) return;
+				if ($scope.svyServoyapi.isInDesigner() || !newValue) return;
 
-					// load data
-					loadDataFromFoundset();
+				// load data
+				loadDataFromFoundset();
 
-					// addFoundsetListener
-					$scope.model.foundset.addChangeListener(foundsetListener);
-				});
-
-			//				$scope.$watch('model.foundset.serverSize', function(oldValue, newValue) {
-			//					if (!$scope.svyServoyapi || $scope.svyServoyapi.isInDesigner()) return;
-			//					loadDataFromFoundset();
-			//				});
+				// addFoundsetListener
+				$scope.model.foundset.addChangeListener(foundsetListener);
+			});
 
 			function loadDataFromFoundset() {
 				if ($scope.model.foundset) {
@@ -113,14 +189,36 @@ angular.module('customrenderedcomponentsListcomponent',['servoy'])
 				}
 			}
 
-			$scope.getStyle = function() {
-				var style = { };
+			$scope.getLayoutStyle = function() {
+				var layoutStyle = { };
 				if ($scope.$parent.absoluteLayout) {
-
 				} else {
-					style.maxHeight = $scope.model.responsiveHeight + "px";
+					layoutStyle.position = "relative";
+					if ($scope.model.responsiveDynamicHeight) {
+						var h = 0;
+						$element.find("div.list-item").each(function() {
+							h += $(this).height();
+							if (h > $scope.model.responsiveHeight) {
+								return false;
+							}
+						});
+						if ($scope.model.responsiveHeight === 0) {
+							$element.css("height", "100%");
+							layoutStyle.height = 100 + "%";
+						} else {
+							layoutStyle.height = h + "px";
+							layoutStyle.maxHeight = $scope.model.responsiveHeight + "px";
+						}
+					} else {
+						if ($scope.model.responsiveHeight === 0) {
+							$element.css("height", "100%");
+							layoutStyle.height = 100 + "%";
+						} else {
+							layoutStyle.height = $scope.model.responsiveHeight + "px";
+						}
+					}
 				}
-				return style;
+				return layoutStyle;
 			}
 
 			// the scrollparent may actually change.. can never be done !!
@@ -155,10 +253,10 @@ angular.module('customrenderedcomponentsListcomponent',['servoy'])
 
 			var destroyListenerUnreg = $scope.$on("$destroy", function() {
 					scrollParent.off('scroll');
-
-					if ($scope.model.foundset) $scope.model.foundset.removeChangeListener(foundsetListener);
+					if ($scope.model.foundset) {
+						$scope.model.foundset.removeChangeListener(foundsetListener);
+					}
 					destroyListenerUnreg();
-					// delete $scope.model[$sabloConstants.modelChangeNotifier];
 				});
 
 		},

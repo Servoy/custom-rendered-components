@@ -46,3 +46,11 @@ $scope.api.removeEntry = function (index) {
     }
     return false;
 }
+
+$scope.api.setEntries = function (entries) {
+	if ($scope.model.foundset) {
+		console.error("The function removeEntry can be used only when listcomponent's foundset is set to -none-");
+	}
+	
+    $scope.model.data = entries;
+}

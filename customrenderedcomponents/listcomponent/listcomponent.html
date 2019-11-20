@@ -1,6 +1,6 @@
-<div class="svy-extra-listcomponent" ng-class="model.styleClass" id="{{::model.svyMarkupId}}" ng-style="getStyle()">
-    <div class="list-item"
-        ng-class="getEntryStyleClass(entry)"
+<div class="svy-extra-listcomponent" ng-class="model.styleClass" id="{{::model.svyMarkupId}}" ng-style="getLayoutStyle()">
+	<div class="list-item"
+        ng-class="getEntryStyleClass(entry, $index)"
         ng-repeat="entry in model.data"
         bind-list-html-compile="getEntryRenderer(getSanitizedData(entry))"
         svy-click='onEntryClick(entry, $index, $event)'>
