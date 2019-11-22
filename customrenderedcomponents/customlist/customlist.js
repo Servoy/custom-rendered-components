@@ -9,13 +9,7 @@ angular.module('customrenderedcomponentsCustomlist',['servoy'])
 			svyServoyapi: '='
 		},
 		controller: function($scope, $element, $attrs) {
-
-			var elementList = $element.find('.svy-extra-listcomponent');
 			
-			if ($scope.svyServoyapi.isInDesigner()) {
-				$scope.model.data = [{ dp0: "dp0", dp1: "dp1" }];
-			}
-
 			/** @type {Function} */
 			var entryStyleClassFunction = null;
 			$scope.$watch("model.entryStyleClassFunction", function(newValue, oldValue) {
@@ -24,15 +18,14 @@ angular.module('customrenderedcomponentsCustomlist',['servoy'])
 				}
 			});
 
-			$scope.getEntryStyleClass = function(entry, fsIndex) {
+			$scope.getEntryStyleClass = function(entry) {
+				var index = $scope.model.data.indexOf(entry);
 				var result = '';
 				if (entryStyleClassFunction) {
 					result = entryStyleClassFunction(entry);
 				}
-				if ($scope.model.selectionClass && $scope.model.foundset.selectedRowIndexes) {
-					if ($scope.model.foundset.selectedRowIndexes.indexOf(fsIndex) != -1) {
-						result += ' ' + $scope.model.selectionClass;
-					}
+				if ($scope.model.selectionClass && $scope.model.selectedIndex === index) {
+					result += ' ' + $scope.model.selectionClass;
 				}
 				return result;
 			}
@@ -41,12 +34,11 @@ angular.module('customrenderedcomponentsCustomlist',['servoy'])
 			var entryRendererFunction = function(entry) {
 				var template = '<div>';
 				for (var prop in entry) {
-					if (prop.indexOf("dp") === 0) {
+					if (prop !== '$$hashKey') {
 						template += '<div data-target="' + prop + '" ng-bind-html="entry.' + prop + '"></div>';
 					}
 				}
 				template += '</div>';
-				template += '<hr/>'
 				return template;
 			}
 
@@ -66,54 +58,18 @@ angular.module('customrenderedcomponentsCustomlist',['servoy'])
 			$scope.getSanitizedData = function (entry) {
 				var data = {};
 				for (var dp in entry) {
-					if (!$scope.model.foundset || dp.indexOf("dp") === 0) {
-						if (!$scope.svyServoyapi.trustAsHtml()) {
-							data[dp] = $sce.getTrustedHtml(entry[dp]);
-						} else {
-							//allow html content
-							data[dp] = $sce.trustAsHtml(entry[dp]);
-						}
+					if (!$scope.svyServoyapi.trustAsHtml()) {
+						data[dp] = $sce.getTrustedHtml(entry[dp]);
+					} else {
+						//allow html content
+						data[dp] = $sce.trustAsHtml(entry[dp]);
 					}
 				}
 				return data;
 			}
 
 			$scope.onEntryClick = function(entry, index, event) {
-				var newSelection = [index];
-				
-				if ($scope.model.foundset && event.ctrlKey) {
-					newSelection = $scope.model.foundset.selectedRowIndexes ? $scope.model.foundset.selectedRowIndexes.slice() : [];
-					var idxInSelected = newSelection.indexOf(index);
-					if (idxInSelected == -1) {
-						newSelection.push(index);
-					} else if (newSelection.length > 1) {
-						newSelection.splice(idxInSelected, 1);
-					}
-				} else if ($scope.model.foundset && event.shiftKey) {
-					var start = -1;
-					if ($scope.model.foundset.selectedRowIndexes) {
-						for (var j = 0; j < $scope.model.foundset.selectedRowIndexes.length; j++) {
-							if (start == -1 || start > $scope.model.foundset.selectedRowIndexes[j]) {
-								start = $scope.model.foundset.selectedRowIndexes[j];
-							}
-						}
-					}
-					var stop = index;
-					if (start > index) {
-						stop = start;
-						start = index;
-					}
-					newSelection = []
-					for (var n = start; n <= stop; n++) {
-						newSelection.push(n);
-					}
-				}
-
-				if ($scope.model.foundset) {
-					$scope.model.foundset.requestSelectionUpdate(newSelection);
-					index ++;
-				}
-				
+				$scope.model.selectedIndex = index;
 				if ($scope.handlers.onClick) {
 					var target = event.target;
 					var dataTarget = $(target).closest("[data-target]");
@@ -147,32 +103,6 @@ angular.module('customrenderedcomponentsCustomlist',['servoy'])
 				$element.find(selector).removeClass(styleClass);
 			}
 
-			var foundsetListener = function(changes) {
-				// check to see what actually changed and update what is needed in browser
-				if (changes[$foundsetTypeConstants.NOTIFY_VIEW_PORT_ROWS_COMPLETELY_CHANGED]) {
-					loadDataFromFoundset();
-
-					// Force a digest to be called
-					$scope.$digest();
-				}
-			};
-
-			$scope.$watch('model.foundset', function(oldValue, newValue) {
-				if ($scope.svyServoyapi.isInDesigner() || !newValue) return;
-
-				// load data
-				loadDataFromFoundset();
-
-				// addFoundsetListener
-				$scope.model.foundset.addChangeListener(foundsetListener);
-			});
-
-			function loadDataFromFoundset() {
-				if ($scope.model.foundset) {
-					$scope.model.data = $scope.model.foundset.viewPort.rows;
-				}
-			}
-
 			$scope.getLayoutStyle = function() {
 				var layoutStyle = { };
 				if ($scope.$parent.absoluteLayout) {
@@ -204,44 +134,6 @@ angular.module('customrenderedcomponentsCustomlist',['servoy'])
 				}
 				return layoutStyle;
 			}
-
-			// the scrollparent may actually change.. can never be done !!
-			var scrollParent = elementList;
-			if (!scrollParent) {
-				console.log('cannot find element');
-			} else {
-				scrollParent.scroll(onScroll);
-			}
-
-			function onScroll(e) {
-
-				// scroll
-				var scrollTop = scrollParent.scrollTop();
-				var scrollHeight = scrollParent[0].scrollHeight;
-				var offsetHeight = scrollParent[0].offsetHeight;
-				var scrollDiff = scrollHeight - scrollTop;
-				var offsetDiff = scrollDiff - offsetHeight;
-
-				if (offsetDiff < 25 && hasMoreRows()) {
-					$scope.model.foundset.loadExtraRecordsAsync(70, false);
-				}
-			}
-
-			function hasMoreRows() {
-				if ($scope.model.foundset) {
-					var foundset = $scope.model.foundset;
-					var viewPortLastIndex = foundset.viewPort.startIndex + foundset.viewPort.size;
-					return $scope.model.foundset.hasMoreRows || viewPortLastIndex < foundset.serverSize;
-				}
-			}
-
-			var destroyListenerUnreg = $scope.$on("$destroy", function() {
-					scrollParent.off('scroll');
-					if ($scope.model.foundset) {
-						$scope.model.foundset.removeChangeListener(foundsetListener);
-					}
-					destroyListenerUnreg();
-				});
 
 		},
       templateUrl: 'customrenderedcomponents/listcomponent/listcomponent.html'
