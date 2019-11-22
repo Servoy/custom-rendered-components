@@ -2,6 +2,7 @@
 	"name": "customrenderedcomponents-listcomponent",
 	"displayName": "List Component",
 	"version": 1,
+	"deprecated": "This component should be replaced by either the FoundSet or Custom List.",
 	"definition": "customrenderedcomponents/listcomponent/listcomponent.js",
 	"serverscript": "customrenderedcomponents/listcomponent/listcomponent_server.js",
 	"libraries": [{ "name": "listcomponent.css", "version": "1.0", "url": "customrenderedcomponents/listcomponent/listcomponent.css", "mimetype": "text/css" }],
