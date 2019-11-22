@@ -29,6 +29,9 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 					if (entryStyleClassFunction) {
 						result = entryStyleClassFunction(entry);
 					}
+					if ($scope.model.entryStyleClassDataProvider) {
+						result += ' ' + $scope.model.entryStyleClassDataProvider[fsIndex];
+					}
 					if ($scope.model.selectionClass && $scope.model.foundset.selectedRowIndexes) {
 						if ($scope.model.foundset.selectedRowIndexes.indexOf(fsIndex) != -1) {
 							result += ' ' + $scope.model.selectionClass;
@@ -46,7 +49,6 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 						}
 					}
 					template += '</div>';
-					template += '<hr/>'
 					return template;
 				}
 
@@ -121,7 +123,8 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 						if (dataTarget && dataTarget[0]) {
 							data = dataTarget[0].getAttribute("data-target");
 						}
-						$scope.handlers.onClick(entry, index, data, event);
+						var record = $scope.model.foundset.viewPort.rows[index];
+						$scope.handlers.onClick(record, index, data, event);
 					}
 				}
 				
@@ -241,7 +244,7 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 							$scope.model.foundset.removeChangeListener(foundsetListener);
 						}
 						destroyListenerUnreg();
-					});
+					});				
 			},
 			templateUrl: 'customrenderedcomponents/foundsetlist/foundsetlist.html'
 		};
