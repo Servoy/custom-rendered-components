@@ -23,7 +23,7 @@
 			"description": "Called when the mouse is clicked on a list entry",
 			"parameters": [
 				{ "name": "record", "type": "record" },
-				{ "name": "index", "type": "int" },
+				{ "name": "foundSetIndex", "type": "int" },
 				{ "name": "dataTarget", "type": "string" },
 				{ "name": "event", "type": "JSEvent" }
 			]
