@@ -55,14 +55,21 @@ angular.module('customrenderedcomponentsCustomlist',['servoy'])
 				return '';
 			}
 			
-			$scope.getSanitizedData = function (entry) {
+			$scope.getSanitizedData = function(entry) {
 				var data = {};
 				for (var dp in entry) {
-					if (!$scope.svyServoyapi.trustAsHtml()) {
-						data[dp] = $sce.getTrustedHtml(entry[dp]);
-					} else {
+					var entryValue = entry[dp];
+					if ((typeof entryValue) === 'object') {
+						for (var i in entryValue) {
+							entryValue[i] = $scope.getSanitizedData(entryValue[i]);
+						}
+					} else if ((typeof entryValue) === 'string' && !$scope.svyServoyapi.trustAsHtml()) {
+						data[dp] = $sce.getTrustedHtml(entryValue);
+					} else if ((typeof entryValue) === 'string') {
 						//allow html content
-						data[dp] = $sce.trustAsHtml(entry[dp]);
+						data[dp] = $sce.trustAsHtml(entryValue);
+					} else {
+						data[dp] = entryValue;
 					}
 				}
 				return data;
