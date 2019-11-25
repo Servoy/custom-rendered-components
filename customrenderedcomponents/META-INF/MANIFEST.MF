@@ -10,9 +10,6 @@ Web-Component: True
 Name: foundsetlist/foundsetlist.spec
 Web-Component: True
 
-Name: timeline/timeline.spec
-Web-Component: True
-
 Name: customlist/customlist.spec
 Web-Component: True
 
