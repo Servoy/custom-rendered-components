@@ -7,7 +7,6 @@
 	"model":
 	{
 		"data": 								{ "type": "object[]", "tags": {"scope" : "private"} },
-		"entryStyleClassFunction": 				{ "type": "tagstring" },
 		"entryRendererFunction": 				{ "type": "tagstring" },
 		"visible": 								{ "type": "visible" },
 		"foundset": 							{ "type": "foundset", "dynamicDataproviders": true, "default" : {"foundsetSelector": ""} , "pushToServer": "allow", "initialPreferredViewPortSize": 130, "sendSelectionViewportInitially": true },

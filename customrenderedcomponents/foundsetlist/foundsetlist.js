@@ -16,21 +16,10 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 					$scope.model.data = [{ dp0: "dp0", dp1: "dp1" }];
 				}
 
-				/** @type {Function} */
-				var entryStyleClassFunction = null;
-				$scope.$watch("model.entryStyleClassFunction", function(newValue, oldValue) {
-					if ($scope.model.entryStyleClassFunction) {
-						entryStyleClassFunction = eval('(' + $scope.model.entryStyleClassFunction + ')');
-					}
-				});
-
 				$scope.getEntryStyleClass = function(entry, fsIndex) {
 					var result = '';
-					if (entryStyleClassFunction) {
-						result = entryStyleClassFunction(entry);
-					}
 					if ($scope.model.entryStyleClassDataProvider) {
-						result += ' ' + $scope.model.entryStyleClassDataProvider[fsIndex];
+						result += $scope.model.entryStyleClassDataProvider[fsIndex];
 					}
 					if ($scope.model.selectionClass && $scope.model.foundset.selectedRowIndexes) {
 						if ($scope.model.foundset.selectedRowIndexes.indexOf(fsIndex) != -1) {
