@@ -9,12 +9,23 @@ angular.module('customrenderedcomponentsCustomlist',['servoy'])
 			svyServoyapi: '='
 		},
 		controller: function($scope, $element, $attrs) {
+			
+			/** @type {Function} */
+			var entryStyleClassFunction = null;
+			$scope.$watch("model.entryStyleClassFunction", function(newValue, oldValue) {
+				if ($scope.model.entryStyleClassFunction) {
+					entryStyleClassFunction = eval('(' + $scope.model.entryStyleClassFunction + ')');
+				}
+			});
 
 			$scope.getEntryStyleClass = function(entry) {
 				var index = $scope.model.data.indexOf(entry);
 				var result = '';
+				if (entryStyleClassFunction) {
+					result = entryStyleClassFunction(entry);
+				}
 				if ($scope.model.selectionClass && $scope.model.selectedIndex === index) {
-					result += $scope.model.selectionClass;
+					result += ' ' + $scope.model.selectionClass;
 				}
 				return result;
 			}
