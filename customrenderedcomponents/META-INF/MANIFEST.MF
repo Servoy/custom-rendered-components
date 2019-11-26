@@ -7,6 +7,9 @@ Package-Type: Web-Component
 Name: listcomponent/listcomponent.spec
 Web-Component: True
 
-Name: timeline/timeline.spec
+Name: foundsetlist/foundsetlist.spec
+Web-Component: True
+
+Name: customlist/customlist.spec
 Web-Component: True
 
