@@ -9,6 +9,7 @@
 	{
 		"data": 							{ "type": "object[]", "tags": {"scope" : "private"}, "pushToServer": "allow" },
 		"selectedIndex": 					{ "type": "int", "default": 0, "tags": {"scope" : "private"}, "pushToServer": "allow" },
+		"entryStyleClassFunction": 			{ "type": "tagstring" },
 		"entryRendererFunction": 			{ "type": "tagstring" },
 		"visible": 							{ "type": "visible" },
 		"responsiveHeight": 				{ "type": "int", "default": 500 },
