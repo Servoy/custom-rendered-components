@@ -12,19 +12,18 @@ extendsID:"2A5F4A4C-AB7B-4911-B94F-34313023357A",
 items:[
 {
 containsFormID:"E1D8CB76-5B0C-45D9-B80C-D65F911FD459",
-location:"306,300",
+location:"26,133",
 name:"listcomponent",
-text:"Listcomponent",
+text:"FoundSet List",
 typeid:15,
 uuid:"012F92F1-49CE-4498-A3DE-2F4B5D1AF7DB"
 },
 {
-containsFormID:"46C59626-94A3-4933-A12C-3843044CF665",
-location:"211,201",
-name:"timeline",
-text:"Timeline",
+containsFormID:"31B8CEEF-25B5-44EE-92C5-8C214DCE1CB2",
+location:"106,133",
+text:"Custom List",
 typeid:15,
-uuid:"320CF112-408B-4348-A417-29A2342A1CA0"
+uuid:"C35E73F8-6F9B-4403-B07D-0AA659915679"
 }
 ],
 typeid:16,

@@ -1,0 +1,53 @@
+@import "standard_ngclient.css";
+
+.product-row {
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid #eeeeee;
+	height: 60px;
+	align-items: center;
+	font-size: 16px;
+}
+
+.product {
+	font-size: 18px;
+	width: 40%;
+}
+
+.product-unitsinstock {
+	width: 100px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.product-unitprice {
+	width: 100px;
+	display: flex;
+    justify-content: flex-end;
+}
+
+.product-discontinued {
+	width: 30px;
+}
+
+.list-item {
+	border-left: 8px solid;
+	padding: 0px 10px;
+	position: relative;
+}
+
+.list-item.discontinued .product {
+	text-decoration: line-through;
+}
+
+.list-item.stock-critical {
+	border-color: #dc3545;
+}
+
+.list-item.stock-low {
+	border-color: #ffc107;
+}
+
+.list-item.stock-ok {
+	border-color: #28a745;
+}
