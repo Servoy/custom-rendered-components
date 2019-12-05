@@ -1,0 +1,12 @@
+{
+    "name":"customrenderedcomponents",
+    "displayName":"Custom Rendered Components",
+    "packageType": "Web-Component",
+    "icon": "https://github.com/Servoy/custom-rendered-components/master/servoy.png",
+    "description": "Simple repeating renderer components for FoundSets or custom data",
+    "wikiUrl": "https://github.com/Servoy/custom-rendered-components/wiki",
+    "sourceUrl" : "https://github.com/Servoy/custom-rendered-components",
+    "releases" : [
+    	{"version":"1.0.0","url":"https://github.com/Servoy/custom-rendered-components/releases/download/v1.0.0/customrenderedcomponents.zip", "servoy-version":"2019.6"}
+    ]
+}
