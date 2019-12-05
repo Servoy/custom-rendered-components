@@ -1,4 +1,12 @@
 @import "standard_ngclient.css";
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i');
+@import url("themes/theme-servoy.css");
+	
+body
+{
+	font-family: 'Roboto', sans-serif;
+}
+
 
 .product-row {
 	display: flex;

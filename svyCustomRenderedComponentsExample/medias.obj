@@ -1,6 +1,13 @@
 [
 {
 encapsulation:0,
+mimeType:"image/png",
+name:"servoylogowhite.png",
+typeid:37,
+uuid:"83B7924A-9990-42CD-831E-B5FA94ECD3B1"
+},
+{
+encapsulation:0,
 mimeType:"text/css",
 name:"standard_ngclient.css",
 typeid:37,
