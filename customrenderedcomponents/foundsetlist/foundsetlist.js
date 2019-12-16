@@ -174,10 +174,8 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 					if ($scope.$parent.absoluteLayout) {
 					} else {
 						layoutStyle.position = "relative";
-						if ($scope.model.responsiveDynamicHeight) {
-							if ($scope.model.responsiveHeight > 0) {
+						if ($scope.model.responsiveDynamicHeight && $scope.model.responsiveHeight > 0) {
 								layoutStyle.maxHeight = $scope.model.responsiveHeight + "px";
-							}
 						} else {
 							if ($scope.model.responsiveHeight === 0) {
 								$element.css("height", "100%");
