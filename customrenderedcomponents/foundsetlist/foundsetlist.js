@@ -107,7 +107,6 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 
 					if ($scope.model.foundset) {
 						$scope.model.foundset.requestSelectionUpdate(newSelection);
-						index ++;
 					}
 					
 					if ($scope.handlers.onClick) {
@@ -118,7 +117,7 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 							data = dataTarget[0].getAttribute("data-target");
 						}
 						var record = $scope.model.foundset.viewPort.rows[index];
-						$scope.handlers.onClick(record, index, data, event);
+						$scope.handlers.onClick(record, index + 1, data, event);
 					}
 				}
 				
