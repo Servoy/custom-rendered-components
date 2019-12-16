@@ -3,7 +3,7 @@
 	"displayName": "FoundSet List",
 	"version": 1,
 	"definition": "customrenderedcomponents/foundsetlist/foundsetlist.js",
-	"libraries": [{ "name": "listcomponent.css", "version": "1.0", "url": "customrenderedcomponents/listcomponent/listcomponent.css", "mimetype": "text/css" }],
+	"libraries": [{ "name": "listcomponent.css", "version": "1.0", "url": "customrenderedcomponents/css/listcomponent.css", "mimetype": "text/css" }],
 	"model":
 	{
 		"data": 								{ "type": "object[]", "tags": {"scope" : "private"} },

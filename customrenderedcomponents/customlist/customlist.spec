@@ -4,7 +4,7 @@
 	"version": 1,
 	"definition": "customrenderedcomponents/customlist/customlist.js",
 	"serverscript": "customrenderedcomponents/customlist/customlist_server.js",
-	"libraries": [{ "name": "listcomponent.css", "version": "1.0", "url": "customrenderedcomponents/listcomponent/listcomponent.css", "mimetype": "text/css" }],
+	"libraries": [{ "name": "listcomponent.css", "version": "1.0", "url": "customrenderedcomponents/css/listcomponent.css", "mimetype": "text/css" }],
 	"model":
 	{
 		"data": 							{ "type": "object[]", "tags": {"scope" : "private"}, "pushToServer": "allow" },

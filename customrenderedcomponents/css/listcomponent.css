@@ -1,0 +1,9 @@
+.svy-wrapper > * > .svy-extra-listcomponent {
+	height: 100%;
+	width: 100%;
+	overflow: auto;
+}
+
+.svy-extra-listcomponent {
+	overflow: auto;
+}
