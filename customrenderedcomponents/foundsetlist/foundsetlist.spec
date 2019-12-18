@@ -15,7 +15,9 @@
 		"responsiveDynamicHeight": 				{ "type": "boolean", "default": false },
 		"styleClass": 							{ "type": "styleclass", "tags": { "scope" :"design" } },
 		"selectionClass": 						{ "type": "styleclass" },
-		"enabled": 								{ "type": "enabled", "blockingOn": false, "default": true, "for": ["onClick"] }
+		"enabled": 								{ "type": "enabled", "blockingOn": false, "default": true, "for": ["onClick"] },
+		"firstItemHtml":						{ "type": "tagstring" },
+		"lastItemHtml":							{ "type": "tagstring" },
 	},
 	"handlers" : {
 		"onClick": {
@@ -25,6 +27,20 @@
 				{ "name": "foundSetIndex", "type": "int" },
 				{ "name": "dataTarget", "type": "string" },
 				{ "name": "event", "type": "JSEvent" }
+			]
+		},
+		"onFirstItemClick": {
+			"description": "Called when the mouse is clicked on the optional firstItemHtml",
+			"parameters": [
+				{ "name": "event", "type": "JSEvent" },
+				{ "name": "dataTarget", "type": "string" }
+			]
+		},
+		"onLastItemClick": {
+			"description": "Called when the mouse is clicked on the optional lastItemHtml",
+			"parameters": [
+				{ "name": "event", "type": "JSEvent" },
+				{ "name": "dataTarget", "type": "string" }
 			]
 		}
 	}, 

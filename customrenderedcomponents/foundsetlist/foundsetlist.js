@@ -53,7 +53,7 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 					}
 					return '';
 				}
-				
+
 				$scope.getSanitizedData = function(entry) {
 					var data = {};
 					for (var dp in entry) {
@@ -73,7 +73,14 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 					}
 					return data;
 				}
-
+				
+				$scope.getSanitizedHtml = function(html) {
+					if (!$scope.svyServoyapi.trustAsHtml()) {
+						return $sce.getTrustedHtml(html);
+					} else {
+						return $sce.trustAsHtml(html);
+					}
+				}
 				$scope.onEntryClick = function(entry, index, event) {
 					var newSelection = [index];
 					
@@ -120,6 +127,30 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 						$scope.handlers.onClick(record, index + 1, data, event);
 					}
 				}
+				
+				$scope.onFirstItemClick = function(event) {
+					if ($scope.handlers.onFirstItemClick) {
+						var target = event.target;
+						var dataTarget = $(target).closest("[data-target]");
+						var data;
+						if (dataTarget && dataTarget[0]) {
+							data = dataTarget[0].getAttribute("data-target");
+						}
+						$scope.handlers.onFirstItemClick(event, data);
+					}
+				}
+				
+				$scope.onLastItemClick = function(event) {
+					if ($scope.handlers.onLastItemClick) {
+						var target = event.target;
+						var dataTarget = $(target).closest("[data-target]");
+						var data;
+						if (dataTarget && dataTarget[0]) {
+							data = dataTarget[0].getAttribute("data-target");
+						}
+						$scope.handlers.onLastItemClick(event, data);
+					}
+				}				
 				
 				/**
 				 * Adds the given style class to all items in the list's children that match the selector.
@@ -175,7 +206,7 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 					} else {
 						layoutStyle.position = "relative";
 						if ($scope.model.responsiveDynamicHeight && $scope.model.responsiveHeight > 0) {
-								layoutStyle.maxHeight = $scope.model.responsiveHeight + "px";
+							layoutStyle.maxHeight = $scope.model.responsiveHeight + "px";
 						} else {
 							if ($scope.model.responsiveHeight === 0) {
 								$element.css("height", "100%");
