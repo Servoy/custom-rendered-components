@@ -18,6 +18,8 @@
 		"enabled": 								{ "type": "enabled", "blockingOn": false, "default": true, "for": ["onClick"] },
 		"firstItemHtml":						{ "type": "tagstring" },
 		"lastItemHtml":							{ "type": "tagstring" },
+		"tooltipDataProvider":					{ "type": "dataprovider", "forFoundset": "foundset" },
+		"tooltipFunction":						{ "type": "tagstring" }
 	},
 	"handlers" : {
 		"onClick": {

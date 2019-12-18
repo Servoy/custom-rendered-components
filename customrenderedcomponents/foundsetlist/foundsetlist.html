@@ -8,6 +8,7 @@
         ng-class="getEntryStyleClass(entry, $index)"
         ng-repeat="entry in model.data"
         bind-list-html-compile="getEntryRenderer(getSanitizedData(entry))"
+		svy-tooltip="getTooltip($index)" 
         svy-click='onEntryClick(entry, $index, $event)'>
     </div>
 	<div class="last-list-item"

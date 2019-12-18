@@ -54,6 +54,17 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 					return '';
 				}
 
+				$scope.tooltipFunction = function() {
+					return null
+				};
+				$scope.$watch("model.tooltipFunction", function(newValue, oldValue) {
+					if ($scope.model.tooltipFunction && !$scope.model.tooltipDataProvider) {
+						$scope.tooltipFunction = eval('(' + $scope.model.tooltipFunction + ')');
+					} else if ($scope.model.tooltipFunction && $scope.model.tooltipDataProvider) {
+						console.warn('tooltipFunction will not be used when a tooltipDataProvider is attached as well');
+					}
+				});				
+				
 				$scope.getSanitizedData = function(entry) {
 					var data = {};
 					for (var dp in entry) {
@@ -81,6 +92,14 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 						return $sce.trustAsHtml(html);
 					}
 				}
+				
+				$scope.getTooltip = function(index) {
+					if (index >= 0 && $scope.model.tooltipDataProvider && $scope.model.tooltipDataProvider[index] != undefined) {
+						return $scope.model.tooltipDataProvider[index];
+					}
+					return null;
+				}
+				
 				$scope.onEntryClick = function(entry, index, event) {
 					var newSelection = [index];
 					

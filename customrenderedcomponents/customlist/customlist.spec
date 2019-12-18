@@ -16,7 +16,8 @@
 		"responsiveDynamicHeight": 			{ "type": "boolean", "default": false },
 		"styleClass": 						{ "type": "styleclass", "tags": { "scope" :"design" } },
 		"selectionClass": 					{ "type": "styleclass" },
-		"enabled": 							{ "type": "enabled", "blockingOn": false, "default": true, "for": ["onClick"] }
+		"enabled": 							{ "type": "enabled", "blockingOn": false, "default": true, "for": ["onClick"] },
+		"tooltipFunction":					{ "type": "tagstring" }
 	},
 	"handlers" : {
 		"onClick": {

@@ -55,6 +55,15 @@ angular.module('customrenderedcomponentsCustomlist',['servoy'])
 				return '';
 			}
 			
+			$scope.tooltipFunction = function() {
+				return null
+			};
+			$scope.$watch("model.tooltipFunction", function(newValue, oldValue) {
+				if ($scope.model.tooltipFunction) {
+					$scope.tooltipFunction = eval('(' + $scope.model.tooltipFunction + ')');
+				}
+			});	
+			
 			$scope.getSanitizedData = function(entry) {
 				var data = {};
 				for (var dp in entry) {
