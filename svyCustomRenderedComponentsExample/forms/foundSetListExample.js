@@ -22,9 +22,9 @@ function onLoad(event) {
  */
 function renderEntry(entry) {
 	var template = '<div class="product-row">';
-	template += '<div class="product" data-target="product-name">' + entry.dp0 + '</div>';
-	template += '<div class="product-unitsinstock" data-target="unitsinstock">' + entry.dp1 + '&nbsp;&nbsp;<i class="fas fa-layer-group fa-lg"></i></div>';
-	template += '<div class="product-unitprice" data-target="unitprice">' + entry.dp2 + '&nbsp;&nbsp;<i class="fas fa-tag fa-lg"></i></div>';
+	template += '<div class="product" data-target="product-name" svy-tooltip="tooltipFunction(null, entry)">' + entry.dp0 + '</div>';
+	template += '<div class="product-unitsinstock" data-target="unitsinstock" svy-tooltip="tooltipFunction(\'unitsinstock\')">' + entry.dp1 + '&nbsp;&nbsp;<i class="fas fa-layer-group fa-lg"></i></div>';
+	template += '<div class="product-unitprice" data-target="unitprice" svy-tooltip="tooltipFunction(\'unitprice\')">' + entry.dp2 + '&nbsp;&nbsp;<i class="fas fa-tag fa-lg"></i></div>';
 	template += '<div class="product-discontinued">' + (entry.dp3 !== 0 ? '<i class="fas fa-ban fa-lg"></i>' : '') + '</div>';
 	template += '</div>';
 	return template;
@@ -44,4 +44,16 @@ function renderEntry(entry) {
  */
 function onClick(record, foundSetIndex, dataTarget, event) {
 	plugins.dialogs.showInfoDialog('Dialog title', 'You clicked on product "' + record.productname + '", click (data) target "' + dataTarget + '"', 'OK');
+}
+
+/**
+ * Handle record selected.
+ *
+ * @param {JSEvent} event the event that triggered the action
+ *
+ * @private
+ *
+ * @properties={typeid:24,uuid:"542428E0-472A-4AE8-8E3A-394887B12133"}
+ */
+function onRecordSelection(event) {
 }

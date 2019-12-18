@@ -30,7 +30,13 @@ dp3:"discontinued"
 },
 foundsetSelector:""
 },
-onClick:"074BAC57-1C04-4938-AA44-FB6B2D404F0E"
+onClick:"074BAC57-1C04-4938-AA44-FB6B2D404F0E",
+tooltipFunction:"function getTooltip(dataTarget, entry) {\r\
+    if (entry && entry.dp3 != 0) return 'Product discontinued'\r\
+    else if (dataTarget == 'unitsinstock') return 'Units in stock'\r\
+    else if (dataTarget == 'unitprice') return 'Price'\r\
+    else return null;\r\
+}"
 },
 name:"foundsetlist",
 typeName:"customrenderedcomponents-foundsetlist",
@@ -49,6 +55,7 @@ uuid:"651E17F4-B96F-4D87-B3B8-5AB638083A7E"
 name:"foundSetListExample",
 navigatorID:"-1",
 onLoadMethodID:"09717D58-B9D4-45DD-B745-347D1B06261C",
+onRecordSelectionMethodID:"542428E0-472A-4AE8-8E3A-394887B12133",
 showInMenu:true,
 typeid:3,
 uuid:"E1D8CB76-5B0C-45D9-B80C-D65F911FD459"

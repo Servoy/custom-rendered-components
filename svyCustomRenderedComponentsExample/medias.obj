@@ -19,5 +19,12 @@ mimeType:"text/css",
 name:"svyCustomRenderedComponentsExample.css",
 typeid:37,
 uuid:"17D18CA4-8BFB-4DD6-A679-ED59F0A2C0A5"
+},
+{
+encapsulation:0,
+mimeType:"text/css",
+name:"theme-servoy.css",
+typeid:37,
+uuid:"BDEC8ED0-CEC4-407F-97AC-E1E28B8446AE"
 }
 ]

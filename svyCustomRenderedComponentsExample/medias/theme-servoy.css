@@ -1,0 +1,2924 @@
+/* main theme color; should be called primary ? */
+/* Main color */
+/* Main color inverse */
+/* Main color light lighten(@main-color, 28%); #F9DB89 */
+/* Main color dark EB8C39 */
+/* Secondary color */
+/* Secondary color inverse */
+/* Secondary color light*/
+/* Secondary color dark*/
+/* Font & Font Sizes */
+/* when the font-size is set to 62.5 1rem = 10px */
+/*
+@font-size-h1 : 36px;
+@font-size-h2 : 30px;
+@font-size-h3 : 24px;
+@font-size-h4 : 18px;
+@font-size-h5 : 14px;
+@font-size-h6 : 12px;
+*/
+/* Body bg */
+/* Bogy bg */
+/* Body bg inverse */
+/* TODO setup borders for colors */
+/* Borders */
+/* Border color */
+/* Border width */
+/* Border style */
+/* Border radius */
+/* Colors for labels and inputs */
+/* Text color */
+/* Text color inverse */
+/* Fields */
+/* Field bg */
+/* Field disabled bg */
+/* Field color #4A4A4A */
+/* Field addon bg */
+/* Field width */
+/* Check and Radio Color */
+/* TODO icons */
+/* Sidenav */
+/* Border for selected top-level item top|right|bottom|left */
+/* Sidenav Secondary color */
+/* Border for selected top-level item top|right|bottom|left */
+/* Navbar */
+/* #f8f8f8; */
+/* @main-color; */
+/* @text-color; */
+/* Tabs */
+/* Windows */
+/* Window header bg */
+/* Window body bg */
+/* Window footer bg */
+/* Window header color */
+/* Tables */
+/* TODO Table boder width */
+/* Table header bg */
+/* Table header bg */
+/* Table header font style */
+/* Table header text transform */
+/* NG Table specific style */
+/* NG Table Panels */
+/* Breadcrumb specific style */
+/* Brand colors applicable to labels and buttons */
+/* TODO this one is not applicable to theme roller, what can i do about it ? */
+/* Brand colors applicable to labels and buttons */
+/* Brand colors applicable to hovers of labels and buttons */
+/* Brand colors applicable to hovers of labels and buttons */
+/* Validations */
+/* Margin sizing applicable to margins and padding */
+/* 12 Grid margin reset */
+div:not(.container):not(.container-fluid):not([class^="col-xs-"]):not([class^="col-sm-"]):not([class^="col-md-"]):not([class^="col-lg-"]) > .row {
+  margin-right: 0;
+  margin-left: 0;
+}
+/* General Style */
+body {
+  color: #777777;
+}
+*,
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1.4rem;
+}
+:focus {
+  outline: none;
+}
+.full-size {
+  width: 100%;
+  height: 100%;
+}
+.full-width {
+  width: 100%;
+}
+.full-height {
+  height: 100%;
+}
+.width-auto {
+  width: auto;
+}
+.width-auto-important {
+  width: auto !important;
+}
+/* Reset Header Margins */
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+h1,
+.h1 {
+  font-size: 3.6rem;
+  line-height: if(true, 40px, 4rem);
+}
+h2,
+.h2 {
+  font-size: 3rem;
+  line-height: if(true, 33px, 4rem);
+}
+h3,
+.h3 {
+  font-size: 2.4rem;
+  line-height: if(true, 27px, 3rem);
+}
+h4,
+.h4 {
+  font-size: 1.8rem;
+  line-height: if(true, 20px, 2rem);
+}
+h5,
+.h5 {
+  font-size: 1.4rem;
+  line-height: if(true, 16px, 2rem);
+}
+h6,
+.h6 {
+  font-size: 1.2rem;
+  line-height: if(true, 14px, 2rem);
+}
+/* To be used on a tab/tabless panel when nesting responsive form. Is used to indent the nested form with the container form */
+.margin-reset {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+/* Margins, to be used on rows to separate lines */
+.no-margin {
+  margin: 0;
+}
+.margin-10 {
+  margin: 10px;
+}
+.margin-20 {
+  margin: 20px;
+}
+.margin-30 {
+  margin: 30px;
+}
+.margin-top-10 {
+  margin-top: 10px;
+}
+.margin-top-20 {
+  margin-top: 20px;
+}
+.margin-top-30 {
+  margin-top: 30px;
+}
+.margin-bottom-10 {
+  margin-bottom: 10px;
+}
+.margin-bottom-20 {
+  margin-bottom: 20px;
+}
+.margin-bottom-30 {
+  margin-bottom: 30px;
+}
+.margin-right-10 {
+  margin-right: 10px;
+}
+.margin-right-20 {
+  margin-right: 20px;
+}
+.margin-right-30 {
+  margin-right: 30px;
+}
+.margin-left-10 {
+  margin-left: 10px;
+}
+.margin-left-20 {
+  margin-left: 20px;
+}
+.margin-left-30 {
+  margin-left: 30px;
+}
+/* paddings, to be used on rows to separate lines */
+.no-padding {
+  padding: 0;
+}
+.padding-10 {
+  padding: 10px;
+}
+.padding-20 {
+  padding: 20px;
+}
+.padding-30 {
+  padding: 30px;
+}
+.padding-top-10 {
+  padding-top: 10px;
+}
+.padding-top-20 {
+  padding-top: 20px;
+}
+.padding-top-30 {
+  padding-top: 30px;
+}
+.padding-bottom-10 {
+  padding-bottom: 10px;
+}
+.padding-bottom-20 {
+  padding-bottom: 20px;
+}
+.padding-bottom-30 {
+  padding-bottom: 30px;
+}
+.padding-right-10 {
+  padding-right: 10px;
+}
+.padding-right-20 {
+  padding-right: 20px;
+}
+.padding-right-30 {
+  padding-right: 30px;
+}
+.padding-left-10 {
+  padding-left: 10px;
+}
+.padding-left-20 {
+  padding-left: 20px;
+}
+.padding-left-30 {
+  padding-left: 30px;
+}
+.border-class {
+  border-style: solid;
+  border-color: #dbdbdb;
+}
+/* Border classes */
+/* TODO does it make sense to call a class border ? shall i use border-default instead ? */
+.border {
+  border-style: solid;
+  border-color: #dbdbdb;
+  border-width: 1px;
+}
+/* TODO does make sense ? */
+.border-radius {
+  border-radius: 2px;
+}
+.border-default {
+  border-style: solid;
+  border-color: #dbdbdb;
+  border-width: 1px;
+  border-radius: 2px;
+  /* TODO does it make sense to use border radius in border-default ? shall i create a separate class border-radius instead ? */
+}
+.no-border {
+  border-style: none;
+  border-width: 0;
+}
+.border-top {
+  border-style: solid;
+  border-color: #dbdbdb;
+  border-top-width: 1px;
+}
+.border-bottom {
+  border-style: solid;
+  border-color: #dbdbdb;
+  border-bottom-width: 1px;
+}
+.border-left {
+  border-style: solid;
+  border-color: #dbdbdb;
+  border-left-width: 1px;
+}
+.border-right {
+  border-style: solid;
+  border-color: #dbdbdb;
+  border-right-width: 1px;
+}
+/* Clickable cursors */
+.clickable {
+  cursor: pointer;
+}
+.clickable-hover {
+  cursor: pointer;
+  transition: border-color 0.4s ease 0s, background-color 0.4s ease 0s;
+}
+.clickable-hover:hover {
+  background: rgba(233, 114, 11, 0.2);
+}
+.clickable[disabled],
+.clickable-hover[disabled] {
+  cursor: not-allowed;
+}
+/* Forms */
+/* TODO enable form bgs !?
+.svy-form {
+	background-color: @body-bg;
+}
+
+.svy-form-inverse {
+	background-color: @body-bg-inverse;
+}
+*/
+/* Dialogs */
+.svy-dialog .svy-header {
+  background: #dddddd;
+  color: #777777;
+}
+.svy-dialog .svy-body {
+  background: #ffffff;
+}
+.svy-dialog .svy-footer {
+  background: #ffffff;
+}
+/* Button */
+.svy-button,
+.bts-button,
+.btn {
+  border-radius: 2px;
+}
+.btn-default {
+  color: #777777;
+}
+.btn:focus,
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+  outline-color: #f58c32;
+  border-color: #f58c32;
+}
+/* Label */
+.svy-label,
+.bts-label {
+  color: #777777;
+  /* font-size: 12px; */
+}
+.svy-label[disabled],
+.bts-label[disabled],
+.svy-fa[disabled] {
+  opacity: 0.6;
+}
+.svy-label.full-size,
+.bts-label.full-size,
+.svy-label.full-width,
+.bts-label.full-width {
+  display: block;
+}
+/* Fields */
+.form-control {
+  box-shadow: none;
+  border-radius: 2px;
+  background-color: #ffffff;
+}
+.form-control:focus {
+  outline: 1px;
+  outline-color: #f58c32;
+  border-color: #f58c32;
+  box-shadow: none;
+}
+.svy-field,
+.svy-password,
+.svy-textarea,
+.bts-textarea,
+.svy-textfield,
+.bts-textbox,
+.svy-typeahead,
+.bts-typeahead,
+.svy-combobox,
+.svy-combobox ~ .input-group-addon,
+.bts-select,
+.bts-select ~ .input-group-addon,
+.svy-calendar,
+.svy-calendar ~ .input-group-addon,
+.bts-calendar input,
+.bts-calendar input ~ .input-group-addon {
+  box-shadow: none;
+  color: #777777;
+  font-size: 1.4rem;
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -moz-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -ms-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+.svy-field,
+.svy-password,
+.svy-textarea,
+.bts-textarea,
+.svy-textfield,
+.bts-textbox,
+.svy-typeahead,
+.bts-typeahead,
+.bts-select,
+.bts-select ~ .input-group-addon,
+.svy-calendar,
+.svy-calendar ~ .input-group-addon,
+.bts-calendar input,
+.bts-calendar input ~ .input-group-addon {
+  border-style: solid;
+  border-color: #dbdbdb;
+  border-width: 1px 1px 1px 1px;
+  border-radius: 0;
+}
+.input-group-addon:last-child,
+.svy-calendar ~ .input-group-addon,
+.bts-calendar input ~ .input-group-addon {
+  border-left: 0;
+}
+.bts-select,
+.bts-select ~ .input-group-addon,
+.svy-calendar,
+.svy-calendar ~ .input-group-addon,
+.bts-calendar input,
+.bts-calendar input ~ .input-group-addon {
+  background-color: #ffffff;
+}
+/*
+.input-group.date .input-group-addon {
+	background-color: @field-addon-bg;
+} */
+.svy-field:focus,
+.svy-password:focus,
+.svy-textarea:focus,
+.bts-textarea:focus,
+.svy-textfield:focus,
+.bts-textbox:focus,
+.svy-typeahead:focus,
+.bts-typeahead:focus,
+.svy-combobox:focus,
+.svy-combobox:focus ~ .input-group-addon,
+.bts-select:focus,
+.bts-select:focus ~ .input-group-addon,
+.svy-calendar:focus,
+.svy-calendar:focus ~ .input-group-addon,
+.bts-calendar input:focus,
+.bts-calendar input:focus ~ .input-group-addon {
+  border-color: #e9720b;
+}
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
+  background-color: #ffffff;
+  opacity: 0.6;
+  border-color: #dbdbdb;
+}
+/* Checkbox */
+/*** custom checkboxes ***/
+.svy-check label,
+.svy-checkgroup label,
+.svy-radiogroup label,
+.bts-check label,
+.bts-radiogroup label {
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+}
+.svy-check input[type=checkbox],
+.svy-check input[type=radio],
+.svy-checkgroup input[type=checkbox],
+.svy-radiogroup input[type=radio],
+.bts-check input[type=checkbox],
+.bts-radiogroup input[type=checkbox],
+.bts-radiogroup input[type=radio] {
+  /* to hide the checkbox itself */
+  webkit-appearence: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 0;
+  height: 0;
+}
+.svy-check input[type=checkbox] + span:before,
+.svy-check input[type=radio] + span:before,
+.svy-checkgroup input[type=checkbox] + span:before,
+.svy-radiogroup input[type=radio] + span:before,
+.bts-check input[type=checkbox] + span:before,
+.bts-radiogroup input[type=checkbox] + span:before,
+.bts-radiogroup input[type=radio] + span:before {
+  display: inline-block;
+  font-family: 'Glyphicons Halflings';
+  letter-spacing: 5px;
+  color: #5bc0de;
+}
+.svy-check input[type=checkbox]:focus + span:before,
+.svy-check input[type=radio]:focus + span:before,
+.svy-checkgroup input[type=checkbox]:focus + span:before,
+.svy-radiogroup input[type=radio]:focus + span:before,
+.bts-check input[type=checkbox]:focus + span:before,
+.bts-radiogroup input[type=checkbox]:focus + span:before,
+.bts-radiogroup input[type=radio]:focus + span:before {
+  color: #28a1c5;
+}
+input[type="radio"][disabled] + span,
+input[type="checkbox"][disabled] + span,
+input[type="radio"].disabled + span,
+input[type="checkbox"].disabled + span,
+fieldset[disabled] input[type="radio"] + span,
+fieldset[disabled] input[type="checkbox"] + span {
+  cursor: not-allowed;
+}
+input[type="radio"][disabled] + span:before,
+input[type="checkbox"][disabled] + span:before,
+input[type="radio"].disabled + span:before,
+input[type="checkbox"].disabled + span:before,
+fieldset[disabled] input[type="radio"] + span:before,
+fieldset[disabled] input[type="checkbox"] + span:before {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.svy-check input[type=checkbox] + span:before,
+.bts-check input[type=checkbox] + span:before,
+.svy-checkgroup input[type=checkbox] + span:before,
+.bts-radiogroup input[type=checkbox] + span:before {
+  content: "\e157";
+}
+.svy-check input[type=checkbox]:checked + span:before,
+.bts-check input[type=checkbox]:checked + span:before,
+.svy-checkgroup input[type=checkbox]:checked + span:before,
+.bts-radiogroup input[type=checkbox]:checked + span:before {
+  content: "\e067";
+}
+.svy-radiogroup input[type=radio] + span:before,
+.bts-radiogroup input[type=radio] + span:before {
+  content: "\e157";
+}
+.svy-radiogroup input[type=radio]:checked + span:before,
+.bts-radiogroup input[type=radio]:checked + span:before {
+  content: "\e165";
+}
+/* Calendar Field */
+/*
+.bts-calendar input {
+	border: 0;
+}
+
+/* Input Groups *
+.input-group .input-group-addon {
+	background-color: @field-addon-bg;
+	border-radius: 0;
+	border-width: 0;
+	border-color: @border-color;
+	border-bottom-width: 1px;
+	-webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	   -moz-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	    -ms-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+	     -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  	        transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+.svy-field:focus ~ .input-group-addon,
+.svy-textarea:focus ~ .input-group-addon, .bts-textarea:focus ~ .input-group-addon,
+.svy-textfield:focus ~ .input-group-addon, .bts-textbox:focus ~ .input-group-addon,
+.svy-typeahead:focus ~ .input-group-addon, .bts-typeahead:focus ~ .input-group-addon,
+.svy-combobox:focus ~ .input-group-addon, .bts-select:focus ~ .input-group-addon,
+.svy-calendar:focus ~ .input-group-addon, .bts-calendar:focus ~ .input-group-addon, 
+.bts-calendar input:focus ~ .input-group-addon  {
+	border-color: @main-color;
+}
+
+.svy-field:focus ~ .input-group-addon,
+.svy-textarea:focus ~ .input-group-addon, .bts-textarea:focus ~ .input-group-addon,
+.svy-textfield:focus ~ .input-group-addon, .bts-textbox:focus ~ .input-group-addon,
+.svy-typeahead:focus ~ .input-group-addon, .bts-typeahead:focus ~ .input-group-addon,
+.svy-combobox:focus ~ .input-group-addon, .bts-select:focus ~ .input-group-addon,
+.svy-calendar:focus ~ .input-group-addon, .bts-calendar:focus ~ .input-group-addon, 
+.bts-calendar input:focus ~ .input-group-addon  {
+	border-color: @main-color;
+}
+
+.svy-calendar input,
+.bts-calendar input,
+.table .input-group .input-group-addon {
+	background-color: @field-addon-bg;
+}
+*/
+/* Calendar Picker */
+.bootstrap-datetimepicker-widget a {
+  color: #f58c32;
+}
+.bootstrap-datetimepicker-widget table td.today {
+  color: #e9720b;
+}
+.bootstrap-datetimepicker-widget table td.active,
+.bootstrap-datetimepicker-widget table td.active:hover {
+  background-color: #e9720b;
+  color: #ffffff;
+}
+/* Combobox */
+.svy-combobox .ui-select-toggle {
+  border: 0;
+  border-style: solid;
+  border-color: #dbdbdb;
+  border-width: 1px 1px 1px 1px;
+  border-radius: 0;
+  box-shadow: none;
+}
+.svy-combobox .ui-select-toggle:hover {
+  background-color: #ffffff;
+  border-color: #e9720b;
+}
+.svy-combobox input {
+  border-width: 1px 1px 1px 1px;
+  border-radius: 0;
+  box-shadow: none;
+}
+.svy-combobox input:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-style: solid;
+  border-color: #f58c32;
+  border-width: 1px 1px 1px 1px;
+}
+.svy-combobox.ui-select-bootstrap .ui-select-choices-row.active > span {
+  background-color: #e9720b;
+}
+/* Dropdown field */
+.dropdown-menu > li > a {
+  color: #777777;
+}
+.dropdown-menu > .active > a,
+.dropdown-menu > .active > a:hover,
+.dropdown-menu > .active > a:focus {
+  background-color: #e9720b;
+}
+/* Bootstrap Select  
+.bts-select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	-webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+} */
+.bts-select option:checked,
+.bts-select option:focus,
+.bts-select option:hover,
+.bts-select option:active {
+  background-color: #e9720b !important;
+  background: #e9720b !important;
+  outline: none;
+}
+/* Select2Tokenizer Servoy Extra */
+.svy-select2-autotokenizer-dropdown .select2-results__option.select2-results__option--highlighted {
+  background-color: #e9720b;
+}
+.svy-select2-autotokenizer .select2-container--default .select2-selection--multiple {
+  background-color: #ffffff;
+  color: #777777;
+  border-style: solid;
+  border-color: #dbdbdb;
+  border-width: 1px 1px 1px 1px;
+  border-radius: 0;
+  cursor: text;
+}
+.svy-select2-autotokenizer .select2-container--default.select2-container--focus .select2-selection--multiple {
+  outline: 1px;
+  outline-color: #f58c32;
+  border-color: #f58c32;
+  box-shadow: none;
+}
+.svy-select2-autotokenizer .select2-container .select2-selection--multiple .select2-selection__rendered {
+  /*display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+    padding: 2px 5px; */
+}
+.svy-select2-autotokenizer-dropdown .svy-select2-autotokenizer.select2-sm .svy-select2-autotokenizer-container .select2-selection__choice,
+.svy-select2-autotokenizer.select2-sm .svy-select2-autotokenizer-container .select2-search--inline .select2-search__field {
+  margin-bottom: 5px;
+}
+.svy-select2-autotokenizer .select2-container--default .select2-selection--multiple .select2-selection__choice {
+  background-color: #e9720b;
+  /* #76BB29; */
+  border: 0px solid #dbdbdb;
+  border-radius: 30px;
+  cursor: default;
+  margin-top: 5px;
+  padding: 1px 15px 1px 10px;
+  color: #ffffff;
+  /*     display: flex;
+    align-items: center; */
+}
+.svy-select2-autotokenizer .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+  color: #ffffff;
+}
+.svy-select2-autotokenizer-dropdown .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
+  color: #4A4A4A;
+  cursor: pointer;
+  font-weight: normal;
+  margin-right: 5px;
+  font-size: 0px;
+}
+.svy-select2-autotokenizer-dropdown .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:before {
+  font-family: "FontAwesome", "Font Awesome 5 Free";
+  content: "\F15A";
+  color: #ffffff;
+}
+.svy-select2-autotokenizer-dropdown .select2-container--default .select2-selection--multiple .select2-selection__choice__remove:hover:before {
+  font-family: "FontAwesome", "Font Awesome 5 Free";
+  content: "\F159";
+  /* color: #ffffff; */
+}
+.svy-select2-autotokenizer-dropdown .select2-results__option[aria-selected=true] {
+  background-color: #e9720b;
+  color: #ffffff;
+}
+.svy-select2-autotokenizer-dropdown .select2-results__option[aria-selected]:before {
+  font-family: 'Glyphicons Halflings';
+  content: "\e067";
+  margin-right: 5px;
+}
+.svy-select2-autotokenizer-dropdown .select2-results__option[aria-selected=true]:before {
+  content: "\e157";
+}
+/* Badge */
+.btn-filter .badge {
+  background-color: #e9720b;
+}
+/* Breadcrumb */
+.bts-extra-breadcrumbs {
+  background-color: #ffffff;
+}
+.bts-extra-breadcrumbs a {
+  color: #e9720b;
+}
+.bts-extra-breadcrumbs > .active {
+  color: #777777;
+}
+/* TabPanel */
+.svy-tabpanel > .nav-tabs,
+.bts-tabpanel > .nav-tabs {
+  border: 0;
+  background-color: #dddddd;
+}
+.svy-tabpanel > .nav-tabs > li,
+.bts-tabpanel > .nav-tabs > li {
+  margin-bottom: 0;
+}
+.svy-tabpanel > .nav-tabs > li > a,
+.bts-tabpanel > .nav-tabs > li > a {
+  background-color: #dddddd;
+  color: #777777;
+  text-transform: uppercase;
+  padding: 8px 15px;
+  border-style: solid;
+  border-color: #ffffff;
+  border-width: 0;
+  border-radius: 0;
+}
+.svy-tabpanel > .nav-tabs > li.active > a,
+.svy-tabpanel > .nav-tabs > li.active > a:hover,
+.svy-tabpanel > .nav-tabs > li.active > a:focus,
+.bts-tabpanel > .nav-tabs > li.active > a,
+.bts-tabpanel > .nav-tabs > li.active > a:hover,
+.bts-tabpanel > .nav-tabs > li.active > a:focus {
+  /* border: @tab-border;
+	border-radius: @tab-border-radius; */
+  background-color: #e9720b;
+  color: #ffffff;
+  border-style: solid;
+  border-color: #e9720b;
+  border-width: 0;
+}
+/* Tab Tertiary */
+.svy-tabpanel.bg-tertiary > .nav-tabs,
+.bts-tabpanel.bg-tertiary > .nav-tabs {
+  background-color: #e8e6e6;
+  background-color: #777777;
+}
+.svy-tabpanel.bg-tertiary > .nav-tabs > li > a,
+.bts-tabpanel.bg-tertiary > .nav-tabs > li > a {
+  background-color: #e8e6e6;
+  background-color: #777777;
+}
+.svy-tabpanel.bg-tertiary > .nav-tabs > li.active > a,
+.svy-tabpanel.bg-tertiary > .nav-tabs > li.active > a:hover,
+.svy-tabpanel.bg-tertiary > .nav-tabs > li.active > a:focus,
+.bts-tabpanel.bg-tertiary > .nav-tabs > li.active > a,
+.bts-tabpanel.bg-tertiary > .nav-tabs > li.active > a:hover,
+.bts-tabpanel.bg-tertiary > .nav-tabs > li.active > a:focus {
+  background-color: #e8e6e6;
+  background-color: #777777;
+  border-color: #e9720b;
+}
+/* Font Awesome *
+data-servoyextra-fontawesome > div {
+	display: inline;
+	float: left;
+	font-size: 18px;
+	margin : 0 15px;
+}
+*/
+/* Sidenav Servoy Extra */
+.svy-sidenav {
+  background-color: #18222c;
+  color: #ffffff;
+  border-width: 1px;
+  border-color: #dbdbdb;
+}
+.svy-sidenav-menu,
+.svy-sidenav-collapse-icon {
+  font-size: 12px;
+  line-height: 36px;
+  color: #ffffff;
+}
+.svy-sidenav-divider {
+  line-height: 0px;
+  padding: 0;
+  margin: 0;
+}
+.svy-sidenav-item {
+  font-size: 1.2rem;
+}
+.svy-sidenav-dropdown {
+  background-color: #18222c;
+  color: #ffffff;
+  font-weight: initial;
+}
+/* Override padding to obtain hover effect */
+.svy-sidenav-menu ul {
+  padding-left: 0px;
+}
+.svy-sidenav-item {
+  padding: 7px 15px 7px 20px;
+}
+.svy-sidenav-item.sn-level-2 {
+  padding-left: 40px;
+}
+.svy-sidenav-item.sn-level-3 {
+  padding-left: 60px;
+}
+.svy-sidenav-item.sn-level-4 {
+  padding-left: 80px;
+}
+/*
+	.svy-sidenav-dropdown.sn-level-2 {
+		margin-left: -20px;
+		padding-left: 20px;
+	}
+	
+	.svy-sidenav-item.sn-level-2 {
+		margin-right: 0;
+	}
+	
+	.svy-sidenav-dropdown.sn-level-3 {
+		margin-left: -40px;
+		padding-left: 40px;
+	}
+	
+	.svy-sidenav-dropdown.sn-level-4 {
+		margin-left: -60px;
+		padding-left: 60px;
+	}*/
+.svy-navitem-selected {
+  /* TODO inverse the column when selected */
+  color: #ffffff;
+  background-color: #464e56;
+}
+.svy-navitem-selected.sn-level-1 {
+  border-style: solid;
+  border-color: #e9720b;
+  border-width: 0px 0px 0px 0px;
+}
+/* When sidenav selected item has border, compensate non-selected items with paddings. */
+.svy-sidenav-dropdown.sn-level-1:not(.svy-navitem-selected) {
+  padding: 0px 0px 0px 0px;
+  /* align non selected items with the selected item */
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.svy-sidenav-item:hover,
+.svy-sidenav-item:hover > .svy-sidenav-collapse-icon,
+.svy-sidenav-dropdown.sn-level-2:hover,
+.svy-sidenav-dropdown.sn-level-3:hover,
+.svy-sidenav-dropdown.sn-level-4:hover {
+  /* TODO inverse the column when selected ! */
+  color: #ffffff;
+  background-color: #464e56;
+}
+.svy-sidenav-secondary {
+  /* Override padding to obtain hover effect */
+  /*
+	.svy-sidenav-dropdown.sn-level-2 {
+		margin-left: -20px;
+		padding-left: 20px;
+	}
+	
+	.svy-sidenav-item.sn-level-2 {
+		margin-right: 0;
+	}
+	
+	.svy-sidenav-dropdown.sn-level-3 {
+		margin-left: -40px;
+		padding-left: 40px;
+	}
+	
+	.svy-sidenav-dropdown.sn-level-4 {
+		margin-left: -60px;
+		padding-left: 60px;
+	}*/
+  /* When sidenav selected item has border, compensate non-selected items with paddings. */
+  /* apply the style to .svy-sidenav */
+  background-color: #e9720b;
+  color: #ffffff;
+  border-width: 1px;
+  border-color: #dbdbdb;
+}
+.svy-sidenav-secondary .svy-sidenav {
+  background-color: #e9720b;
+  color: #ffffff;
+  border-width: 1px;
+  border-color: #dbdbdb;
+}
+.svy-sidenav-secondary .svy-sidenav-menu,
+.svy-sidenav-secondary .svy-sidenav-collapse-icon {
+  font-size: 12px;
+  line-height: 36px;
+  color: #ffffff;
+}
+.svy-sidenav-secondary .svy-sidenav-divider {
+  line-height: 0px;
+  padding: 0;
+  margin: 0;
+}
+.svy-sidenav-secondary .svy-sidenav-item {
+  font-size: 1.2rem;
+}
+.svy-sidenav-secondary .svy-sidenav-dropdown {
+  background-color: #e9720b;
+  color: #ffffff;
+  font-weight: initial;
+}
+.svy-sidenav-secondary .svy-sidenav-menu ul {
+  padding-left: 0px;
+}
+.svy-sidenav-secondary .svy-sidenav-item {
+  padding: 7px 15px 7px 20px;
+}
+.svy-sidenav-secondary .svy-sidenav-item.sn-level-2 {
+  padding-left: 40px;
+}
+.svy-sidenav-secondary .svy-sidenav-item.sn-level-3 {
+  padding-left: 60px;
+}
+.svy-sidenav-secondary .svy-sidenav-item.sn-level-4 {
+  padding-left: 80px;
+}
+.svy-sidenav-secondary .svy-navitem-selected {
+  /* TODO inverse the column when selected */
+  color: #ffffff;
+  background-color: #f58c32;
+}
+.svy-sidenav-secondary .svy-navitem-selected.sn-level-1 {
+  border-style: solid;
+  border-color: #ffffff;
+  border-width: 0px 0px 0px 5px;
+}
+.svy-sidenav-secondary .svy-sidenav-dropdown.sn-level-1:not(.svy-navitem-selected) {
+  padding: 0px 0px 0px 5px;
+  /* align non selected items with the selected item */
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.svy-sidenav-secondary .svy-sidenav-item:hover,
+.svy-sidenav-secondary .svy-sidenav-item:hover > .svy-sidenav-collapse-icon,
+.svy-sidenav-secondary .svy-sidenav-dropdown.sn-level-2:hover,
+.svy-sidenav-secondary .svy-sidenav-dropdown.sn-level-3:hover,
+.svy-sidenav-secondary .svy-sidenav-dropdown.sn-level-4:hover {
+  /* TODO inverse the column when selected ! */
+  color: #ffffff;
+  background-color: #f58c32;
+}
+#svy-sidenav {
+  /* Override padding to obtain hover effect */
+  /*
+	.svy-sidenav-dropdown.sn-level-2 {
+		margin-left: -20px;
+		padding-left: 20px;
+	}
+	
+	.svy-sidenav-item.sn-level-2 {
+		margin-right: 0;
+	}
+	
+	.svy-sidenav-dropdown.sn-level-3 {
+		margin-left: -40px;
+		padding-left: 40px;
+	}
+	
+	.svy-sidenav-dropdown.sn-level-4 {
+		margin-left: -60px;
+		padding-left: 60px;
+	}*/
+  /* When sidenav selected item has border, compensate non-selected items with paddings. */
+}
+#svy-sidenav .svy-sidenav {
+  background-color: #18222c;
+  color: #ffffff;
+  border-width: 1px;
+  border-color: #dbdbdb;
+}
+#svy-sidenav .svy-sidenav-menu,
+#svy-sidenav .svy-sidenav-collapse-icon {
+  font-size: 12px;
+  line-height: 36px;
+  color: #ffffff;
+}
+#svy-sidenav .svy-sidenav-divider {
+  line-height: 0px;
+  padding: 0;
+  margin: 0;
+}
+#svy-sidenav .svy-sidenav-item {
+  font-size: 1.2rem;
+}
+#svy-sidenav .svy-sidenav-dropdown {
+  background-color: #18222c;
+  color: #ffffff;
+  font-weight: initial;
+}
+#svy-sidenav .svy-sidenav-menu ul {
+  padding-left: 0px;
+}
+#svy-sidenav .svy-sidenav-item {
+  padding: 7px 15px 7px 20px;
+}
+#svy-sidenav .svy-sidenav-item.sn-level-2 {
+  padding-left: 40px;
+}
+#svy-sidenav .svy-sidenav-item.sn-level-3 {
+  padding-left: 60px;
+}
+#svy-sidenav .svy-sidenav-item.sn-level-4 {
+  padding-left: 80px;
+}
+#svy-sidenav .svy-navitem-selected {
+  /* TODO inverse the column when selected */
+  color: #ffffff;
+  background-color: #464e56;
+}
+#svy-sidenav .svy-navitem-selected.sn-level-1 {
+  border-style: solid;
+  border-color: #e9720b;
+  border-width: 0px 0px 0px 0px;
+}
+#svy-sidenav .svy-sidenav-dropdown.sn-level-1:not(.svy-navitem-selected) {
+  padding: 0px 0px 0px 0px;
+  /* align non selected items with the selected item */
+  padding-top: 0;
+  padding-bottom: 0;
+}
+#svy-sidenav .svy-sidenav-item:hover,
+#svy-sidenav .svy-sidenav-item:hover > .svy-sidenav-collapse-icon,
+#svy-sidenav .svy-sidenav-dropdown.sn-level-2:hover,
+#svy-sidenav .svy-sidenav-dropdown.sn-level-3:hover,
+#svy-sidenav .svy-sidenav-dropdown.sn-level-4:hover {
+  /* TODO inverse the column when selected ! */
+  color: #ffffff;
+  background-color: #464e56;
+}
+/* Navbar Bootstrap Extra */
+.navbar {
+  border-radius: 0;
+}
+.bts-extra-navbar.navbar-default {
+  background-color: #e9720b;
+  color: #ffffff;
+  margin-bottom: 0;
+  border: 0;
+}
+.bts-extra-navbar.navbar-default .navbar-brand {
+  color: #ffffff;
+}
+.bts-extra-navbar.navbar-default .navbar-nav > li > a,
+.bts-extra-navbar.navbar-default .navbar-nav > .active > a,
+.bts-extra-navbar.navbar-default .navbar-default .navbar-nav > .active > a:hover,
+.bts-extra-navbar.navbar-default .navbar-default .navbar-nav > .active > a:focus,
+.bts-extra-navbar.navbar-default .navbar-nav > .open > a,
+.bts-extra-navbar.navbar-default .navbar-nav > .open > a:hover,
+.bts-extra-navbar.navbar-default .navbar-nav > .open > a:focus {
+  background-color: #e9720b;
+  color: #ffffff;
+}
+.bts-extra-navbar.navbar-default .navbar-nav > .active > a,
+.bts-extra-navbar.navbar-default .navbar-default .navbar-nav > .active > a:hover,
+.bts-extra-navbar.navbar-default .navbar-default .navbar-nav > .active > a:focus,
+.bts-extra-navbar.navbar-default .navbar-nav > .active.open > a,
+.bts-extra-navbar.navbar-default .navbar-nav > .active.open > a:hover,
+.bts-extra-navbar.navbar-default .navbar-nav > .active.open > a:focus {
+  background-color: #e9720b;
+  color: #ffffff;
+  border-color: #ffffff;
+  border-width: 0;
+  border-style: solid;
+}
+.bts-extra-navbar.navbar-default .dropdown-menu,
+.bts-extra-navbar.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+  background-color: #e9720b;
+  color: #ffffff;
+}
+.bts-extra-navbar.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+.bts-extra-navbar.navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+  background-color: #a04e08;
+}
+.bts-extra-navbar.navbar-default .navbar-toggle {
+  background-color: #e9720b;
+  color: #ffffff;
+}
+.bts-extra-navbar.navbar-default .navbar-toggle:hover,
+.bts-extra-navbar.navbar-default .navbar-toggle:focus {
+  background-color: #a04e08;
+}
+.bts-extra-navbar.navbar-default .navbar-toggle .icon-bar {
+  background-color: #ffffff;
+}
+/* Navbar static */
+/* TODO should be moved into the Navbar itself */
+@media (max-width: 768px) {
+  .bts-extra-navbar.navbar-fixed .navbar-header {
+    float: left;
+  }
+  .bts-extra-navbar.navbar-fixed .navbar-nav {
+    float: left;
+    margin: 0;
+  }
+  .bts-extra-navbar.navbar-fixed .navbar-right {
+    float: right !important;
+    margin-right: -15px;
+  }
+  .bts-extra-navbar.navbar-fixed .navbar-nav > li {
+    float: left;
+  }
+  .bts-extra-navbar.navbar-fixed .navbar-nav > li > a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+}
+/* Input Group Bootstrap Extra */
+.bts-extra-navbar .form-control,
+.bts-extra-input-group .form-control {
+  border: 1px solid #dbdbdb;
+}
+.bts-extra-navbar .form-control:focus,
+.bts-extra-input-group .form-control:focus {
+  outline: 1px;
+  outline-color: #f58c32;
+  border-color: #f58c32;
+}
+.bts-extra-input-group .form-control:first-child {
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+.bts-extra-input-group .form-control:last-child {
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+/* Default Table */
+.ui-grid {
+  /*border: 0; TODO fix this*/
+  /*border: @table-border-width @border-style @border-color;*/
+}
+.ui-grid-header-cell {
+  text-transform: uppercase;
+  border-width: 0;
+  font-style: normal;
+  /*	font-size: 12px; */
+}
+.ui-grid-header,
+.ui-grid-top-panel,
+.ui-grid-header-cell,
+.ui-grid-row:nth-child(even) .ui-grid-cell,
+.ui-grid-row:nth-child(odd) .ui-grid-cell {
+  background: #ffffff;
+  /* TODO should be inherit !? */
+  color: #777777;
+}
+.ui-grid-row:nth-child(even) .ui-grid-cell {
+  background: #ffffff;
+  color: #777777;
+}
+.ui-grid-row:nth-child(odd) .ui-grid-cell {
+  background: #ffffff;
+  color: #777777;
+}
+.ui-grid-row .ui-grid-cell {
+  border-bottom: 1px solid #dbdbdb;
+  border-color: #dbdbdb;
+}
+.ui-grid-row div.ui-grid-cell > * {
+  border-width: 0;
+  box-shadow: none;
+}
+/* Selected Row */
+.ui-grid-row.ui-grid-row-selected div.ui-grid-cell {
+  background-color: #e9720b !important;
+  color: #ffffff;
+}
+.ui-grid-cell .svy-field,
+.ui-grid-cell .svy-password,
+.ui-grid-cell .svy-textarea,
+.ui-grid-cell .bts-textarea,
+.ui-grid-cell .svy-textfield,
+.ui-grid-cell .bts-textbox,
+.ui-grid-cell .svy-typeahead,
+.ui-grid-cell .bts-typeahead,
+.ui-grid-cell .svy-combobox,
+.ui-grid-cell .svy-combobox .ui-select-toggle,
+.ui-grid-cell .svy-combobox input,
+.ui-grid-cell .bts-select,
+.ui-grid-cell .svy-calendar,
+.ui-grid-cell .svy-calendar ~ .input-group-addon,
+.ui-grid-cell .bts-calendar input,
+.ui-grid-cell .bts-calendar input ~ .input-group-addon {
+  border: 0;
+}
+.ui-grid-cell .svy-label,
+.ui-grid-cell .bts-label {
+  font-size: 1.4rem;
+}
+.ui-grid-row-selected div.ui-grid-cell .svy-label,
+.ui-grid-row-selected div.ui-grid-cell .bts-label {
+  color: #ffffff;
+}
+.ui-grid-row-selected .ui-grid-cell .svy-field,
+.ui-grid-row-selected .ui-grid-cell .svy-password,
+.ui-grid-row-selected .ui-grid-cell .svy-textarea,
+.ui-grid-row-selected .ui-grid-cell .bts-textarea,
+.ui-grid-row-selected .ui-grid-cell .svy-textfield,
+.ui-grid-row-selected .ui-grid-cell .bts-textbox,
+.ui-grid-row-selected .ui-grid-cell .svy-typeahead,
+.ui-grid-row-selected .ui-grid-cell .bts-typeahead,
+.ui-grid-row-selected .ui-grid-cell .svy-combobox,
+.ui-grid-row-selected .ui-grid-cell .svy-combobox .ui-select-toggle,
+.ui-grid-row-selected .ui-grid-cell .svy-combobox input,
+.ui-grid-row-selected .ui-grid-cell .bts-select,
+.ui-grid-row-selected .ui-grid-cell .svy-calendar,
+.ui-grid-row-selected .ui-grid-cell .bts-calendar,
+.ui-grid-row-selected .ui-grid-cell .bts-calendar input {
+  outline: #e9720b;
+  background-color: inherit;
+  color: #ffffff;
+}
+.ui-grid-row-selected .ui-grid-cell .bts-select,
+.ui-grid-row-selected .ui-grid-cell .bts-select ~ .input-group-addon,
+.ui-grid-row-selected .ui-grid-cell .svy-calendar,
+.ui-grid-row-selected .ui-grid-cell .svy-calendar ~ .input-group-addon,
+.ui-grid-row-selected .ui-grid-cell .bts-calendar input,
+.ui-grid-row-selected .ui-grid-cell .bts-calendar input ~ .input-group-addon {
+  background-color: inherit;
+}
+.ui-grid-row-selected .ui-grid-cell .svy-field:focus,
+.ui-grid-row-selected .ui-grid-cell .svy-password:focus,
+.ui-grid-row-selected .ui-grid-cell .svy-textarea:focus,
+.ui-grid-row-selected .ui-grid-cell .bts-textarea:focus,
+.ui-grid-row-selected .ui-grid-cell .svy-textfield:focus,
+.ui-grid-row-selected .ui-grid-cell .bts-textbox:focus,
+.ui-grid-row-selected .ui-grid-cell .svy-typeahead:focus,
+.ui-grid-row-selected .ui-grid-cell .bts-typeahead:focus,
+.ui-grid-row-selected .ui-grid-cell .svy-combobox:focus,
+.ui-grid-row-selected .ui-grid-cell .svy-combobox:focus ~ .input-group-addon,
+.ui-grid-row-selected .ui-grid-cell .bts-select:focus,
+.ui-grid-row-selected .ui-grid-cell .bts-select:focus ~ .input-group-addon,
+.ui-grid-row-selected .ui-grid-cell .svy-calendar:focus,
+.ui-grid-row-selected .ui-grid-cell .svy-calendar:focus ~ .input-group-addon,
+.ui-grid-row-selected .ui-grid-cell .bts-calendar input:focus,
+.ui-grid-row-selected .ui-grid-cell .bts-calendar input:focus ~ .input-group-addon {
+  /* background-color: @field-bg;
+	color: @field-color;
+	border-radius: 0;*/
+}
+.ui-grid-row-selected .ui-grid-cell .svy-combobox:focus ~ .input-group-addon,
+.ui-grid-row-selected .ui-grid-cell .bts-select:focus ~ .input-group-addon,
+.ui-grid-row-selected .ui-grid-cell .svy-calendar:focus ~ .input-group-addon,
+.ui-grid-row-selected .ui-grid-cell .bts-calendar input:focus ~ .input-group-addon {
+  /* background-color: @field-addon-bg;
+	color: @field-color; */
+}
+/* Servoy Bootstrap/Extra Table */
+.svy-table,
+.bts-table {
+  border: 0 solid #dbdbdb;
+}
+.bts-table thead,
+.svy-table thead {
+  color: #777777;
+  background-color: inherit;
+  /* Table header bg */
+  font-style: normal;
+  /* Table header font style */
+  text-transform: uppercase;
+  /* Table header text transform */
+}
+.svy-table tbody tr:nth-child(even):not(.table-servoyextra-selected) {
+  background: #ffffff;
+  color: #777777;
+}
+.svy-table tbody tr:nth-child(odd):not(.table-servoyextra-selected) {
+  background: #ffffff;
+  color: #777777;
+}
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  border-color: #dbdbdb;
+  border-top-width: 1px;
+}
+.table-bootstrapcomponent-selected,
+.table-servoyextra-selected {
+  background-color: #e9720b;
+  color: #ffffff;
+}
+.svy-table th,
+.svy-table td,
+.bts-table th,
+.bts-table td {
+  border-color: #dbdbdb;
+}
+.svy-table thead,
+.bts-table thead,
+.ui-grid-header-cell {
+  color: #777777;
+  background-color: inherit;
+  border-style: solid;
+  border-color: #dbdbdb;
+  border-width: 0;
+}
+.ui-grid-header-cell,
+.svy-table th,
+.bts-table th,
+.table > thead > tr > th {
+  border-width: 0;
+  text-transform: uppercase;
+  font-weight: normal;
+  /*	font-size: 12px; */
+}
+/* AG Grid Table */
+.ag-table {
+  color: #777777;
+  background-color: inherit;
+}
+.ag-table .ag-header {
+  color: #777777;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+.ag-table .ag-row {
+  border-style: solid;
+  border-width: 0;
+  border-bottom-width: 1px;
+  border-color: #dbdbdb;
+}
+.ag-table .ag-row-odd {
+  background-color: #ffffff;
+  color: #777777;
+}
+.ag-table .ag-row-even {
+  background-color: #ffffff;
+  color: #777777;
+}
+.ag-table .ag-row-selected {
+  background-color: #e9720b;
+  color: #ffffff;
+}
+.ag-table .ag-cell-inline-editing input {
+  color: #777777;
+}
+.ag-table .ag-cell.font-icon {
+  padding: 0 8px;
+}
+/* AG Grid Side Panel Button */
+.ag-table .ag-tool-panel > .ag-side-buttons > button {
+  webkit-appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+}
+.ag-table .ag-tool-panel > .ag-side-buttons > button:before {
+  content: "\f0c9";
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-family: "FontAwesome", "Font Awesome 5 Free";
+}
+.ag-table .ag-side-bar .ag-side-buttons .ag-side-button button {
+  background: transparent;
+  border: 0;
+  padding: 8px 0 8px 0;
+}
+.ag-table .ag-side-bar .ag-side-buttons .ag-selected button {
+  background-color: #f6f6f6;
+  /* TODO parametrize color */
+}
+/*******************************************************************************************************************
+*
+* AG Grid Theme Servoy
+*
+* Body & Header
+* Header Filters
+* Checkbox & Input fields
+* Grouped Rows
+* Column Menu
+* 	Menu List
+* 	Filter
+* 	Column List
+* Side Panel
+* 	Filter
+* 	Columns
+* Horizontal Panel Drop
+* Side Panel Column Drop
+*
+*******************************************************************************************************************/
+.ag-table.ag-theme-servoy .ag-root {
+  border: 1px solid #dbdbdb;
+}
+.ag-table.ag-theme-servoy .ag-header {
+  color: #777777;
+  background-color: inherit;
+  border-bottom: 1px solid #dbdbdb;
+}
+.ag-theme-servoy .ag-header-cell,
+.ag-theme-servoy .ag-header-group-cell {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+.ag-theme-servoy .ag-cell {
+  padding-left: 11px;
+  padding-right: 11px;
+}
+.ag-theme-servoy .ag-header-cell-label .ag-header-cell-text {
+  /*
+	overflow: hidden;
+    text-overflow: ellipsis; */
+}
+.ag-theme-servoy .ag-header-cell-label {
+  display: flex;
+}
+.ag-theme-servoy .ag-header-cell-label > span {
+  height: 100%;
+}
+.ag-theme-servoy .ag-icon-menu {
+  height: 24px;
+}
+.ag-table.ag-theme-servoy .ag-body .ag-cell-value {
+  line-height: 23px;
+}
+/* Ag Grid Theme Header Filter bar */
+.ag-theme-servoy .ag-floating-filter-body {
+  float: left;
+  height: 100%;
+  margin-right: 0;
+  width: calc(72%);
+}
+.ag-theme-servoy .ag-floating-filter-body input {
+  padding-left: 4px;
+  box-shadow: none;
+  color: #777777;
+  font-size: 1.4rem;
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -moz-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -ms-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  border-style: solid;
+  border-color: #dbdbdb;
+  border-width: 1px 1px 1px 1px;
+  border-radius: 0;
+}
+.ag-theme-servoy .ag-floating-filter-body input:focus {
+  border-color: #e9720b;
+  /* .svy-field:focus(); */
+}
+.ag-theme-servoy .ag-floating-filter-button {
+  float: right;
+  line-height: 16px;
+  margin-top: 4px;
+}
+.ag-theme-servoy .ag-floating-filter-button button {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  height: 16px;
+  padding: 0;
+  width: 16px;
+}
+/* Ag Grid Theme Check icons */
+.ag-theme-servoy .ag-column-select-checkbox {
+  margin-right: 4px;
+}
+/*
+.ag-theme-servoy .ag-icon-checkbox-checked,
+.ag-theme-servoy .ag-icon-checkbox-checked:empty {
+	font-family: 'Glyphicons Halflings';
+  	letter-spacing: 5px;
+  	color: @field-check-color;
+	background: none;
+	line-height: 10px;
+    font-size: 12px;
+    height: auto;
+    width: auto;
+}
+
+.ag-theme-servoy .ag-icon-checkbox-checked:before {
+	content: "\e067";
+}
+
+.ag-theme-servoy .ag-icon-checkbox-unchecked {
+	font-family: 'Glyphicons Halflings';
+  	letter-spacing: 5px;
+  	color: @field-check-color;
+	background: none;
+	line-height: 10px;
+    font-size: 12px;
+    height: auto;
+    width: auto;
+}
+
+.ag-theme-servoy .ag-icon-checkbox-unchecked:before {
+	content: "\e157";
+}
+
+.ag-theme-servoy .ag-icon-checkbox-indeterminate {
+	font-family: 'Glyphicons Halflings';
+  	letter-spacing: 5px;
+  	color: @field-check-color;
+  	background: none;
+  	line-height: 10px;
+    font-size: 12px;
+    height: auto;
+    width: auto;
+}
+
+.ag-theme-servoy .ag-icon-checkbox-indeterminate:before {
+	content: "\e157";
+} */
+/* Ag Grid Theme Input Fields */
+.ag-table.ag-theme-servoy .ag-menu input,
+.ag-table.ag-theme-servoy .ag-menu select,
+.ag-table.ag-theme-servoy .ag-side-bar input,
+.ag-table.ag-theme-servoy .ag-side-bar select {
+  padding-left: 4px;
+  box-shadow: none;
+  color: #777777;
+  font-size: 1.4rem;
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -moz-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -ms-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  -o-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  border-style: solid;
+  border-color: #dbdbdb;
+  border-width: 1px 1px 1px 1px;
+  border-radius: 0;
+}
+.ag-table.ag-theme-servoy .ag-menu input:focus,
+.ag-table.ag-theme-servoy .ag-menu select:focus,
+.ag-table.ag-theme-servoy .ag-side-bar input:focus,
+.ag-table.ag-theme-servoy .ag-side-bar select:focus {
+  padding-left: 4px;
+  border-color: #e9720b;
+  /* .svy-field:focus();  */
+}
+/* Ag Grid Theme Grouped rows */
+.ag-table.ag-theme-servoy .ag-row-group {
+  color: #777777;
+  background-color: #ffffff;
+}
+.ag-table.ag-theme-servoy .ag-row-group.ag-row-level-0 {
+  color: #e9720b;
+  background-color: #f9f9f9;
+}
+.ag-table.ag-theme-servoy .ag-row-group > .ag-cell {
+  font-weight: bold;
+}
+/* AG Grid Theme Column Menu */
+.ag-table.ag-theme-servoy .ag-menu {
+  background-color: #ffffff;
+  color: #777777;
+  border-radius: 2px;
+  border-color: #dbdbdb;
+}
+.ag-table.ag-theme-servoy .ag-tab-header {
+  background-color: #e8e6e6;
+}
+.ag-table.ag-theme-servoy .ag-tab-body {
+  padding: 8px 0;
+}
+.ag-table.ag-theme-servoy .ag-tab-header .ag-tab.ag-tab-selected {
+  background-color: inherit;
+  border-color: #dbdbdb;
+  border-bottom: 0px;
+}
+.ag-table.ag-theme-servoy .ag-tab-body .ag-menu-list {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+.ag-table.ag-theme-servoy .ag-menu .ag-menu-option-active {
+  background: #ffffff;
+  color: #e9720b;
+}
+.ag-table.ag-theme-servoy .ag-filter-body-wrapper {
+  padding-bottom: 5px;
+}
+.ag-table.ag-theme-servoy .ag-filter .ag-filter-apply-panel {
+  border: 0;
+}
+.ag-table.ag-theme-servoy .ag-menu .ag-primary-cols-filter-wrapper {
+  margin-left: 4px;
+  margin-right: 0px;
+}
+.ag-table.ag-theme-servoy .ag-primary-cols-header-panel .ag-primary-cols-filter-wrapper .ag-primary-cols-filter {
+  width: 100%;
+  height: 32px;
+}
+.ag-table.ag-theme-servoy .ag-menu .ag-primary-cols-header-panel {
+  height: auto;
+  align-items: center;
+  padding-bottom: 8px;
+  padding-top: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  /* padding-left: 0; */
+  border-color: #dbdbdb;
+}
+.ag-table.ag-theme-servoy .ag-menu .ag-primary-cols-list-panel {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.ag-table.ag-theme-servoy .ag-column-select-panel .ag-column-tool-panel-column .ag-column-select-checkbox {
+  margin-left: 0;
+}
+/* AG Grid Theme Tool Panel & Side Bar */
+.ag-theme-servoy .ag-side-bar {
+  background-color: #f9f9f9;
+  color: #777777;
+  border-bottom: 1px solid #dbdbdb;
+  border-right: 1px solid #dbdbdb;
+  border-top: 1px solid #dbdbdb;
+}
+.ag-theme-servoy .ag-side-bar .ag-side-buttons {
+  background-color: #ffffff;
+  /* TODO parametrize color */
+  color: #777777;
+}
+.ag-theme-servoy .ag-side-bar .ag-side-buttons .ag-selected button {
+  background-color: #f9f9f9;
+  /* TODO parametrize color */
+  color: #777777;
+}
+/* Ag Grid Theme Side Panel Filter */
+.ag-theme-servoy .ag-tool-panel-wrapper {
+  border-right: 1px solid #dbdbdb;
+}
+.ag-theme-servoy .ag-tool-panel-wrapper .ag-filter-panel {
+  width: 100%;
+}
+.ag-theme-servoy .ag-tool-panel-wrapper .ag-filter-panel .ag-filter-toolpanel-header {
+  padding: 10px;
+}
+.ag-theme-servoy .ag-filter-panel .ag-header-cell-label {
+  display: flex;
+  float: left;
+  width: 100%;
+  border-bottom: 1px solid #dbdbdb;
+}
+.ag-theme-servoy .ag-filter-panel .ag-header-cell-label .ag-header-cell-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ag-theme-servoy .ag-filter-toolpanel-body.ag-filter .ag-filter-air {
+  border-bottom: 1px solid #dbdbdb;
+  padding-bottom: 10px;
+}
+.ag-theme-servoy .ag-tool-panel-wrapper .ag-filter-panel .ag-filter-body-wrapper > div:first-child > * {
+  margin-top: 10px;
+}
+.ag-table.ag-theme-servoy .ag-filter-filter,
+.ag-table.ag-theme-servoy .ag-filter-select {
+  margin: 4px 10px;
+  width: calc(80%);
+  height: 32px;
+}
+.ag-table.ag-theme-servoy .ag-filter-apply-panel {
+  display: flex;
+  justify-content: space-around;
+  padding: 4px;
+}
+.ag-table.ag-theme-servoy .ag-filter-apply-panel button {
+  webkit-appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  border: 1px solid #dbdbdb;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+.ag-table.ag-theme-servoy .ag-filter-apply-panel button:first-child {
+  background-color: #e8e6e6;
+  color: #777777;
+  border-color: #e8e6e6;
+}
+.ag-table.ag-theme-servoy .ag-filter-apply-panel button:last-child {
+  background-color: #428bca;
+  color: #ffffff;
+  border-color: #428bca;
+}
+/* Ag Grid Theme Side Panel Columns */
+.ag-theme-servoy .ag-column-drag {
+  height: 12px;
+  background-position-y: 0 !important;
+}
+.ag-theme-servoy .ag-column-tool-panel-column {
+  align-items: center;
+  overflow: hidden;
+  margin-left: 10px;
+  min-height: 20px;
+}
+.ag-theme-servoy .ag-column-tool-panel-column .ag-column-select-checkbox > span {
+  display: flex;
+}
+.ag-theme-servoy .ag-column-tool-panel-column .ag-column-tool-panel-column-label {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+/* AG Grid Theme Side Tool panel */
+.ag-table.ag-theme-servoy .ag-column-panel .ag-pivot-mode-panel,
+.ag-table.ag-theme-servoy .ag-column-panel .ag-primary-cols-header-panel,
+.ag-table.ag-theme-servoy .ag-column-panel .ag-column-drop-vertical .ag-column-drop-list {
+  /* margin: 0 12px 8px 16px; */
+  padding: 8px 10px;
+  border-width: 0;
+  border-bottom-width: 1px;
+  border-color: #dbdbdb;
+  border-style: solid;
+}
+.ag-table.ag-theme-servoy .ag-column-panel .ag-column-drop-vertical .ag-column-drop-list {
+  border-bottom-width: 0;
+}
+.ag-table.ag-theme-servoy .ag-column-panel .ag-primary-cols-list-panel {
+  margin-top: 8px;
+}
+.ag-table.ag-theme-servoy .ag-column-panel .ag-column-drop-vertical .ag-column-drop-icon {
+  margin-left: 16px;
+}
+.ag-table.ag-theme-servoy .ag-column-panel .ag-primary-cols-header-panel {
+  align-items: center;
+}
+.ag-table.ag-theme-servoy .ag-primary-cols-header-panel a {
+  margin-left: 0;
+  margin-right: 4px;
+}
+/*
+.ag-table.ag-theme-servoy .ag-table.ag-theme-servoy .ag-tool-panel .ag-column-drop {
+    clear: both;
+    overflow: auto;
+    padding: 4px 0;
+    padding-bottom: 4px;
+} */
+/* Ag Group Theme Horizontal Panel Column Drop */
+.ag-theme-servoy .ag-column-drop-horizontal {
+  background-color: inherit;
+  border: 1px solid #dbdbdb;
+  border-bottom: 0;
+  padding: 5px;
+}
+.ag-table.ag-theme-servoy .ag-column-drop-horizontal > div:first-child {
+  float: left;
+  height: 100%;
+  line-height: 32px;
+}
+.ag-table.ag-theme-servoy .ag-column-drop-horizontal .ag-right-arrow {
+  padding: 0 4px;
+  display: none;
+}
+.ag-table.ag-theme-servoy .ag-column-drop-horizontal .ag-column-drop-cell .ag-column-drop-cell-button:after {
+  font-family: "FontAwesome", "Font Awesome 5 Free";
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  content: "\f054";
+  vertical-align: middle;
+}
+.ag-table.ag-theme-servoy .ag-column-drop-horizontal .ag-column-drag {
+  border: 1px solid #dbdbdb;
+  padding: 4px 6px 4px 16px;
+  border-radius: 2px 0 0 2px;
+  border-right: 0;
+  background-repeat: no-repeat;
+  background-position: 4px 6px !important;
+}
+.ag-table.ag-theme-servoy .ag-column-drop-horizontal .ag-column-drop-cell-text {
+  border: 1px solid #dbdbdb;
+  border-left: 0;
+  padding: 4px 16px;
+  padding-left: 0;
+  border-radius: 0 2px 2px 0;
+}
+.ag-table.ag-theme-servoy .ag-column-drop-horizontal .ag-icon-group,
+.ag-table.ag-theme-servoy .ag-column-drop-horizontal .ag-icon-pivot {
+  margin-right: 12px;
+}
+/*
+.ag-table.ag-theme-servoy .ag-tool-panel-wrapper .ag-column-drop .ag-column-drop-cell {
+    padding-left: 10px;
+    /*line-height: 32px;*
+    display: block;
+} */
+/* Ag-Grid Theme Side Panel Column Drops */
+.ag-table.ag-theme-servoy .ag-column-drop-vertical {
+  padding-top: 8px;
+  border-top: 1px solid #dbdbdb;
+}
+.ag-table.ag-theme-servoy .ag-column-drop-vertical .ag-column-drop-cell {
+  margin-top: 4px;
+  border: 1px solid #dbdbdb;
+  padding: 4px 16px;
+  padding-left: 0;
+  border-radius: 2px;
+}
+.ag-table.ag-theme-servoy .ag-column-drop-vertical .ag-column-drop-drag {
+  background-repeat: no-repeat;
+  background-position: 4px 6px !important;
+}
+.ag-table.ag-theme-servoy .ag-column-drop-vertical .ag-column-drop-cell .ag-column-drop-cell-button {
+  margin-top: 2px;
+}
+/*
+.ag-table.ag-theme-servoy .ag-tool-panel .ag-column-drop .ag-column-drop-cell .ag-column-drop-cell-button {
+    float: initial;
+} */
+.ag-table.ag-theme-servoy .ag-column-drop-empty-message,
+.ag-table.ag-theme-servoy .ag-column-drop-horizontal .ag-column-drop-cell:last-child:after,
+.ag-table.ag-theme-servoy .ag-column-drop-vertical .ag-column-drop-list:after {
+  content: "Drop a column";
+  border: 1px dashed #dbdbdb;
+  color: #777777;
+  border-radius: 2px;
+  padding: 4px 16px;
+  display: inline-block;
+  line-height: 20px;
+}
+.ag-table.ag-theme-servoy .ag-column-drop-vertical .ag-column-drop-list:after {
+  width: 100%;
+}
+.ag-table.ag-theme-servoy .ag-column-drop-empty-message {
+  margin: 0 12px 0 16px;
+  display: none;
+  /* There is a bug in ag-grid not properly clean empty message when clearing groups */
+}
+.ag-table.ag-theme-servoy .ag-column-drop-vertical .ag-column-drop-list:after {
+  margin-top: 4px;
+}
+/*------------------------------------------------------------------------------------------------------------------
+* ----End AG Grid Theme Servoy-----------
+* ------------------------------------------------------------------------------------------------------------------*/
+/* Popup */
+.yuimenu {
+  padding: 0;
+  background: #FFF;
+  border-radius: 2px;
+  /* TODO shall it use a popup border radius instead !? */
+}
+.yuimenuitemlabel {
+  color: #777777;
+}
+.yuimenuitemlabel a:hover,
+.yuimenuitemlabel a:focus {
+  color: #777777;
+}
+.yuimenuitemlabel:hover,
+.yuimenuitemlabel-selected,
+.yuimenuitemlabel-selected:hover {
+  background-color: #e9720b;
+}
+.yuimenubaritemlabel:focus,
+.yuimenubaritemlabel:hover,
+.yuimenuitemlabel:hover,
+.yuimenuitemlabel:focus {
+  outline: none;
+  text-decoration: initial;
+  color: inherit;
+}
+.yuimenubaritemlabel-selected,
+.yuimenubaritemlabel-selected:hover,
+.yuimenubaritemlabel-selected:focus,
+.yuimenubaritemlabel-selected:visited,
+.yuimenuitemlabel-selected,
+.yuimenuitemlabel-selected:hover,
+.yuimenuitemlabel-selected:focus,
+.yuimenuitemlabel-selected:visited {
+  background-color: #e9720b;
+  color: #ffffff;
+  text-decoration: inherit;
+}
+.yuimenubaritemlabel-disabled:focus,
+.yuimenubaritemlabel-disabled:hover,
+.yuimenuitemlabel-disabled:hover,
+.yuimenuitemlabel-disabled:focus {
+  color: #dbdbdb;
+}
+/* Scrollbar Style */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+  padding: 0 5px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 0px;
+  background: #FFF;
+  border: 0 solid #dbdbdb;
+  border-top: 0;
+  border-bottom: 0;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background: #dbdbdb;
+}
+::-webkit-scrollbar-thumb:window-inactive {
+  background: #F8F8F8;
+}
+/************************************************************************************
+ Style Layout Containers
+ *************************************************************************************/
+/* Simple Collapsible */
+.simple-collapsible {
+  margin-bottom: 15px;
+}
+.simple-collapsible-toggle {
+  color: #e9720b;
+  border-bottom: 1px solid #e9720b;
+}
+.simple-collapsible-content > *:first-child {
+  margin-top: 15px;
+}
+.simple-collapsible-content > *:last-child {
+  margin-bottom: 15px;
+}
+.simple-collapsible-content {
+  border-bottom: 1px solid #e9720b;
+}
+.simple-collapsible-toggle .svy-label,
+.simple-collapsible-toggle .bts-label {
+  color: #e9720b;
+  font-size: 18px;
+}
+/* Inline Groups */
+.inline-group.input-group-xs > .inline-group-left,
+.inline-group.input-group-xs > .inline-group-right {
+  min-height: 22px;
+}
+.inline-group.input-group-sm > .inline-group-left,
+.inline-group.input-group-sm > .inline-group-right {
+  min-height: 30px;
+}
+.inline-group.input-group-md > .inline-group-left,
+.inline-group.input-group-md > .inline-group-right {
+  min-height: 34px;
+}
+.inline-group.input-group-lg > .inline-group-left,
+.inline-group.input-group-lg > .inline-group-right {
+  min-height: 44px;
+}
+/* Style the flex footer if used on a form with theme servoy */
+/* TODO do i really need that ? */
+ > .flexlayout > .flex-footer {
+  background-color: #e9720b;
+  color: #ffffff;
+  height: 80px;
+}
+ > .flexlayout > .flex-footer .svy-label,
+ > .flexlayout > .flex-footer .bts-label {
+  color: #ffffff;
+}
+/* Background colors */
+.bg {
+  background-color: #ffffff;
+  color: #333333;
+}
+.bg-inverse {
+  background-color: #dddddd;
+  color: #333333;
+}
+.bg-main {
+  background-color: #e9720b;
+  color: #ffffff;
+}
+.bg-primary {
+  background-color: #428bca;
+  color: #ffffff;
+}
+.bg-tertiary {
+  background-color: #e8e6e6;
+  color: #777777;
+}
+.bg-success {
+  background-color: #5cb85c;
+  color: #ffffff;
+}
+.bg-info {
+  background-color: #5bc0de;
+  color: #ffffff;
+}
+.bg-warning {
+  background-color: #f0ad4e;
+  color: #ffffff;
+}
+.bg-danger {
+  background-color: #d9534f;
+  color: #ffffff;
+}
+/* Overrule background-variant */
+a.bg-primary:hover {
+  background-color: #357ebd;
+  color: #ffffff;
+}
+a.bg-tertiary:hover {
+  background-color: #dcd9d9;
+  color: #777777;
+}
+a.bg-success:hover {
+  background-color: #4cae4c;
+  color: #ffffff;
+}
+a.bg-info:hover {
+  background-color: #46b8da;
+  color: #ffffff;
+}
+a.bg-warning:hover {
+  background-color: #eea236;
+  color: #ffffff;
+}
+a.bg-danger:hover {
+  background-color: #d43f3a;
+  color: #ffffff;
+}
+/************************************************************************************
+* Default styles
+************************************************************************************/
+/* Title Labels, can i deprecate these classes ? */
+.label_header_0 {
+  background: #F8F8F8;
+  color: #e9720b;
+  font-size: 24px;
+  padding-left: 30px;
+  text-transform: uppercase;
+}
+.label_header_1 {
+  color: #f58c32;
+  background: #ffffff;
+  border-bottom: 1px solid #f58c32;
+  font-size: 24px;
+  font-weight: 100;
+}
+.label_header_2,
+.label_header_3 {
+  padding-left: 6px;
+  background: #e9720b;
+  color: white;
+  font-weight: 100;
+  border-radius: 25px;
+}
+.label_header_0,
+.label_header_1,
+.label_header_2,
+.label_header_3 {
+  display: inline-block;
+  width: 100%;
+}
+.svy-layoutcontainer > * > .label_header_1,
+.svy-layoutcontainer > * > .label_header_2 {
+  margin: 15px 0;
+}
+.svy-layoutcontainer > * > .label_header_2 {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+.svy-layoutcontainer > * > .label_header_0,
+.svy-layoutcontainer > * > .label_header_3 {
+  display: inline-block;
+  width: 100%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.label_header_3 {
+  text-align: center;
+}
+.label_subheader_0 {
+  position: absolute;
+  top: 25px;
+  left: 160px;
+}
+/************************************************************************************
+* Typography
+*
+* text-center, text-uppercase, text-center, text-underline, label-underline
+* label-primary|tertiary|success|info|warning|danger  
+* text-primary|tertiary|success|info|warning|danger	  
+************************************************************************************/
+.text-center {
+  text-align: center;
+}
+.bts-label.text-center,
+.bts-datalabel.text-center {
+  display: block;
+  /* To center text on a responsive label i should show the label as block */
+  white-space: initial;
+}
+/* Fonts */
+.font-weight-bold {
+  font-weight: bold;
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
+.text-underline,
+.label-underline {
+  text-decoration: underline;
+}
+/* TODO where is this used ? can i remove it ? */
+.label-primary,
+.label-tertiary,
+.label-success,
+.label-info,
+.label-warning,
+.label-danger {
+  color: #FFF;
+  /* TODO remove color */
+  text-align: center;
+  border-radius: 2px;
+}
+/* Label Colors */
+.text-primary,
+.label-primary,
+.btn.text-primary {
+  color: #428bca;
+}
+.text-tertiary,
+.label-tertiary,
+.btn.text-tertiary {
+  color: #999997;
+}
+.text-success,
+.label-success,
+.btn.text-success {
+  color: #5cb85c;
+}
+.text-info,
+.label-info,
+.btn.text-info {
+  color: #5bc0de;
+}
+.text-warning,
+.label-warning,
+.btn.text-warning {
+  color: #f0ad4e;
+}
+.text-danger,
+.label-danger,
+.btn.text-danger {
+  color: #d9534f;
+}
+/************************************************************************************
+* Buttons Style Classes
+*
+* btn-primary|tertiary|success|warning|danger|info|default
+************************************************************************************/
+.btn-primary {
+  background-color: #428bca;
+  color: #ffffff;
+  border-color: #428bca;
+}
+/* TODO this is strange, do we really need a no-focus class ? */
+/* TODO this is strange, shall i replicate for all other brand colors ? */
+.btn-primary.no-focus:focus,
+.btn-primary.no-focus.focus {
+  background-color: #428bca;
+  color: #ffffff;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.focus,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary:active:focus,
+.btn-primary.active:focus,
+.btn-primary:active.focus,
+.btn-primary.active.focus,
+.btn-primary.no-focus:hover,
+.btn-primary.no-focus.focus:hover,
+.open > .dropdown-toggle.btn-primary {
+  background-color: #357ebd;
+  color: #ffffff;
+  outline-color: #428bca;
+  border-color: #428bca;
+}
+.btn-primary.disabled,
+.btn-primary[disabled],
+fieldset[disabled] .btn-primary,
+.btn-primary.disabled:hover,
+.btn-primary[disabled]:hover,
+fieldset[disabled] .btn-primary:hover,
+.btn-primary.disabled:focus,
+.btn-primary[disabled]:focus,
+fieldset[disabled] .btn-primary:focus,
+.btn-primary.disabled.focus,
+.btn-primary[disabled].focus,
+fieldset[disabled] .btn-primary.focus,
+.btn-primary.disabled:active,
+.btn-primary[disabled]:active,
+fieldset[disabled] .btn-primary:active,
+.btn-primary.disabled.active,
+.btn-primary[disabled].active,
+fieldset[disabled] .btn-primary.active {
+  background-color: #428bca;
+  border-color: #428bca;
+}
+.btn-tertiary {
+  background-color: #e8e6e6;
+  color: #777777;
+  border-color: #e8e6e6;
+}
+.btn-tertiary:hover,
+.btn-tertiary:focus,
+.btn-tertiary.focus,
+.btn-tertiary:active,
+.btn-tertiary.active,
+.btn-tertiary:active:focus,
+.btn-tertiary.active:focus,
+.btn-tertiary:active.focus,
+.btn-tertiary.active.focus,
+.btn-tertiary.no-focus:hover,
+.btn-tertiary.no-focus.focus:hover,
+.open > .dropdown-toggle.btn-tertiary {
+  background-color: #dcd9d9;
+  color: #777777;
+  outline-color: #e8e6e6;
+  border-color: #e8e6e6;
+}
+.btn-tertiary.disabled,
+.btn-tertiary[disabled],
+fieldset[disabled] .btn-tertiary,
+.btn-tertiary.disabled:hover,
+.btn-tertiary[disabled]:hover,
+fieldset[disabled] .btn-tertiary:hover,
+.btn-tertiary.disabled:focus,
+.btn-tertiary[disabled]:focus,
+fieldset[disabled] .btn-tertiary:focus,
+.btn-tertiary.disabled.focus,
+.btn-tertiary[disabled].focus,
+fieldset[disabled] .btn-tertiary.focus,
+.btn-tertiary.disabled:active,
+.btn-tertiary[disabled]:active,
+fieldset[disabled] .btn-tertiary:active,
+.btn-tertiary.disabled.active,
+.btn-tertiary[disabled].active,
+fieldset[disabled] .btn-tertiary.active {
+  background-color: #e8e6e6;
+  border-color: #e8e6e6;
+}
+.btn-success {
+  background-color: #5cb85c;
+  color: #ffffff;
+  border-color: #5cb85c;
+}
+.btn-success:hover,
+.btn-success:focus,
+.btn-success.focus,
+.btn-success:active,
+.btn-success.active,
+.btn-success:active:focus,
+.btn-success.active:focus,
+.btn-success:active.focus,
+.btn-success.active.focus,
+.btn-success.no-focus:hover,
+.btn-success.no-focus.focus:hover,
+.open > .dropdown-toggle.btn-success {
+  background-color: #4cae4c;
+  color: #ffffff;
+  outline-color: #5cb85c;
+  border-color: #5cb85c;
+}
+.btn-success.disabled,
+.btn-success[disabled],
+fieldset[disabled] .btn-success,
+.btn-success.disabled:hover,
+.btn-success[disabled]:hover,
+fieldset[disabled] .btn-success:hover,
+.btn-success.disabled:focus,
+.btn-success[disabled]:focus,
+fieldset[disabled] .btn-success:focus,
+.btn-success.disabled.focus,
+.btn-success[disabled].focus,
+fieldset[disabled] .btn-success.focus,
+.btn-success.disabled:active,
+.btn-success[disabled]:active,
+fieldset[disabled] .btn-success:active,
+.btn-success.disabled.active,
+.btn-success[disabled].active,
+fieldset[disabled] .btn-success.active {
+  background-color: #5cb85c;
+  border-color: #5cb85c;
+}
+.btn-info {
+  background-color: #5bc0de;
+  color: #ffffff;
+  border-color: #5bc0de;
+}
+.btn-info:hover,
+.btn-info:focus,
+.btn-info.focus,
+.btn-info:active,
+.btn-info.active,
+.btn-info:active:focus,
+.btn-info.active:focus,
+.btn-info:active.focus,
+.btn-info.active.focus,
+.btn-info.no-focus:hover,
+.btn-info.no-focus.focus:hover,
+.open > .dropdown-toggle.btn-info {
+  background-color: #46b8da;
+  color: #ffffff;
+  outline-color: #5bc0de;
+  border-color: #5bc0de;
+}
+.btn-info.disabled,
+.btn-info[disabled],
+fieldset[disabled] .btn-info,
+.btn-info.disabled:hover,
+.btn-info[disabled]:hover,
+fieldset[disabled] .btn-info:hover,
+.btn-info.disabled:focus,
+.btn-info[disabled]:focus,
+fieldset[disabled] .btn-info:focus,
+.btn-info.disabled.focus,
+.btn-info[disabled].focus,
+fieldset[disabled] .btn-info.focus,
+.btn-info.disabled:active,
+.btn-info[disabled]:active,
+fieldset[disabled] .btn-info:active,
+.btn-info.disabled.active,
+.btn-info[disabled].active,
+fieldset[disabled] .btn-info.active {
+  background-color: #5bc0de;
+  border-color: #5bc0de;
+}
+.btn-warning {
+  background-color: #f0ad4e;
+  color: #ffffff;
+  border-color: #f0ad4e;
+}
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning.focus,
+.btn-warning:active,
+.btn-warning.active,
+.btn-warning:active:focus,
+.btn-warning.active:focus,
+.btn-warning:active.focus,
+.btn-warning.active.focus,
+.btn-warning.no-focus:hover,
+.btn-warning.no-focus.focus:hover,
+.open > .dropdown-toggle.btn-warning {
+  background-color: #eea236;
+  color: #ffffff;
+  outline-color: #f0ad4e;
+  border-color: #f0ad4e;
+}
+.btn-warning.disabled,
+.btn-warning[disabled],
+fieldset[disabled] .btn-warning,
+.btn-warning.disabled:hover,
+.btn-warning[disabled]:hover,
+fieldset[disabled] .btn-warning:hover,
+.btn-warning.disabled:focus,
+.btn-warning[disabled]:focus,
+fieldset[disabled] .btn-warning:focus,
+.btn-warning.disabled.focus,
+.btn-warning[disabled].focus,
+fieldset[disabled] .btn-warning.focus,
+.btn-warning.disabled:active,
+.btn-warning[disabled]:active,
+fieldset[disabled] .btn-warning:active,
+.btn-warning.disabled.active,
+.btn-warning[disabled].active,
+fieldset[disabled] .btn-warning.active {
+  background-color: #f0ad4e;
+  border-color: #f0ad4e;
+}
+.btn-danger {
+  background-color: #d9534f;
+  color: #ffffff;
+  border-color: #d9534f;
+}
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger.focus,
+.btn-danger:active,
+.btn-danger.active,
+.btn-danger:active:focus,
+.btn-danger.active:focus,
+.btn-danger:active.focus,
+.btn-danger.active.focus,
+.btn-danger.no-focus:hover,
+.btn-danger.no-focus.focus:hover,
+.open > .dropdown-toggle.btn-danger {
+  background-color: #d43f3a;
+  color: #ffffff;
+  outline-color: #d9534f;
+  border-color: #d9534f;
+}
+.btn-danger.disabled,
+.btn-danger[disabled],
+fieldset[disabled] .btn-danger,
+.btn-danger.disabled:hover,
+.btn-danger[disabled]:hover,
+fieldset[disabled] .btn-danger:hover,
+.btn-danger.disabled:focus,
+.btn-danger[disabled]:focus,
+fieldset[disabled] .btn-danger:focus,
+.btn-danger.disabled.focus,
+.btn-danger[disabled].focus,
+fieldset[disabled] .btn-danger.focus,
+.btn-danger.disabled:active,
+.btn-danger[disabled]:active,
+fieldset[disabled] .btn-danger:active,
+.btn-danger.disabled.active,
+.btn-danger[disabled].active,
+fieldset[disabled] .btn-danger.active {
+  background-color: #d9534f;
+  border-color: #d9534f;
+}
+/************************************************************************************
+* Button Outline Style Classes
+*
+* btn-outline-primary|tertiary|success|warning|danger|info|default
+************************************************************************************/
+.btn-outline-primary {
+  background-color: #ffffff;
+  color: #428bca;
+  border-color: #428bca;
+}
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary.focus,
+.btn-outline-primary:active,
+.btn-outline-primary.active,
+.btn-outline-primary:active:focus,
+.btn-outline-primary.active:focus,
+.btn-outline-primary:active.focus,
+.btn-outline-primary.active.focus,
+.btn-outline-primary.no-focus:hover,
+.btn-outline-primary.no-focus.focus:hover,
+.open > .dropdown-toggle.btn-outline-primary {
+  background-color: #357ebd;
+  color: #ffffff;
+  outline-color: #428bca;
+  border-color: #428bca;
+}
+.btn-outline-primary.disabled,
+.btn-outline-primary[disabled],
+fieldset[disabled] .btn-outline-primary,
+.btn-outline-primary.disabled:hover,
+.btn-outline-primary[disabled]:hover,
+fieldset[disabled] .btn-outline-primary:hover,
+.btn-outline-primary.disabled:focus,
+.btn-outline-primary[disabled]:focus,
+fieldset[disabled] .btn-outline-primary:focus,
+.btn-outline-primary.disabled.focus,
+.btn-outline-primary[disabled].focus,
+fieldset[disabled] .btn-outline-primary.focus,
+.btn-outline-primary.disabled:active,
+.btn-outline-primary[disabled]:active,
+fieldset[disabled] .btn-outline-primary:active,
+.btn-outline-primary.disabled.active,
+.btn-outline-primary[disabled].active,
+fieldset[disabled] .btn-outline-primary.active {
+  background-color: #ffffff;
+  border-color: #428bca;
+}
+.btn-outline-tertiary {
+  background-color: #777777;
+  color: #e8e6e6;
+  border-color: #e8e6e6;
+}
+.btn-outline-tertiary:hover,
+.btn-outline-tertiary:focus,
+.btn-outline-tertiary.focus,
+.btn-outline-tertiary:active,
+.btn-outline-tertiary.active,
+.btn-outline-tertiary:active:focus,
+.btn-outline-tertiary.active:focus,
+.btn-outline-tertiary:active.focus,
+.btn-outline-tertiary.active.focus,
+.btn-outline-tertiary.no-focus:hover,
+.btn-outline-tertiary.no-focus.focus:hover,
+.open > .dropdown-toggle.btn-outline-tertiary {
+  background-color: #dcd9d9;
+  color: #777777;
+  outline-color: #e8e6e6;
+  border-color: #e8e6e6;
+}
+.btn-outline-tertiary.disabled,
+.btn-outline-tertiary[disabled],
+fieldset[disabled] .btn-outline-tertiary,
+.btn-outline-tertiary.disabled:hover,
+.btn-outline-tertiary[disabled]:hover,
+fieldset[disabled] .btn-outline-tertiary:hover,
+.btn-outline-tertiary.disabled:focus,
+.btn-outline-tertiary[disabled]:focus,
+fieldset[disabled] .btn-outline-tertiary:focus,
+.btn-outline-tertiary.disabled.focus,
+.btn-outline-tertiary[disabled].focus,
+fieldset[disabled] .btn-outline-tertiary.focus,
+.btn-outline-tertiary.disabled:active,
+.btn-outline-tertiary[disabled]:active,
+fieldset[disabled] .btn-outline-tertiary:active,
+.btn-outline-tertiary.disabled.active,
+.btn-outline-tertiary[disabled].active,
+fieldset[disabled] .btn-outline-tertiary.active {
+  background-color: #777777;
+  border-color: #e8e6e6;
+}
+.btn-outline-success {
+  background-color: #ffffff;
+  color: #5cb85c;
+  border-color: #5cb85c;
+}
+.btn-outline-success:hover,
+.btn-outline-success:focus,
+.btn-outline-success.focus,
+.btn-outline-success:active,
+.btn-outline-success.active,
+.btn-outline-success:active:focus,
+.btn-outline-success.active:focus,
+.btn-outline-success:active.focus,
+.btn-outline-success.active.focus,
+.btn-outline-success.no-focus:hover,
+.btn-outline-success.no-focus.focus:hover,
+.open > .dropdown-toggle.btn-outline-success {
+  background-color: #4cae4c;
+  color: #ffffff;
+  outline-color: #5cb85c;
+  border-color: #5cb85c;
+}
+.btn-outline-success.disabled,
+.btn-outline-success[disabled],
+fieldset[disabled] .btn-outline-success,
+.btn-outline-success.disabled:hover,
+.btn-outline-success[disabled]:hover,
+fieldset[disabled] .btn-outline-success:hover,
+.btn-outline-success.disabled:focus,
+.btn-outline-success[disabled]:focus,
+fieldset[disabled] .btn-outline-success:focus,
+.btn-outline-success.disabled.focus,
+.btn-outline-success[disabled].focus,
+fieldset[disabled] .btn-outline-success.focus,
+.btn-outline-success.disabled:active,
+.btn-outline-success[disabled]:active,
+fieldset[disabled] .btn-outline-success:active,
+.btn-outline-success.disabled.active,
+.btn-outline-success[disabled].active,
+fieldset[disabled] .btn-outline-success.active {
+  background-color: #ffffff;
+  border-color: #5cb85c;
+}
+.btn-outline-info {
+  background-color: #ffffff;
+  color: #5bc0de;
+  border-color: #5bc0de;
+}
+.btn-outline-info:hover,
+.btn-outline-info:focus,
+.btn-outline-info.focus,
+.btn-outline-info:active,
+.btn-outline-info.active,
+.btn-outline-info:active:focus,
+.btn-outline-info.active:focus,
+.btn-outline-info:active.focus,
+.btn-outline-info.active.focus,
+.btn-outline-info.no-focus:hover,
+.btn-outline-info.no-focus.focus:hover,
+.open > .dropdown-toggle.btn-outline-info {
+  background-color: #46b8da;
+  color: #ffffff;
+  outline-color: #5bc0de;
+  border-color: #5bc0de;
+}
+.btn-outline-info.disabled,
+.btn-outline-info[disabled],
+fieldset[disabled] .btn-outline-info,
+.btn-outline-info.disabled:hover,
+.btn-outline-info[disabled]:hover,
+fieldset[disabled] .btn-outline-info:hover,
+.btn-outline-info.disabled:focus,
+.btn-outline-info[disabled]:focus,
+fieldset[disabled] .btn-outline-info:focus,
+.btn-outline-info.disabled.focus,
+.btn-outline-info[disabled].focus,
+fieldset[disabled] .btn-outline-info.focus,
+.btn-outline-info.disabled:active,
+.btn-outline-info[disabled]:active,
+fieldset[disabled] .btn-outline-info:active,
+.btn-outline-info.disabled.active,
+.btn-outline-info[disabled].active,
+fieldset[disabled] .btn-outline-info.active {
+  background-color: #ffffff;
+  border-color: #5bc0de;
+}
+.btn-outline-warning {
+  background-color: #ffffff;
+  color: #f0ad4e;
+  border-color: #f0ad4e;
+}
+.btn-outline-warning:hover,
+.btn-outline-warning:focus,
+.btn-outline-warning.focus,
+.btn-outline-warning:active,
+.btn-outline-warning.active,
+.btn-outline-warning:active:focus,
+.btn-outline-warning.active:focus,
+.btn-outline-warning:active.focus,
+.btn-outline-warning.active.focus,
+.btn-outline-warning.no-focus:hover,
+.btn-outline-warning.no-focus.focus:hover,
+.open > .dropdown-toggle.btn-outline-warning {
+  background-color: #eea236;
+  color: #ffffff;
+  outline-color: #f0ad4e;
+  border-color: #f0ad4e;
+}
+.btn-outline-warning.disabled,
+.btn-outline-warning[disabled],
+fieldset[disabled] .btn-outline-warning,
+.btn-outline-warning.disabled:hover,
+.btn-outline-warning[disabled]:hover,
+fieldset[disabled] .btn-outline-warning:hover,
+.btn-outline-warning.disabled:focus,
+.btn-outline-warning[disabled]:focus,
+fieldset[disabled] .btn-outline-warning:focus,
+.btn-outline-warning.disabled.focus,
+.btn-outline-warning[disabled].focus,
+fieldset[disabled] .btn-outline-warning.focus,
+.btn-outline-warning.disabled:active,
+.btn-outline-warning[disabled]:active,
+fieldset[disabled] .btn-outline-warning:active,
+.btn-outline-warning.disabled.active,
+.btn-outline-warning[disabled].active,
+fieldset[disabled] .btn-outline-warning.active {
+  background-color: #ffffff;
+  border-color: #f0ad4e;
+}
+.btn-outline-danger {
+  background-color: #ffffff;
+  color: #d9534f;
+  border-color: #d9534f;
+}
+.btn-outline-danger:hover,
+.btn-outline-danger:focus,
+.btn-outline-danger.focus,
+.btn-outline-danger:active,
+.btn-outline-danger.active,
+.btn-outline-danger:active:focus,
+.btn-outline-danger.active:focus,
+.btn-outline-danger:active.focus,
+.btn-outline-danger.active.focus,
+.btn-outline-danger.no-focus:hover,
+.btn-outline-danger.no-focus.focus:hover,
+.open > .dropdown-toggle.btn-outline-danger {
+  background-color: #d43f3a;
+  color: #ffffff;
+  outline-color: #d9534f;
+  border-color: #d9534f;
+}
+.btn-outline-danger.disabled,
+.btn-outline-danger[disabled],
+fieldset[disabled] .btn-outline-danger,
+.btn-outline-danger.disabled:hover,
+.btn-outline-danger[disabled]:hover,
+fieldset[disabled] .btn-outline-danger:hover,
+.btn-outline-danger.disabled:focus,
+.btn-outline-danger[disabled]:focus,
+fieldset[disabled] .btn-outline-danger:focus,
+.btn-outline-danger.disabled.focus,
+.btn-outline-danger[disabled].focus,
+fieldset[disabled] .btn-outline-danger.focus,
+.btn-outline-danger.disabled:active,
+.btn-outline-danger[disabled]:active,
+fieldset[disabled] .btn-outline-danger:active,
+.btn-outline-danger.disabled.active,
+.btn-outline-danger[disabled].active,
+fieldset[disabled] .btn-outline-danger.active {
+  background-color: #ffffff;
+  border-color: #d9534f;
+}
+.btn-outline-default {
+  background-color: transparent;
+  color: inherit;
+}
+.btn-outline-default:hover,
+.btn-outline-default:focus,
+.btn-outline-default.focus,
+.btn-outline-default:active,
+.btn-outline-default.active,
+.btn-outline-default:active:focus,
+.btn-outline-default.active:focus,
+.btn-outline-default:active.focus,
+.btn-outline-default.active.focus,
+.btn-outline-default.no-focus:hover,
+.btn-outline-default.no-focus.focus:hover,
+.open > .dropdown-toggle.btn-outline-default {
+  background-color: transparent;
+  color: inherit;
+  opacity: 0.8;
+}
+.btn-outline-default.disabled,
+.btn-outline-default[disabled],
+fieldset[disabled] .btn-outline-default,
+.btn-outline-default.disabled:hover,
+.btn-outline-default[disabled]:hover,
+fieldset[disabled] .btn-outline-default:hover,
+.btn-outline-default.disabled:focus,
+.btn-outline-default[disabled]:focus,
+fieldset[disabled] .btn-outline-default:focus,
+.btn-outline-default.disabled.focus,
+.btn-outline-default[disabled].focus,
+fieldset[disabled] .btn-outline-default.focus,
+.btn-outline-default.disabled:active,
+.btn-outline-default[disabled]:active,
+fieldset[disabled] .btn-outline-default:active,
+.btn-outline-default.disabled.active,
+.btn-outline-default[disabled].active,
+fieldset[disabled] .btn-outline-default.active {
+  background-color: transparent;
+  opacity: 0.6;
+}
+/* Special Buttons */
+.btn-round,
+.btn-round:hover,
+.btn-round:focus,
+.btn-round.focus,
+.btn-round:active,
+.btn-round.active,
+.btn-round:active:focus,
+.btn-round.active:focus,
+.btn-round:active.focus,
+.btn-round.active.focus,
+.btn-round.no-focus:hover,
+.btn-round.no-focus.focus:hover,
+.open > .dropdown-toggle.btn-round {
+  border-radius: 50px;
+  outline: none;
+  /* TODO set box shadow instea of outline box-shadow: 0 0 3px orange; */
+}
+/* Fields */
+.form-default {
+  background-color: #FFF;
+  /* TODO setting for default color does make sense !? */
+}
+.form-primary {
+  background-color: #428bca;
+}
+.form-tertiary {
+  background-color: #e8e6e6;
+}
+.form-success {
+  background-color: #5cb85c;
+}
+.form-info {
+  background-color: #5bc0de;
+}
+.form-warning {
+  background-color: #f0ad4e;
+}
+.form-danger {
+  background-color: #d9534f;
+}
+/************************************************************************************
+* Component Style Classes
+************************************************************************************/
+.svy-checkgroup.check-horizontal label,
+.svy-radiogroup.check-horizontal label,
+.bts-radiogroup.check-horizontal label,
+.svy-checkgroup.radio-horizontal label,
+.svy-radiogroup.radio-horizontal label,
+.bts-radiogroup.radio-horizontal label {
+  display: inline;
+}
+.svy-checkgroup.radio-horizontal.check-spacing-10 label,
+.svy-radiogroup.radio-horizontal.check-spacing-10 label,
+.bts-radiogroup.radio-horizontal.check-spacing-10 label,
+.svy-checkgroup.radio-horizontal.radio-spacing-10 label,
+.svy-radiogroup.radio-horizontal.radio-spacing-10 label,
+.bts-radiogroup.radio-horizontal.radio-spacing-10 label {
+  margin-right: 10px;
+}
+.svy-checkgroup.radio-horizontal.check-spacing-20 label,
+.svy-radiogroup.radio-horizontal.check-spacing-20 label,
+.bts-radiogroup.radio-horizontal.check-spacing-20 label,
+.svy-checkgroup.radio-horizontal.radio-spacing-20 label,
+.svy-radiogroup.radio-horizontal.radio-spacing-20 label,
+.bts-radiogroup.radio-horizontal.radio-spacing-20 label {
+  margin-right: 20px;
+}
+.svy-checkgroup.radio-horizontal.check-spacing-30 label,
+.svy-radiogroup.radio-horizontal.check-spacing-30 label,
+.bts-radiogroup.radio-horizontal.check-spacing-30 label,
+.svy-checkgroup.radio-horizontal.radio-spacing-30 label,
+.svy-radiogroup.radio-horizontal.radio-spacing-30 label,
+.bts-radiogroup.radio-horizontal.radio-spacing-30 label {
+  margin-right: 30px;
+}
+.svy-checkgroup.radio-horizontal.check-spacing-10 label:last-child,
+.svy-radiogroup.radio-horizontal.check-spacing-10 label:last-child,
+.bts-radiogroup.radio-horizontal.check-spacing-10 label:last-child,
+.svy-checkgroup.radio-horizontal.radio-spacing-10 label:last-child,
+.svy-radiogroup.radio-horizontal.radio-spacing-10 label:last-child,
+.bts-radiogroup.radio-horizontal.radio-spacing-10 label:last-child,
+.svy-checkgroup.radio-horizontal.check-spacing-20 label:last-child,
+.svy-radiogroup.radio-horizontal.check-spacing-20 label:last-child,
+.bts-radiogroup.radio-horizontal.check-spacing-20 label:last-child,
+.svy-checkgroup.radio-horizontal.radio-spacing-20 label:last-child,
+.svy-radiogroup.radio-horizontal.radio-spacing-20 label:last-child,
+.bts-radiogroup.radio-horizontal.radio-spacing-20 label:last-child,
+.svy-checkgroup.radio-horizontal.check-spacing-30 label:last-child,
+.svy-radiogroup.radio-horizontal.check-spacing-30 label:last-child,
+.bts-radiogroup.radio-horizontal.check-spacing-30 label:last-child,
+.svy-checkgroup.radio-horizontal.radio-spacing-30 label:last-child,
+.svy-radiogroup.radio-horizontal.radio-spacing-30 label:last-child,
+.bts-radiogroup.radio-horizontal.radio-spacing-30 label:last-child {
+  margin-right: 0;
+}
+/************************************************************************************
+ Validations
+ *************************************************************************************/
+.svy-label.form-required:after,
+.bts-label.form-required:after,
+.form-required .svy-label:after,
+.form-required .bts-label:after {
+  content: "";
+  margin-left: 2px;
+}
+.svy-field.form-invalid,
+.svy-password.form-invalid,
+.svy-textarea.form-invalid,
+.bts-textarea.form-invalid,
+.svy-textfield.form-invalid,
+.bts-textbox.form-invalid,
+.svy-typeahead.form-invalid,
+.bts-typeahead.form-invalid,
+.bts-select.form-invalid,
+.bts-select.form-invalid ~ .input-group-addon,
+.svy-calendar.form-invalid,
+.svy-calendar.form-invalid ~ .input-group-addon,
+.bts-calendar input.form-invalid,
+.bts-calendar input.form-invalid ~ .input-group-addon {
+  border: 1px solid #d9534f;
+  outline-color: #d9534f;
+}
+.svy-check.form-invalid input[type=checkbox] + span:before,
+.bts-check.form-invalid input[type=checkbox] + span:before,
+.svy-checkgroup.form-invalid input[type=checkbox] + span:before,
+.bts-radiogroup.form-invalid input[type=checkbox] + span:before {
+  color: #d9534f;
+}
+.inactive {
+  opacity: 0.6;
+}
+/************************************************************************************
+ Class Templates Top Bar 
+ *************************************************************************************/
+.header-bar {
+  border-top: 12px solid #f58c32;
+  background-color: #e9720b;
+  color: white;
+  padding: 30px 0;
+  font-size: 24px;
+  text-transform: uppercase;
+  /* height: initial !important; TODO what is this for, to center the text of a navbar ? */
+}
+.header-bar .bts-label,
+.header-bar .svy-label {
+  color: #FFF;
+}
+.header-title {
+  text-align: center;
+  float: left;
+  width: calc(2%);
+  font-size: 24px;
+}
+/* Container styles */
+.content-panel {
+  border-radius: 4px;
+  border: 2px solid #e9720b;
+  padding: 30px 15px;
+  border-bottom-width: 30px;
+  min-width: 640px;
+}
+/* Shapes */
+.hr {
+  border: 0 solid #dbdbdb;
+  border-bottom-width: 1px;
+}

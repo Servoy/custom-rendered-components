@@ -56,9 +56,9 @@ function setListEntries() {
  */
 function renderEntry(entry) {
 	var template = '<div class="product-row">';
-	template += '<div class="product" data-target="product-name">' + entry.productname + '</div>';
-	template += '<div class="product-unitsinstock" data-target="unitsinstock">' + entry.unitsinstock + '&nbsp;&nbsp;<i class="fas fa-layer-group fa-lg"></i></div>';
-	template += '<div class="product-unitprice" data-target="unitprice">' + entry.unitprice + '&nbsp;&nbsp;<i class="fas fa-tag fa-lg"></i></div>';
+	template += '<div class="product" data-target="product-name" svy-tooltip="tooltipFunction(null, entry)">' + entry.productname + '</div>';
+	template += '<div class="product-unitsinstock" data-target="unitsinstock" svy-tooltip="tooltipFunction(\'unitsinstock\')">' + entry.unitsinstock + '&nbsp;&nbsp;<i class="fas fa-layer-group fa-lg"></i></div>';
+	template += '<div class="product-unitprice" data-target="unitprice" svy-tooltip="tooltipFunction(\'unitprice\')">' + entry.unitprice + '&nbsp;&nbsp;<i class="fas fa-tag fa-lg"></i></div>';
 	template += '<div class="product-discontinued">' + (entry.discontinued !== 0 ? '<i class="fas fa-ban fa-lg"></i>' : '') + '</div>';
 	template += '</div>';
 	return template;

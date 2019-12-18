@@ -18,7 +18,13 @@ left:"20",
 right:"20",
 top:"120",
 width:"-1"
-}
+},
+tooltipFunction:"function getTooltip(dataTarget, entry) {\r\
+    if (entry && entry.discontinued != 0) return 'Product discontinued'\r\
+    else if (dataTarget == 'unitsinstock') return 'Units in stock'\r\
+    else if (dataTarget == 'unitprice') return 'Price'\r\
+    else return null;\r\
+}"
 },
 name:"customlist",
 typeName:"customrenderedcomponents-customlist",
