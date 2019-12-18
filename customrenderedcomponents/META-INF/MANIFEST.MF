@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-SymbolicName: customrenderedcomponents
-Bundle-Name: Custom Rendered Components
+Bundle-Name: Advanced Renderers
 Bundle-Version: 1.0.0
 Package-Type: Web-Component
 
