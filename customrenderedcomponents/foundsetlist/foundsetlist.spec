@@ -2,6 +2,7 @@
 	"name": "customrenderedcomponents-foundsetlist",
 	"displayName": "FoundSet List",
 	"version": 1,
+	"icon" :"customrenderedcomponents/arc-icon-16.png",
 	"definition": "customrenderedcomponents/foundsetlist/foundsetlist.js",
 	"libraries": [{ "name": "listcomponent.css", "version": "1.0", "url": "customrenderedcomponents/css/listcomponent.css", "mimetype": "text/css" }],
 	"model":
