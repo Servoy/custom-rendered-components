@@ -9,7 +9,18 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 				api: '=svyApi',
 				svyServoyapi: '='
 			},
-			controller: function($scope, $element, $attrs) {
+			/**
+			 * @param {{model: {data: Array, entryRendererFunction: String, foundset: {viewPort: {size: Number, selectedRowIndexes: Array<Number>}, multiSelect: Boolean}, entryStyleClassDataProvider: String, tooltipDataProvider: String, tooltipFunction: String}, svyServoyapi: {isInDesigner: Function}, tooltipFunction: Function}} $scope
+			 * @param $element
+			 * @param $$attrs
+			 * 
+			 * @SuppressWarnings(nls)
+			 */
+			controller: 
+			/**
+			* @SuppressWarnings(nls)
+			*/
+			function($scope, $element, $attrs) {
 				var elementList = $element.find('.svy-extra-listcomponent');
 				
 				if ($scope.svyServoyapi.isInDesigner()) {
