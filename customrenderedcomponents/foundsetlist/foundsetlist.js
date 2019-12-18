@@ -84,7 +84,7 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 				$scope.onEntryClick = function(entry, index, event) {
 					var newSelection = [index];
 					
-					if ($scope.model.foundset && event.ctrlKey) {
+					if ($scope.model.foundset && $scope.model.foundset.multiSelect == true && event.ctrlKey) {
 						newSelection = $scope.model.foundset.selectedRowIndexes ? $scope.model.foundset.selectedRowIndexes.slice() : [];
 						var idxInSelected = newSelection.indexOf(index);
 						if (idxInSelected == -1) {
@@ -92,7 +92,7 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 						} else if (newSelection.length > 1) {
 							newSelection.splice(idxInSelected, 1);
 						}
-					} else if ($scope.model.foundset && event.shiftKey) {
+					} else if ($scope.model.foundset && $scope.model.foundset.multiSelect == true && event.shiftKey) {
 						var start = -1;
 						if ($scope.model.foundset.selectedRowIndexes) {
 							for (var j = 0; j < $scope.model.foundset.selectedRowIndexes.length; j++) {
