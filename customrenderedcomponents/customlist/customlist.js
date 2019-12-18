@@ -31,7 +31,7 @@ angular.module('customrenderedcomponentsCustomlist',['servoy'])
 			}
 
 			/** @type {Function} */
-			var entryRendererFunction = function(entry) {
+			var entryRendererFunction = function(entry, index) {
 				var template = '<div>';
 				for (var prop in entry) {
 					if (prop !== '$$hashKey') {
@@ -50,7 +50,7 @@ angular.module('customrenderedcomponentsCustomlist',['servoy'])
 
 			$scope.getEntryRenderer = function(entry, index) {
 				if (entryRendererFunction) {
-					return entryRendererFunction(entry, index, $scope.model.data.length);
+					return entryRendererFunction(entry, index);
 				}
 				return '';
 			}
