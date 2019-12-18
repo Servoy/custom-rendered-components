@@ -41,7 +41,7 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 				}
 
 				/** @type {Function} */
-				var entryRendererFunction = function(entry) {
+				var entryRendererFunction = function(entry, index, maxIndex) {
 					var template = '<div>';
 					for (var prop in entry) {
 						if (prop.indexOf("dp") === 0) {
@@ -58,9 +58,9 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 					}
 				});
 
-				$scope.getEntryRenderer = function(entry) {
+				$scope.getEntryRenderer = function(entry, index) {
 					if (entryRendererFunction) {
-						return entryRendererFunction(entry);
+						return entryRendererFunction(entry, index + 1, $scope.model.foundset.viewPort.size);
 					}
 					return '';
 				}

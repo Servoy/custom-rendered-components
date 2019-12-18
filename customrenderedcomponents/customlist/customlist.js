@@ -48,9 +48,9 @@ angular.module('customrenderedcomponentsCustomlist',['servoy'])
 				}
 			});
 
-			$scope.getEntryRenderer = function(entry) {
+			$scope.getEntryRenderer = function(entry, index) {
 				if (entryRendererFunction) {
-					return entryRendererFunction(entry);
+					return entryRendererFunction(entry, index, $scope.model.data.length);
 				}
 				return '';
 			}
