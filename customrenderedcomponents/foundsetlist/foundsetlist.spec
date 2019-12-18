@@ -15,7 +15,7 @@
 		"responsiveDynamicHeight": 				{ "type": "boolean", "default": false },
 		"styleClass": 							{ "type": "styleclass", "tags": { "scope" :"design" } },
 		"selectionClass": 						{ "type": "styleclass" },
-		"enabled": 								{ "type": "enabled", "blockingOn": false, "default": true, "for": ["onClick"] },
+		"enabled": 								{ "type": "enabled", "blockingOn": false, "default": true, "for": ["onClick", "onFirstItemClick", "onLastItemClick"] },
 		"firstItemHtml":						{ "type": "tagstring" },
 		"lastItemHtml":							{ "type": "tagstring" },
 		"tooltipDataProvider":					{ "type": "dataprovider", "forFoundset": "foundset" },
