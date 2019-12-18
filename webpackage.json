@@ -1,6 +1,6 @@
 {
     "name":"customrenderedcomponents",
-    "displayName":"Custom Rendered Components",
+    "displayName":"Advanced Renderer Components",
     "packageType": "Web-Component",
     "icon": "https://github.com/Servoy/custom-rendered-components/master/servoy.png",
     "description": "Simple repeating renderer components for FoundSets or custom data",
