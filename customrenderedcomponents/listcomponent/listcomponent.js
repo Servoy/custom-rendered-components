@@ -195,18 +195,7 @@ angular.module('customrenderedcomponentsListcomponent',['servoy'])
 				} else {
 					layoutStyle.position = "relative";
 					if ($scope.model.responsiveDynamicHeight) {
-						var h = 0;
-						$element.find("div.list-item").each(function() {
-							h += $(this).height();
-							if (h > $scope.model.responsiveHeight) {
-								return false;
-							}
-						});
-						if ($scope.model.responsiveHeight === 0) {
-							$element.css("height", "100%");
-							layoutStyle.height = 100 + "%";
-						} else {
-							layoutStyle.height = h + "px";
+						if ($scope.model.responsiveHeight > 0) {
 							layoutStyle.maxHeight = $scope.model.responsiveHeight + "px";
 						}
 					} else {
