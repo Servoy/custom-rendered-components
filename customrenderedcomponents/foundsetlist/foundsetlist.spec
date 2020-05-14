@@ -1,6 +1,7 @@
 {
 	"name": "customrenderedcomponents-foundsetlist",
 	"displayName": "FoundSet List",
+	"categoryName": "Visualization",
 	"version": 1,
 	"icon" :"customrenderedcomponents/arc-icon-16.png",
 	"definition": "customrenderedcomponents/foundsetlist/foundsetlist.js",
