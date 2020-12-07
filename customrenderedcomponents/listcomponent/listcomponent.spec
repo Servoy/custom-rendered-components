@@ -24,7 +24,7 @@
 	},
 	"handlers" : {
 		"onClick": {
-			"description": "Called when the mouse is clicked on a list entry",
+			"doc": "Called when the mouse is clicked on a list entry",
 			"parameters": [
 				{ "name": "entry", "type": "object" },
 				{ "name": "index", "type": "int" },

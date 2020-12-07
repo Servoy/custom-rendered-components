@@ -25,7 +25,7 @@
 	},
 	"handlers" : {
 		"onClick": {
-			"description": "Called when the mouse is clicked on a list entry",
+			"doc": "Called when the mouse is clicked on a list entry",
 			"parameters": [
 				{ "name": "record", "type": "record" },
 				{ "name": "foundSetIndex", "type": "int" },
@@ -34,14 +34,14 @@
 			]
 		},
 		"onFirstItemClick": {
-			"description": "Called when the mouse is clicked on the optional firstItemHtml",
+			"doc": "Called when the mouse is clicked on the optional firstItemHtml",
 			"parameters": [
 				{ "name": "event", "type": "JSEvent" },
 				{ "name": "dataTarget", "type": "string" }
 			]
 		},
 		"onLastItemClick": {
-			"description": "Called when the mouse is clicked on the optional lastItemHtml",
+			"doc": "Called when the mouse is clicked on the optional lastItemHtml",
 			"parameters": [
 				{ "name": "event", "type": "JSEvent" },
 				{ "name": "dataTarget", "type": "string" }
