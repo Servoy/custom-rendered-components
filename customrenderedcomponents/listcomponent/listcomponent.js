@@ -79,18 +79,44 @@ angular.module('customrenderedcomponentsListcomponent',['servoy'])
 				return '';
 			}
 			
-			$scope.getSanitizedData = function (entry) {
+			$scope.isTrustedHTML = function() {
+				if($scope.svyServoyapi.trustAsHtml() || $scope.model.showAs === 'trusted_html') {
+					return true;
+				}
+				return false;
+			}
+			
+			$scope.getSanitizedData = function(entry) {
+				// return it as is
+				if ($scope.isTrustedHTML()) {
+					// avoid cycling the object if trusted
+					return entry;
+				}
+				
+				//console.log(entry);
 				var data = {};
 				for (var dp in entry) {
-					if (!$scope.model.foundset || dp.indexOf("dp") === 0) {
-						if (!$scope.svyServoyapi.trustAsHtml()) {
-							data[dp] = $sce.getTrustedHtml(entry[dp]);
-						} else {
-							//allow html content
-							data[dp] = $sce.trustAsHtml(entry[dp]);
+					var entryValue = entry[dp];
+					if (entryValue === null || entryValue === undefined) {
+						data[dp] = entryValue;
+					} else if (entryValue instanceof Array) {
+						// handle arrays
+						for (var i in entryValue) {
+							entryValue[i] = $scope.getSanitizedData(entryValue[i]);
 						}
+						data[dp] = entryValue;
+					} else if ((typeof entryValue) === 'object') {
+						// nested object
+						entryValue = $scope.getSanitizedData(entryValue);
+						data[dp] = entryValue;
+					} else if ((typeof entryValue) === 'string' && !$scope.isTrustedHTML()) {
+						data[dp] = $sce.getTrustedHtml(entryValue);
+					} else if ((typeof entryValue) === 'string') {
+						data[dp] = $sce.trustAsHtml(entryValue);
+					} else {
+						data[dp] = entryValue;
 					}
-				}
+				}				
 				return data;
 			}
 
@@ -170,6 +196,8 @@ angular.module('customrenderedcomponentsListcomponent',['servoy'])
 
 					// Force a digest to be called
 					$scope.$digest();
+				} else if (changes[$foundsetTypeConstants.NOTIFY_VIEW_PORT_ROW_UPDATES_RECEIVED]) {
+					loadDataFromFoundset();
 				}
 			};
 
@@ -185,7 +213,12 @@ angular.module('customrenderedcomponentsListcomponent',['servoy'])
 
 			function loadDataFromFoundset() {
 				if ($scope.model.foundset) {
-					$scope.model.data = $scope.model.foundset.viewPort.rows;
+					var data = [];
+					for (var i = 0; i < $scope.model.foundset.viewPort.rows.length; i++) {
+						var sanitizedRow = $scope.getSanitizedData($scope.model.foundset.viewPort.rows[i]);
+						data.push(sanitizedRow);
+					}
+					$scope.model.data = data;
 				}
 			}
 

@@ -20,6 +20,7 @@
 		"responsiveDynamicHeight": 		{ "type": "boolean", "default": false },
 		"styleClass": 					{ "type": "styleclass", "tags": { "scope" :"design" } },
 		"selectionClass": 				{ "type": "styleclass" },
+		"showAs": 						{ "type": "string", "values": ["html", "trusted_html"], "default" : "html", "tags": { "scope" :"design","doc" :"Option whether text is shown as sanitized html or trusted html (as is)." }},
 		"enabled": 						{ "type": "enabled", "blockingOn": false, "default": true, "for": ["onClick"] }
 	},
 	"handlers" : {
