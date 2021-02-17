@@ -19,7 +19,8 @@
 		"styleClass": 						{ "type": "styleclass", "tags": { "scope" :"design" } },
 		"selectionClass": 					{ "type": "styleclass" },
 		"enabled": 							{ "type": "enabled", "blockingOn": false, "default": true, "for": ["onClick"] },
-		"tooltipFunction":					{ "type": "tagstring" }
+		"tooltipFunction":					{ "type": "tagstring" },
+		"showAs": 							{ "type": "string", "values": ["html", "trusted_html"], "default" : "html", "tags": { "scope" :"design","doc" :"Option whether text is shown as sanitized html or trusted html (as is)." }}	
 	},
 	"handlers" : {
 		"onClick": {

@@ -21,7 +21,8 @@
 		"firstItemHtml":						{ "type": "tagstring" },
 		"lastItemHtml":							{ "type": "tagstring" },
 		"tooltipDataProvider":					{ "type": "dataprovider", "forFoundset": "foundset" },
-		"tooltipFunction":						{ "type": "tagstring" }
+		"tooltipFunction":						{ "type": "tagstring" },
+		"showAs": 								{ "type": "string", "values": ["html", "trusted_html"], "default" : "html", "tags": { "scope" :"design","doc" :"Option whether text is shown as sanitized html or trusted html (as is)." }}	
 	},
 	"handlers" : {
 		"onClick": {

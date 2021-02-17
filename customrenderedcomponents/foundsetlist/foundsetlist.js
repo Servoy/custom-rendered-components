@@ -74,25 +74,46 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 					} else if ($scope.model.tooltipFunction && $scope.model.tooltipDataProvider) {
 						console.warn('tooltipFunction will not be used when a tooltipDataProvider is attached as well');
 					}
-				});				
+				});
+				
+		        $scope.isTrustedHTML = function() {
+		            if($scope.svyApi.trustAsHtml() || $scope.model.showAs === 'trusted_html') {
+		                return true;
+		            }
+		            return false;
+		        }
 				
 				$scope.getSanitizedData = function(entry) {
+					// return it as is
+					if ($scope.isTrustedHTML()) {
+						// avoid cycling the object if trusted
+						return entry;
+					}
+					
+					//console.log(entry);
 					var data = {};
 					for (var dp in entry) {
 						var entryValue = entry[dp];
-						if ((typeof entryValue) === 'object') {
+						if (entryValue === null || entryValue === undefined) {
+							data[dp] = entryValue;
+						} else if (entryValue instanceof Array) {
+							// handle arrays
 							for (var i in entryValue) {
 								entryValue[i] = $scope.getSanitizedData(entryValue[i]);
 							}
-						} else if ((typeof entryValue) === 'string' && !$scope.svyServoyapi.trustAsHtml()) {
+							data[dp] = entryValue;
+						} else if ((typeof entryValue) === 'object') {
+							// nested object
+							entryValue = $scope.getSanitizedData(entryValue);
+							data[dp] = entryValue;
+						} else if ((typeof entryValue) === 'string' && !$scope.isTrustedHTML()) {
 							data[dp] = $sce.getTrustedHtml(entryValue);
 						} else if ((typeof entryValue) === 'string') {
-							//allow html content
 							data[dp] = $sce.trustAsHtml(entryValue);
 						} else {
 							data[dp] = entryValue;
 						}
-					}
+					}				
 					return data;
 				}
 				
