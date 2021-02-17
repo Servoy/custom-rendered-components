@@ -232,7 +232,9 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 
 						// Force a digest to be called
 						$scope.$digest();
-					}
+					} else if (changes[$foundsetTypeConstants.NOTIFY_VIEW_PORT_ROW_UPDATES_RECEIVED]) {
+						loadDataFromFoundset();
+					}					
 				};
 
 				$scope.$watch('model.foundset', function(oldValue, newValue) {
@@ -247,7 +249,12 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 
 				function loadDataFromFoundset() {
 					if ($scope.model.foundset) {
-						$scope.model.data = $scope.model.foundset.viewPort.rows;
+						var data = [];
+						for (var i = 0; i < $scope.model.foundset.viewPort.rows.length; i++) {
+							var sanitizedRow = $scope.getSanitizedData($scope.model.foundset.viewPort.rows[i]);
+							data.push(sanitizedRow);
+						}
+						$scope.model.data = data;
 					}
 				}
 
