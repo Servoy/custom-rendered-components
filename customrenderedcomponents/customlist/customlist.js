@@ -65,7 +65,7 @@ angular.module('customrenderedcomponentsCustomlist',['servoy'])
 			});	
 			
 	        $scope.isTrustedHTML = function() {
-	            if($scope.svyApi.trustAsHtml() || $scope.model.showAs === 'trusted_html') {
+	            if($scope.svyServoyapi.trustAsHtml() || $scope.model.showAs === 'trusted_html') {
 	                return true;
 	            }
 	            return false;
