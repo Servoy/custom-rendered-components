@@ -223,7 +223,7 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 				 */
 				$scope.api.removeStyleClassForSelector = function(selector, styleClass) {
 					$element.find(selector).removeClass(styleClass);
-				}
+				}				
 
 				var foundsetListener = function(changes) {
 					// check to see what actually changed and update what is needed in browser
@@ -255,7 +255,32 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 							data.push(sanitizedRow);
 						}
 						$scope.model.data = data;
+						if ($scope.handlers.onSortEnd || $scope.model.sortableOptions) {
+							var sortOptions = $scope.model.sortableOptions || {};
+							if ($scope.handlers.onSortEnd) {
+								sortOptions.onEnd = onSortEnd;
+							}
+							Sortable.create($element.find('.svy-extra-listcomponent')[0], sortOptions);
+						}
 					}
+				}
+				
+				function onSortEnd(evt) {
+					var evtOldIndices = (evt.oldIndicies.length ? evt.oldIndicies : null) || [{index: evt.oldIndex}];
+					var evtNewIndices = (evt.newIndicies.length ? evt.newIndicies : null) || [{index: evt.newIndex}];
+					var oldIndicies = [];
+					var newIndicies = [];
+					var recordsMoved = [];
+					var recordsMovedTo = [];
+					
+					for (var o = 0; o < evtOldIndices.length; o++) {
+						oldIndicies.push(evtOldIndices[o].index + 1);
+						recordsMoved.push($scope.model.foundset.viewPort.rows[evtOldIndices[o].index]);
+						newIndicies.push(evtNewIndices[o].index + 1);
+						recordsMovedTo.push($scope.model.foundset.viewPort.rows[evtNewIndices[o].index]);
+					}
+					
+					$scope.handlers.onSortEnd(evt, oldIndicies, newIndicies, recordsMoved, recordsMovedTo);
 				}
 
 				$scope.getLayoutStyle = function() {

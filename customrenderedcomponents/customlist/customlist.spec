@@ -6,7 +6,10 @@
 	"icon" :"customrenderedcomponents/arc-icon-16.png",
 	"definition": "customrenderedcomponents/customlist/customlist.js",
 	"serverscript": "customrenderedcomponents/customlist/customlist_server.js",
-	"libraries": [{ "name": "listcomponent.css", "version": "1.0", "url": "customrenderedcomponents/css/listcomponent.css", "mimetype": "text/css" }],
+	"libraries": [
+		{ "name": "listcomponent.css", "version": "1.0", "url": "customrenderedcomponents/css/listcomponent.css", "mimetype": "text/css" },
+		{ "name": "Sortable.js", "version": "1.13.0", "url": "customrenderedcomponents/sortable/Sortable.js", "mimetype": "text/javascript" }
+	],
 	"model":
 	{
 		"data": 							{ "type": "object[]", "tags": {"scope" : "private"}, "pushToServer": "allow" },
@@ -20,7 +23,8 @@
 		"selectionClass": 					{ "type": "styleclass" },
 		"enabled": 							{ "type": "enabled", "blockingOn": false, "default": true, "for": ["onClick"] },
 		"tooltipFunction":					{ "type": "tagstring" },
-		"showAs": 							{ "type": "string", "values": ["html", "trusted_html"], "default" : "html", "tags": { "scope" :"design","doc" :"Option whether text is shown as sanitized html or trusted html (as is)." }}	
+		"showAs": 							{ "type": "string", "values": ["html", "trusted_html"], "default" : "html", "tags": { "scope" :"design","doc" :"Option whether text is shown as sanitized html or trusted html (as is)." }},
+		"sortableOptions":					{ "type": "sortableOptions" }	
 	},
 	"handlers" : {
 		"onClick": {
@@ -30,6 +34,15 @@
 				{ "name": "index", "type": "int" },
 				{ "name": "dataTarget", "type": "string" },
 				{ "name": "event", "type": "JSEvent" }
+			]
+		},
+		"onSortEnd": {
+			"parameters": [
+				{ "name": "event", "type": "JSEvent" },
+				{ "name": "oldIndicies", "type": "int[]" },
+				{ "name": "newIndicies", "type": "int[]" },
+				{ "name": "oldEntries", "type": "object[]" },
+				{ "name": "newEntries", "type": "object[]" }
 			]
 		}
 	}, 
@@ -76,5 +89,14 @@
         		{"name": "styleClass", "type": "string"}
 			]
         }
+	},
+	"types": {
+		"sortableOptions" : {
+			"sort" :			"boolean",
+			"handle" : 			"styleclass",
+			"animation" : 		"int",
+			"multiDrag" :		"boolean",
+			"selectedClass" :	"styleclass"
+		}
 	}
 }

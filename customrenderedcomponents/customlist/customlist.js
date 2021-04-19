@@ -160,6 +160,43 @@ angular.module('customrenderedcomponentsCustomlist',['servoy'])
 				}
 				return layoutStyle;
 			}
+			
+			if ($scope.handlers.onSortEnd || $scope.model.sortableOptions) {
+				var sortOptions = $scope.model.sortableOptions || {};
+				if ($scope.handlers.onSortEnd) {
+					sortOptions.onEnd = onSortEnd;
+				}
+				Sortable.create($element.find('.svy-extra-listcomponent')[0], sortOptions);
+			}
+			
+			function onSortEnd(evt) {
+				var evtOldIndices = (evt.oldIndicies.length ? evt.oldIndicies : null) || [{index: evt.oldIndex}];
+				var evtNewIndices = (evt.newIndicies.length ? evt.newIndicies : null) || [{index: evt.newIndex}];
+				var oldIndicies = [];
+				var newIndicies = [];
+				var oldEntries = [];
+				var newEntries = [];
+				
+				/** @type {Array} */
+				var originalArray = $scope.model.data.concat([]);
+				
+				for (var o = 0; o < evtOldIndices.length; o++) {					
+					var oldItem = originalArray[evtOldIndices[o].index];
+					var newItem = originalArray[evt.newIndex];
+					
+					//reorder the data
+					$scope.model.data.splice(originalArray.indexOf(oldItem), 1);
+					$scope.model.data.splice(originalArray.indexOf(newItem), 0, oldItem);
+					
+					oldIndicies.push(evtOldIndices[o].index);
+					newIndicies.push(evtNewIndices[o].index);
+					newEntries.push(newItem);
+					oldEntries.push(oldItem);
+				}
+				
+				$scope.svyServoyapi.apply('data');
+				$scope.handlers.onSortEnd(evt, oldIndicies, newIndicies, oldEntries, newEntries);
+			}
 
 		},
       templateUrl: 'customrenderedcomponents/listcomponent/listcomponent.html'
