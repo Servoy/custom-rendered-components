@@ -71,37 +71,49 @@ angular.module('customrenderedcomponentsCustomlist',['servoy'])
 	            return false;
 	        }
 			
-			$scope.getSanitizedData = function(entry) {
+	        $scope.getSanitizedData = function(entry) {
 				// return it as is
 				if ($scope.isTrustedHTML()) {
 					// avoid cycling the object if trusted
 					return entry;
 				}
 				
-				//console.log(entry);
 				var data = {};
-				for (var dp in entry) {
-					var entryValue = entry[dp];
-					if (entryValue === null || entryValue === undefined) {
-						data[dp] = entryValue;
-					} else if (entryValue instanceof Array) {
-						// handle arrays
-						for (var i in entryValue) {
-							entryValue[i] = $scope.getSanitizedData(entryValue[i]);
-						}
-						data[dp] = entryValue;
-					} else if ((typeof entryValue) === 'object') {
-						// nested object
-						entryValue = $scope.getSanitizedData(entryValue);
-						data[dp] = entryValue;
-					} else if ((typeof entryValue) === 'string' && !$scope.isTrustedHTML()) {
-						data[dp] = $sce.getTrustedHtml(entryValue);
-					} else if ((typeof entryValue) === 'string') {
-						data[dp] = $sce.trustAsHtml(entryValue);
+				if ((typeof entry) === 'string') {
+					// if is a string sanitize the string
+					if ($scope.isTrustedHTML()) {
+						data = $sce.trustAsHtml(entry);
 					} else {
-						data[dp] = entryValue;
+						data = $sce.getTrustedHtml(entry);
 					}
-				}				
+				} else if ((typeof entry) === 'object' || entry instanceof Array) {
+					// sanitize items of entry
+					for (var dp in entry) {
+						var entryValue = entry[dp];
+						if (entryValue === null || entryValue === undefined) {
+							data[dp] = entryValue;
+						} else if (entryValue instanceof Array) {
+							// handle arrays
+							for (var i in entryValue) {
+								entryValue[i] = $scope.getSanitizedData(entryValue[i]);
+							}
+							data[dp] = entryValue;
+						} else if ((typeof entryValue) === 'object') {
+							// nested object
+							entryValue = $scope.getSanitizedData(entryValue);
+							data[dp] = entryValue;
+						} else if ((typeof entryValue) === 'string' && !$scope.isTrustedHTML()) {
+							data[dp] = $sce.getTrustedHtml(entryValue);
+						} else if ((typeof entryValue) === 'string') {
+							data[dp] = $sce.trustAsHtml(entryValue);
+						} else {
+							data[dp] = entryValue;
+						}
+					}			
+				} else {
+					// if is a number or boolean
+					data = entry;
+				}
 				return data;
 			}
 
