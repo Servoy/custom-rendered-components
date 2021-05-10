@@ -199,7 +199,7 @@ angular.module('customrenderedcomponentsCustomlist',['servoy'])
 			}
 
 		},
-      templateUrl: 'customrenderedcomponents/listcomponent/listcomponent.html'
+      templateUrl: 'customrenderedcomponents/customlist/customlist.html'
     };
   }]).directive('bindListHtmlCompile', ['$compile', function($compile) {
 		return {
