@@ -1,6 +1,6 @@
 angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 .directive('customrenderedcomponentsFoundsetlist',
-	['$log', '$foundsetTypeConstants', '$sce', function($log, $foundsetTypeConstants, $sce) {
+	['$log', '$foundsetTypeConstants', '$sce', '$timeout', function($log, $foundsetTypeConstants, $sce, $timeout) {
 		return {
 			restrict: 'E',
 			scope: {
@@ -267,33 +267,12 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 							data.push(sanitizedRow);
 						}
 						$scope.model.data = data;
-						if ($scope.handlers.onSortEnd || $scope.model.sortableOptions) {
-							var sortOptions = $scope.model.sortableOptions || {};
-							if ($scope.handlers.onSortEnd) {
-								sortOptions.onEnd = onSortEnd;
-							}
-							Sortable.create($element.find('.svy-extra-listcomponent')[0], sortOptions);
-						}
+						
+						// init the Sortable object
+						initSortable();
 					}
 				}
-				
-				function onSortEnd(evt) {
-					var evtOldIndices = (evt.oldIndicies.length ? evt.oldIndicies : null) || [{index: evt.oldIndex}];
-					var evtNewIndices = (evt.newIndicies.length ? evt.newIndicies : null) || [{index: evt.newIndex}];
-					var oldIndicies = [];
-					var newIndicies = [];
-					var recordsMoved = [];
-					var recordsMovedTo = [];
-					
-					for (var o = 0; o < evtOldIndices.length; o++) {
-						oldIndicies.push(evtOldIndices[o].index + 1);
-						recordsMoved.push($scope.model.foundset.viewPort.rows[evtOldIndices[o].index]);
-						newIndicies.push(evtNewIndices[o].index + 1);
-						recordsMovedTo.push($scope.model.foundset.viewPort.rows[evtNewIndices[o].index]);
-					}
-					
-					$scope.handlers.onSortEnd(evt, oldIndicies, newIndicies, recordsMoved, recordsMovedTo);
-				}
+
 
 				$scope.getLayoutStyle = function() {
 					var layoutStyle = { };
@@ -343,6 +322,184 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 						return $scope.model.foundset.hasMoreRows || viewPortLastIndex < foundset.serverSize;
 					}
 				}
+				
+				var sortableObj;
+				function initSortable() {
+
+					/* Enable Sorting */
+					if ($scope.model.dragEnabled || $scope.model.dropEnabled || $scope.model.sortableEnabled) {
+						var sortOptions = $scope.model.dragSortableOptions || { };
+						var opts = { };
+
+						/** Drag Options */
+						opts.sort = $scope.model.sortableEnabled;
+
+						opts.group = {
+							pull: $scope.model.dragEnabled, // can drag into other lists
+							put: $scope.model.dropEnabled, // can drop from other lists
+						};
+
+						// group name
+						if ($scope.model.dragEnabled || $scope.model.dropEnabled) {
+							opts.group.name = sortOptions.group || "shared-foundsetlist"
+						}
+
+						// if drag type is copy
+						if ($scope.model.dragEnabled && sortOptions.dragType == "COPY") {
+							opts.group.pull = "clone"
+						}
+
+						/** Common options */
+						if (sortOptions.handle) opts.handle = sortOptions.handle;
+						if (sortOptions.animation) opts.animation = sortOptions.animation;
+						if (sortOptions.selectedClass) opts.selectedClass = sortOptions.selectedClass;
+
+						/** Enable Multi Drag */
+						if (sortOptions.multiDrag) {
+							opts.multiDrag = true;
+							opts.selectedClass = 'svyextra-listcomponent-dragselected';
+							if (sortOptions.multiDragKey) opts.multiDragKey = sortOptions.multiDragKey;
+						}
+
+						/** Events */
+						if ($scope.handlers.onDrop) {
+							opts.setData = setData;
+							opts.onAdd = onAdd;
+						}
+
+						if ($scope.handlers.onSortEnd) {
+							opts.onEnd = onSortEnd;
+						}
+
+						if (sortableObj) {
+							sortableObj.destroy();
+						}
+						sortableObj = Sortable.create($element.find('.svy-extra-listcomponent')[0], opts);
+					}
+				}
+				
+				/**
+				 * @private 
+				 * Store draggable data when dragEnabled=true
+				 *  */
+				function setData(/** DataTransfer */dataTransfer, /** HTMLElement*/dragEl) {
+
+					var idx;
+					var evtOldIndices = [];
+					var dragElSelected = null;
+					if ($scope.model.dragSortableOptions && $scope.model.dragSortableOptions.multiDrag) {
+						// when multiDrag enabled, find all selected elements. Are the one having the selected class equal to svyextra-listcomponent-dragselected
+						dragElSelected = $element.find('.svyextra-listcomponent-dragselected');
+						for (var j = 0; j < dragElSelected.length; j++) {
+							idx = dragElSelected[j].getAttribute("data-idx");
+							evtOldIndices.push(idx);
+						}
+					} 
+					
+					// get the idx of the selected element
+					if (!dragElSelected || !dragElSelected.length){
+						idx = dragEl.getAttribute("data-idx");
+						evtOldIndices = [idx];
+					}
+								
+					// get the record reference based on svyRowId
+					var records = [];
+					for (var i = 0; i < evtOldIndices.length; i++) {
+						var rowID = $scope.model.foundset.viewPort.rows[evtOldIndices[i]]._svyRowId;
+						var record =  $scope.model.foundset.getRecordRefByRowID(rowID);
+						records.push(record);
+					}
+
+					dataTransfer.setData('records', JSON.stringify(records)); // `dataTransfer` object of HTML5 DragEvent
+				}
+								
+				/**
+				 * @private 
+				 * When item is dropped into list (MOVED or COPIED)
+				 *  */
+				function onAdd(evt) {
+
+					// get the dragged data from the DataTransfer object (see setData)
+					var records = JSON.parse(evt.originalEvent.dataTransfer.getData("records"));
+					
+					var evtOldIndices = (evt.oldIndicies.length ? evt.oldIndicies : null) || [{index: evt.oldIndex}];
+					var evtNewIndices = (evt.newIndicies.length ? evt.newIndicies : null) || [{index: evt.newIndex}];
+					var oldIndicies = [];
+					var newIndicies = [];
+					var recordsMovedTo = [];
+					
+					for (var o = 0; o < evtNewIndices.length; o++) {
+						// track old foundset indexes (1-based)
+						oldIndicies.push(evtOldIndices[o].index + 1);
+						
+						// track new foundset indexes (1-based)
+						var newIdx = evtNewIndices[o].index;
+						newIndicies.push(newIdx + 1);
+						recordsMovedTo.push($scope.model.foundset.viewPort.rows[newIdx]);
+					}
+					
+					var cloned = false;
+					
+					if (evt.pullMode == 'clone') {
+						cloned = true
+					} else if (evt.pullMode == true) {
+						cloned = false;
+					}
+					
+					// if handler is available
+					if ($scope.handlers.onDrop) {
+						$scope.handlers.onDrop(evt, oldIndicies, newIndicies, records, recordsMovedTo, cloned).then(function () {
+							loadDataFromFoundset();
+						});
+					}	
+				}
+				
+				function onSortEnd(evt) {
+					console.log('END');
+
+					if (evt.pullMode == 'clone') {
+						// TODO shall call an apply ?
+
+					} else if (evt.pullMode == true) {
+						// drag & drop
+					} else { // change sort index
+					
+						var evtOldIndices = (evt.oldIndicies.length ? evt.oldIndicies : null) || [{index: evt.oldIndex}];
+						var evtNewIndices = (evt.newIndicies.length ? evt.newIndicies : null) || [{index: evt.newIndex}];
+						var oldIndicies = [];
+						var newIndicies = [];
+						var recordsMoved = [];
+						var recordsMovedTo = [];
+						
+						for (var o = 0; o < evtOldIndices.length; o++) {
+							oldIndicies.push(evtOldIndices[o].index + 1);
+							recordsMoved.push($scope.model.foundset.viewPort.rows[evtOldIndices[o].index]);
+							newIndicies.push(evtNewIndices[o].index + 1);
+							recordsMovedTo.push($scope.model.foundset.viewPort.rows[evtNewIndices[o].index]);
+						}
+						
+						if ($scope.handlers.onSortEnd) {
+							$scope.handlers.onSortEnd(evt, oldIndicies, newIndicies, recordsMoved, recordsMovedTo);
+						}
+					}
+				}
+				
+				/**
+				 * @deprecated unused
+				 * Create a JSEvent
+				 *
+				 * @return {JSEvent}
+				 * */
+				function createJSEvent(el) {
+					var offset = $(el).offset();
+					var x = offset.left;
+					var y = offset.top;
+
+					var event = document.createEvent("MouseEvents");
+					event.initMouseEvent("move", false, true, window, 1, x, y, x, y, false, false, false, false, 0, null);
+					return event;
+				}
+
 
 				var destroyListenerUnreg = $scope.$on("$destroy", function() {
 						scrollParent.off('scroll');
