@@ -7,6 +7,11 @@ body
 	font-family: 'Roboto', sans-serif;
 }
 
+.selected,
+.svyextra-listcomponent-dragselected {
+  background-color: #f9c7c8;
+}
+
 
 .product-row {
 	display: flex;

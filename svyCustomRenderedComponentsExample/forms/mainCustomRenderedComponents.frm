@@ -24,15 +24,29 @@ verticalAlignment:3
 anchors:15,
 items:[
 {
+containsFormID:"06ED4443-FF12-424E-AED9-77C0F07D3AAF",
+location:"86,110",
+text:"D&D CustomList",
+typeid:15,
+uuid:"136305EF-409E-472B-8F9F-8841141142D5"
+},
+{
+containsFormID:"A65A8EC5-D99A-4026-8DB7-118133E249F2",
+location:"0,110",
+text:"Drag & Drop",
+typeid:15,
+uuid:"35AE04EB-135A-4DF4-8586-F2C40E998667"
+},
+{
 containsFormID:"31B8CEEF-25B5-44EE-92C5-8C214DCE1CB2",
-location:"80,110",
+location:"255,110",
 text:"Custom List",
 typeid:15,
 uuid:"D61CB5CA-B862-42E7-B992-85DDAF093B91"
 },
 {
 containsFormID:"E1D8CB76-5B0C-45D9-B80C-D65F911FD459",
-location:"0,110",
+location:"166,110",
 text:"FoundSet List",
 typeid:15,
 uuid:"F96C8E68-C95B-4FCE-BDF7-C32B4DFFC5E4"
