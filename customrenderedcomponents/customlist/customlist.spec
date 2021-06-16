@@ -24,7 +24,10 @@
 		"enabled": 							{ "type": "enabled", "blockingOn": false, "default": true, "for": ["onClick"] },
 		"tooltipFunction":					{ "type": "tagstring" },
 		"showAs": 							{ "type": "string", "values": ["html", "trusted_html"], "default" : "html", "tags": { "scope" :"design","doc" :"Option whether text is shown as sanitized html or trusted html (as is)." }},
-		"sortableOptions":					{ "type": "sortableOptions" }	
+		"dragEnabled" : 						{ "type" : "boolean", "default" : false, "tags": { "scope" :"design"}},
+		"dropEnabled" : 						{ "type" : "boolean", "default" : false, "tags": { "scope" :"design"}},
+		"sortableEnabled" : 					{ "type" : "boolean", "default" : false, "tags": { "scope" :"design"}},
+		"dragSortableOptions":					{ "type": "sortableOptions", "tags": { "scope" :"design"}}	
 	},
 	"handlers" : {
 		"onClick": {
@@ -43,6 +46,16 @@
 				{ "name": "newIndicies", "type": "int[]" },
 				{ "name": "oldEntries", "type": "object[]" },
 				{ "name": "newEntries", "type": "object[]" }
+			]
+		},
+		"onDrop": {
+			"parameters": [
+				{ "name": "event", "type": "JSEvent" },
+				{ "name": "oldIndicies", "type": "int[]" },
+				{ "name": "newIndicies", "type": "int[]" },
+				{ "name": "recordsMoved", "type": "object[]" },
+				{ "name": "recordsMovedTo", "type": "object[]" },				
+				{ "name": "cloned", "type": "boolean" }
 			]
 		}
 	}, 
@@ -90,13 +103,15 @@
 			]
         }
 	},
-	"types": {
+	"types" : {
 		"sortableOptions" : {
-			"sort" :			"boolean",
-			"handle" : 			"styleclass",
-			"animation" : 		"int",
-			"multiDrag" :		"boolean",
-			"selectedClass" :	"styleclass"
+			"dragType" : { "type" : "string", "default" : "MOVE", "values": [{"MOVE": "MOVE"}, {"COPY": "COPY"}], "tags": { "scope" :"private"}},
+			"multiDrag" : { "type" : "boolean", "default" : false, "tags": { "scope" :"design"}},
+			"multiDragKey" : { "type" : "string", "default" : "CTRL", "tags": { "scope" :"design"}},
+			"group" : {"type" : "string", "tags": { "scope" :"private"}},
+			"handle" : 	{"type": "styleclass", "tags": { "scope" :"design"}},
+			"animation" :  {"type": "int", "tags": { "scope" :"design"}},
+			"selectedClass" :	{"type": "styleclass", "tags": { "scope" :"private"}}
 		}
-	}
+    }
 }

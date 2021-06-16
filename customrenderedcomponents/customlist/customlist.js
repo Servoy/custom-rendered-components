@@ -173,12 +173,191 @@ angular.module('customrenderedcomponentsCustomlist',['servoy'])
 				return layoutStyle;
 			}
 			
-			if ($scope.handlers.onSortEnd || $scope.model.sortableOptions) {
-				var sortOptions = $scope.model.sortableOptions || {};
-				if ($scope.handlers.onSortEnd) {
-					sortOptions.onEnd = onSortEnd;
+//			if ($scope.handlers.onSortEnd || $scope.model.sortableOptions) {
+//				var sortOptions = $scope.model.sortableOptions || {};
+//				if ($scope.handlers.onSortEnd) {
+//					sortOptions.onEnd = onSortEnd;
+//				}
+//				Sortable.create($element.find('.svy-extra-listcomponent')[0], sortOptions);
+//			}
+			
+			var sortableObj;
+			function initSortable() {
+
+				/* Enable Sorting */
+				if ($scope.model.dragEnabled || $scope.model.dropEnabled || $scope.model.sortableEnabled) {
+					var sortOptions = $scope.model.dragSortableOptions || { };
+					var opts = { };
+
+					/** Drag Options */
+					opts.sort = $scope.model.sortableEnabled;
+
+					opts.group = {
+						pull: $scope.model.dragEnabled, // can drag into other lists
+						put: $scope.model.dropEnabled, // can drop from other lists
+					};
+
+					// group name
+					if ($scope.model.dragEnabled || $scope.model.dropEnabled) {
+						opts.group.name = sortOptions.group || "shared-customlist"
+					}
+
+					// if drag type is copy
+					if ($scope.model.dragEnabled && sortOptions.dragType == "COPY") {
+						opts.group.pull = "clone"
+					}
+
+					/** Common options */
+					if (sortOptions.handle) opts.handle = sortOptions.handle;
+					if (sortOptions.animation) opts.animation = sortOptions.animation;
+					if (sortOptions.selectedClass) opts.selectedClass = sortOptions.selectedClass;
+
+					/** Enable Multi Drag */
+					if (sortOptions.multiDrag) {
+						opts.multiDrag = true;
+						opts.selectedClass = 'svyextra-listcomponent-dragselected';
+						if (sortOptions.multiDragKey) opts.multiDragKey = sortOptions.multiDragKey;
+					}
+
+					/** Events */
+					// TODO only if event onDrop is available ?
+					// opts.onStart = onStart;
+					// opts.onClone = onClone;
+					// opts.onChange = onChange;
+					// opts.onRemove = onRemove;
+					// opts.onChoose = onChoose;
+
+					if ($scope.handlers.onDrop) {
+						opts.setData = setData;
+						opts.onAdd = onAdd;
+						opts.onRemove = onRemove;
+					}
+
+					if ($scope.handlers.onSortEnd) {
+						opts.onEnd = onSortEnd;
+					}
+
+					if (sortableObj) {
+						sortableObj.destroy();
+					}
+					sortableObj = Sortable.create($element.find('.svy-extra-listcomponent')[0], opts);
 				}
-				Sortable.create($element.find('.svy-extra-listcomponent')[0], sortOptions);
+			}
+			
+			/**
+			 * @private 
+			 * Store draggable data when dragEnabled=true
+			 *  */
+			function setData(/** DataTransfer */dataTransfer, /** HTMLElement*/dragEl) {
+
+				var idx;
+				var evtOldIndices = [];
+				var dragElSelected = null;
+				if ($scope.model.dragSortableOptions && $scope.model.dragSortableOptions.multiDrag) {
+					// when multiDrag enabled, find all selected elements. Are the one having the selected class equal to svyextra-listcomponent-dragselected
+					dragElSelected = $element.find('.svyextra-listcomponent-dragselected');
+					for (var j = 0; j < dragElSelected.length; j++) {
+						idx = dragElSelected[j].getAttribute("data-idx");
+						evtOldIndices.push(idx);
+					}
+				} 
+				
+				// get the idx of the selected element
+				if (!dragElSelected || !dragElSelected.length){
+					idx = dragEl.getAttribute("data-idx");
+					evtOldIndices = [idx];
+				}
+				
+				/** @type {Array} */
+				var originalArray = $scope.model.data.concat([]);
+							
+				// get the record reference based on svyRowId
+				var entries = [];
+				for (var i = 0; i < evtOldIndices.length; i++) {
+					var entry =  originalArray[evtOldIndices[i]];
+					entries.push(entry);
+				}
+
+				dataTransfer.setData('entries', JSON.stringify(entries)); // `dataTransfer` object of HTML5 DragEvent
+			}
+			
+			/**
+			 * @private 
+			 * When item is dropped into list (MOVED or COPIED)
+			 *  */
+			function onAdd(evt) {
+
+				// get the dragged data from the DataTransfer object (see setData)
+				var entries = JSON.parse(evt.originalEvent.dataTransfer.getData("entries"));
+				
+				var evtOldIndices = (evt.oldIndicies.length ? evt.oldIndicies : null) || [{index: evt.oldIndex}];
+				var evtNewIndices = (evt.newIndicies.length ? evt.newIndicies : null) || [{index: evt.newIndex}];
+				var oldIndicies = [];
+				var newIndicies = [];
+				var entriesMovedTo = [];
+				
+				/** @type {Array} */
+				var originalArray = $scope.model.data.concat([]);
+				
+				for (var o = 0; o < evtNewIndices.length; o++) {
+					// track old entries indexes (0-based)
+					oldIndicies.push(evtOldIndices[o].index);
+					
+					// track new entries indexes (0-based)
+					var newIdx = evtNewIndices[o].index;
+					newIndicies.push(newIdx);
+					entriesMovedTo.push(originalArray[newIdx]);
+				}
+				
+				// add the entry into data
+				for (o = 0; o < newIndicies.length; o++) {
+					$scope.model.data.splice(newIndicies[o], 0, entries[o]);
+				}
+				$scope.svyServoyapi.apply('data');
+				
+				var cloned = false;
+				
+				if (evt.pullMode == 'clone') {
+					cloned = true
+				} else if (evt.pullMode == true) {
+					cloned = false;
+				}
+				
+				// if handler is available
+				if ($scope.handlers.onDrop) {
+					$scope.handlers.onDrop(evt, oldIndicies, newIndicies, entries, entriesMovedTo, cloned);
+				}	
+			}
+			
+			/**
+			 * @private 
+			 * When item is dropped into list (MOVED or COPIED)
+			 *  */
+			function onRemove(evt) {
+
+				
+				var evtOldIndices = (evt.oldIndicies.length ? evt.oldIndicies : null) || [{index: evt.oldIndex}];
+				var oldIndicies = [];
+				
+				for (var o = 0; o < evtOldIndices.length; o++) {
+					// track old entries indexes (0-based)
+					oldIndicies.push(evtOldIndices[o].index);
+				}
+				
+				var cloned = false;
+				
+				if (evt.pullMode == 'clone') {
+					cloned = true;
+				} else if (evt.pullMode == true) {
+					cloned = false;
+					
+					// remove the entry from the list since has been moved to a different list
+					for (o = 0; o < oldIndicies.length; o++) {
+						$scope.model.data.splice(oldIndicies[o], 1);
+					}
+					$scope.svyServoyapi.apply('data');
+				}
+	
 			}
 			
 			function onSortEnd(evt) {
@@ -210,6 +389,8 @@ angular.module('customrenderedcomponentsCustomlist',['servoy'])
 				$scope.handlers.onSortEnd(evt, oldIndicies, newIndicies, oldEntries, newEntries);
 			}
 
+			// Init the Sortable
+			initSortable();
 		},
       templateUrl: 'customrenderedcomponents/customlist/customlist.html'
     };
