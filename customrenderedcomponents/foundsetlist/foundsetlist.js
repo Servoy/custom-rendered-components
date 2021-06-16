@@ -448,7 +448,7 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 					
 					// if handler is available
 					if ($scope.handlers.onDrop) {
-						$scope.handlers.onDrop(evt, oldIndicies, newIndicies, records, recordsMovedTo, cloned).then(function () {
+						$scope.handlers.onDrop(evt, oldIndicies, newIndicies, records, recordsMovedTo).then(function () {
 							loadDataFromFoundset();
 						});
 					}	

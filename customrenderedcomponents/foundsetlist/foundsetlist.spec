@@ -70,8 +70,7 @@
 				{ "name": "oldIndicies", "type": "int[]" },
 				{ "name": "newIndicies", "type": "int[]" },
 				{ "name": "recordsMoved", "type": "record[]" },
-				{ "name": "recordsMovedTo", "type": "record[]" },				
-				{ "name": "cloned", "type": "boolean" }
+				{ "name": "recordsMovedTo", "type": "record[]" }				
 			]
 		}
 	}, 

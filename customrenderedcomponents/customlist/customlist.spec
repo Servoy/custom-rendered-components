@@ -54,8 +54,7 @@
 				{ "name": "oldIndicies", "type": "int[]" },
 				{ "name": "newIndicies", "type": "int[]" },
 				{ "name": "recordsMoved", "type": "object[]" },
-				{ "name": "recordsMovedTo", "type": "object[]" },				
-				{ "name": "cloned", "type": "boolean" }
+				{ "name": "recordsMovedTo", "type": "object[]" }			
 			]
 		}
 	}, 

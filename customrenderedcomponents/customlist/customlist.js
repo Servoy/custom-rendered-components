@@ -325,7 +325,7 @@ angular.module('customrenderedcomponentsCustomlist',['servoy'])
 				
 				// if handler is available
 				if ($scope.handlers.onDrop) {
-					$scope.handlers.onDrop(evt, oldIndicies, newIndicies, entries, entriesMovedTo, cloned);
+					$scope.handlers.onDrop(evt, oldIndicies, newIndicies, entries, entriesMovedTo);
 				}	
 			}
 			
