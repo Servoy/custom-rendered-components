@@ -49,6 +49,7 @@ function setListEntries() {
 	q.result.add(q.columns.unitsinstock);
 	q.result.add(q.columns.unitprice);
 	q.result.add(q.columns.discontinued);
+	q.result.add(q.columns.productid);
 	var ds = databaseManager.getDataSetByQuery(q, -1);
 	
 	var entries = [];
@@ -58,7 +59,9 @@ function setListEntries() {
 			productname: row[0],
 			unitsinstock: row[1],
 			unitprice: utils.numberFormat(row[2], '#,##0.00'),
-			discontinued: row[3]
+			discontinued: row[3],
+			productid: row[4]
+
 		}
 		entries.push(entry);
 	}
@@ -78,6 +81,7 @@ function setListEntrie2s() {
 	q.result.add(q.columns.unitsinstock);
 	q.result.add(q.columns.unitprice);
 	q.result.add(q.columns.discontinued);
+	q.result.add(q.columns.productid)
 	var ds = databaseManager.getDataSetByQuery(q, -1);
 	
 	var entries = [];
@@ -87,7 +91,8 @@ function setListEntrie2s() {
 			productname: row[0],
 			unitsinstock: row[1],
 			unitprice: utils.numberFormat(row[2], '#,##0.00'),
-			discontinued: row[3]
+			discontinued: row[3],
+			productid: row[4]
 		}
 		entries.push(entry);
 	}
@@ -190,25 +195,36 @@ function onDataChange2(oldValue, newValue, event) {
  * @param {JSEvent} event
  * @param {Array<number>} oldIndicies
  * @param {Array<number>} newIndicies
- * @param {Array<object>} oldEntries
- * @param {Array<object>} newEntries
+ * @param {Array<object>} entriesMoved
+ * @param {Array<object>} entriesMovedTo
  *
  * @protected
  *
  * @properties={typeid:24,uuid:"241F0138-FC9F-45BD-8EFB-A1118E7AC39F"}
  */
-function onDrop(event, oldIndicies, newIndicies, oldEntries, newEntries) {
+function onDrop(event, oldIndicies, newIndicies, entriesMoved, entriesMovedTo) {
 	application.output('ON DROP 1 --------------------');
 	application.output(event.getElementName())
 	application.output(oldIndicies)
 	application.output(newIndicies);
-	for (var i = 0; i < oldEntries.length; i++) {
-		application.output(oldEntries[i])
+	for (var i = 0; i < entriesMoved.length; i++) {
+		application.output(entriesMoved[i])
 	}
 	application.output("***      ****");
 
-	for (i = 0; i < newEntries.length; i++) {
-		application.output(newEntries[i])
+	var fs = datasources.db.example_data.products.getFoundSet();
+
+	for (i = 0; i < entriesMoved.length; i++) {
+		application.output(entriesMoved[i])
+		
+		var query = datasources.db.example_data.products.createSelect();
+		query.where.add(query.columns.productid.eq(entriesMoved[i].productid));
+		
+		fs.loadRecords(query);
+		if (fs.getSize()) {
+			fs.categoryid = cat1;
+			databaseManager.saveData(fs);
+		}
 	}
 }
 
@@ -242,26 +258,39 @@ function onSortEnd(event, oldIndicies, newIndicies, oldEntries, newEntries) {
  * @param {JSEvent} event
  * @param {Array<number>} oldIndicies
  * @param {Array<number>} newIndicies
- * @param {Array<object>} oldEntries
- * @param {Array<object>} newEntries
+ * @param {Array<object>} entriesMoved
+ * @param {Array<object>} entriesMovedTo
  *
  * @protected
  *
  * @properties={typeid:24,uuid:"83EF2FA7-C9E8-4C27-B349-ADB5B0CFEDCE"}
  */
-function onDrop2(event, oldIndicies, newIndicies, oldEntries, newEntries) {
+function onDrop2(event, oldIndicies, newIndicies, entriesMoved, entriesMovedTo) {
 	application.output('ON DROP 2 --------------------');
 	application.output(event.getElementName())
 	application.output(oldIndicies)
 	application.output(newIndicies);
-	for (var i = 0; i < oldEntries.length; i++) {
-		application.output(oldEntries[i])
+	for (var i = 0; i < entriesMovedTo.length; i++) {
+		application.output(entriesMovedTo[i])
 	}
 	application.output("***      ****");
 
-	for (i = 0; i < newEntries.length; i++) {
-		application.output(newEntries[i])
+	var fs = datasources.db.example_data.products.getFoundSet();
+
+	for (i = 0; i < entriesMoved.length; i++) {
+		application.output(entriesMoved[i])
+		
+		var query = datasources.db.example_data.products.createSelect();
+		query.where.add(query.columns.productid.eq(entriesMoved[i].productid));
+		
+		fs.loadRecords(query);
+		if (fs.getSize()) {
+			fs.categoryid = cat2;
+			databaseManager.saveData(fs);
+		}
 	}
+	
+	
 }
 
 /**
