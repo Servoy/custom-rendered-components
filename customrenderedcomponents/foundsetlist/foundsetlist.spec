@@ -26,10 +26,10 @@
 		"tooltipDataProvider":					{ "type": "dataprovider", "forFoundset": "foundset" },
 		"tooltipFunction":						{ "type": "tagstring" },
 		"showAs": 								{ "type": "string", "values": ["html", "trusted_html"], "default" : "html", "tags": { "scope" :"design","doc" :"Option whether text is shown as sanitized html or trusted html (as is)." }},
-		"dragEnabled" : 						{ "type" : "boolean", "default" : false, "tags": { "scope" :"design"}},
-		"dropEnabled" : 						{ "type" : "boolean", "default" : false, "tags": { "scope" :"design"}},
-		"sortableEnabled" : 					{ "type" : "boolean", "default" : false, "tags": { "scope" :"design"}},
-		"dragSortableOptions":					{ "type": "sortableOptions", "tags": { "scope" :"design"}}	
+		"dragEnabled" : 						{ "type" : "boolean", "default" : false, "tags": { "scope" :"design", "doc": "When set to true, allows to drag records into another FoundSet List element"}},
+		"dropEnabled" : 						{ "type" : "boolean", "default" : false, "tags": { "scope" :"design", "doc": "When set to true, allows to drop records from another FoundSet List element"}},
+		"sortableEnabled" : 					{ "type" : "boolean", "default" : false, "tags": { "scope" :"design", "doc": "When set to true, allows to reorder records within the FoundSet List element using drag & drop"}},
+		"dragSortableOptions":					{ "type": "sortableOptions", "tags": { "scope" :"design", "doc": "Customize options for the drag n'drop and sortable"}}	
 	},
 	"handlers" : {
 		"onClick": {
@@ -56,21 +56,23 @@
 			]
 		},
 		"onSortEnd": {
+			"doc": "Called when FoundSet List records are reordered by drag&drop. You are responsible to persist the changes for the affected records. Make sure to persist any change for the affected record and call loadRecords for the affected foundsets. If you don't the FoundSet List may get into an incosistent state",
 			"parameters": [
-				{ "name": "event", "type": "JSEvent" },
-				{ "name": "oldIndicies", "type": "int[]" },
-				{ "name": "newIndicies", "type": "int[]" },
-				{ "name": "recordsMoved", "type": "record[]" },
-				{ "name": "recordsMovedTo", "type": "record[]" }
+				{ "name": "event", "type": "JSEvent", "doc": "the JSEvent for this element" },
+				{ "name": "oldIndicies", "type": "int[]", "doc": "the original indexes of the moved records"  },
+				{ "name": "newIndicies", "type": "int[]", "doc": "the new record indexes"  },
+				{ "name": "recordsMoved", "type": "record[]", "doc": "the records sorted"  },
+				{ "name": "recordsMovedTo", "type": "record[]", "doc": "the records whom have been shifted upon sort end"  }
 			]
 		},
 		"onDrop": {
+			"doc": "Called when records dragged from another FoundSet List are dropped into this FoundSet list element. You are responsible to persist the changes for the affected records. Make sure to persist any change for the affected record and call loadRecords for the affected foundsets. If you don't the FoundSet List may go into an incosistent state.",
 			"parameters": [
-				{ "name": "event", "type": "JSEvent" },
-				{ "name": "oldIndicies", "type": "int[]" },
-				{ "name": "newIndicies", "type": "int[]" },
-				{ "name": "recordsMoved", "type": "record[]" },
-				{ "name": "recordsMovedTo", "type": "record[]" }				
+				{ "name": "event", "type": "JSEvent", "doc": "the JSEvent for this element" },
+				{ "name": "oldIndicies", "type": "int[]", "doc": "the original indexes, when drag started, of the dropped records"  },
+				{ "name": "newIndicies", "type": "int[]", "doc": "the new indexes of records upon drop"  },
+				{ "name": "recordsMoved", "type": "record[]", "doc": "the records dragged and dropped"  },
+				{ "name": "recordsMovedTo", "type": "record[]", "doc": "the records whom have been shifted upon drop"  }				
 			]
 		}
 	}, 

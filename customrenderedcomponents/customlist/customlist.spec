@@ -24,10 +24,10 @@
 		"enabled": 							{ "type": "enabled", "blockingOn": false, "default": true, "for": ["onClick"] },
 		"tooltipFunction":					{ "type": "tagstring" },
 		"showAs": 							{ "type": "string", "values": ["html", "trusted_html"], "default" : "html", "tags": { "scope" :"design","doc" :"Option whether text is shown as sanitized html or trusted html (as is)." }},
-		"dragEnabled" : 						{ "type" : "boolean", "default" : false, "tags": { "scope" :"design"}},
-		"dropEnabled" : 						{ "type" : "boolean", "default" : false, "tags": { "scope" :"design"}},
-		"sortableEnabled" : 					{ "type" : "boolean", "default" : false, "tags": { "scope" :"design"}},
-		"dragSortableOptions":					{ "type": "sortableOptions", "tags": { "scope" :"design"}}	
+		"dragEnabled" : 					{ "type" : "boolean", "default" : false, "tags": { "scope" :"design", "doc": "When set to true, allows to drag entries into another Custom List element"}},
+		"dropEnabled" : 					{ "type" : "boolean", "default" : false, "tags": { "scope" :"design", "doc": "When set to true, allows to drop entries from another Custom List element"}},
+		"sortableEnabled" : 				{ "type" : "boolean", "default" : false, "tags": { "scope" :"design", "doc": "When set to true, allows to reorder entries within the Custom List element using drag & drop"}},
+		"dragSortableOptions":				{ "type": "sortableOptions", "tags": { "scope" :"design", "doc": "Customize options for the drag n'drop and sortable"}}	
 	},
 	"handlers" : {
 		"onClick": {
@@ -40,21 +40,23 @@
 			]
 		},
 		"onSortEnd": {
+			"doc": "Called when Custom List entries are reordered by drag&drop.",
 			"parameters": [
-				{ "name": "event", "type": "JSEvent" },
-				{ "name": "oldIndicies", "type": "int[]" },
-				{ "name": "newIndicies", "type": "int[]" },
-				{ "name": "oldEntries", "type": "object[]" },
-				{ "name": "newEntries", "type": "object[]" }
+				{ "name": "event", "type": "JSEvent", "doc": "the JSEvent for this element" },
+				{ "name": "oldIndicies", "type": "int[]", "doc": "the original indexes of the moved entries"  },
+				{ "name": "newIndicies", "type": "int[]", "doc": "the new entries indexes"  },
+				{ "name": "entriesMoved", "type": "object[]", "doc": "the entries sorted"  },
+				{ "name": "entriesMovedTo", "type": "object[]", "doc": "the entries whom have been shifted upon sort end"  }
 			]
 		},
 		"onDrop": {
+			"doc": "Called when entries dragged from another Custom List are dropped into this Custom list element.",
 			"parameters": [
-				{ "name": "event", "type": "JSEvent" },
-				{ "name": "oldIndicies", "type": "int[]" },
-				{ "name": "newIndicies", "type": "int[]" },
-				{ "name": "recordsMoved", "type": "object[]" },
-				{ "name": "recordsMovedTo", "type": "object[]" }			
+				{ "name": "event", "type": "JSEvent", "doc": "the JSEvent for this element" },
+				{ "name": "oldIndicies", "type": "int[]", "doc": "the original indexes, when drag started, of the dropped entries"  },
+				{ "name": "newIndicies", "type": "int[]", "doc": "the new indexes of entries upon drop"  },
+				{ "name": "entriesMoved", "type": "object[]", "doc": "the entries dragged and dropped"  },
+				{ "name": "entriesMovedTo", "type": "object[]", "doc": "the entries whom have been shifted upon drop"  }				
 			]
 		}
 	}, 
