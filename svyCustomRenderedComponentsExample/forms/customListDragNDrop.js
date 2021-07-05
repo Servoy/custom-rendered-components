@@ -192,16 +192,14 @@ function onDataChange2(oldValue, newValue, event) {
  * @param {Array<number>} newIndicies
  * @param {Array<object>} oldEntries
  * @param {Array<object>} newEntries
- * @param {boolean} cloned
  *
  * @protected
  *
  * @properties={typeid:24,uuid:"241F0138-FC9F-45BD-8EFB-A1118E7AC39F"}
  */
-function onDrop(event, oldIndicies, newIndicies, oldEntries, newEntries, cloned) {
+function onDrop(event, oldIndicies, newIndicies, oldEntries, newEntries) {
 	application.output('ON DROP 1 --------------------');
 	application.output(event.getElementName())
-//	application.output(eventFrom.getElementName()) // TODO how to get the event for a different element ?
 	application.output(oldIndicies)
 	application.output(newIndicies);
 	for (var i = 0; i < oldEntries.length; i++) {
@@ -228,7 +226,6 @@ function onDrop(event, oldIndicies, newIndicies, oldEntries, newEntries, cloned)
 function onSortEnd(event, oldIndicies, newIndicies, oldEntries, newEntries) {
 	application.output('ON SORT 1 --------------------');
 	application.output(event.getElementName())
-//	application.output(eventFrom.getElementName()) // TODO how to get the event for a different element ?
 	application.output(oldIndicies)
 	application.output(newIndicies);
 	for (var i = 0; i < oldEntries.length; i++) {
@@ -245,18 +242,16 @@ function onSortEnd(event, oldIndicies, newIndicies, oldEntries, newEntries) {
  * @param {JSEvent} event
  * @param {Array<number>} oldIndicies
  * @param {Array<number>} newIndicies
- * @param {Array<object>} recordsMoved
- * @param {Array<object>} recordsMovedTo
- * @param {boolean} cloned
+ * @param {Array<object>} oldEntries
+ * @param {Array<object>} newEntries
  *
  * @protected
  *
  * @properties={typeid:24,uuid:"83EF2FA7-C9E8-4C27-B349-ADB5B0CFEDCE"}
  */
-function onDrop2(event, oldIndicies, newIndicies, oldEntries, newEntries, cloned) {
+function onDrop2(event, oldIndicies, newIndicies, oldEntries, newEntries) {
 	application.output('ON DROP 2 --------------------');
 	application.output(event.getElementName())
-//	application.output(eventFrom.getElementName()) // TODO how to get the event for a different element ?
 	application.output(oldIndicies)
 	application.output(newIndicies);
 	for (var i = 0; i < oldEntries.length; i++) {
@@ -283,7 +278,6 @@ function onDrop2(event, oldIndicies, newIndicies, oldEntries, newEntries, cloned
 function onSortEnd2(event, oldIndicies, newIndicies, oldEntries, newEntries) {
 	application.output('ON SORT 2 --------------------');
 	application.output(event.getElementName())
-//	application.output(eventFrom.getElementName()) // TODO how to get the event for a different element ?
 	application.output(oldIndicies)
 	application.output(newIndicies);
 	for (var i = 0; i < oldEntries.length; i++) {

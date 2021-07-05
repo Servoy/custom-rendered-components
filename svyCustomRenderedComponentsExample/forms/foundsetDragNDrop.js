@@ -141,17 +141,16 @@ function onRecordSelection(event) { }
  * @param {JSEvent} event
  * @param {Array<number>} oldIndicies
  * @param {Array<number>} newIndicies
- * @param {Array<record>} recordsMoved
- * @param {Array<record>} recordsMovedTo
+ * @param {Array<JSRecord>} recordsMoved
+ * @param {Array<JSRecord>} recordsMovedTo
  *
  * @protected
  *
  * @properties={typeid:24,uuid:"9CFE2313-1924-4A07-ABB1-2F886444ACB8"}
  */
-function onSortEnd(event, oldIndicies, newIndicies, recordsMoved, recordsMovedTo) {
+function onSortEnd1(event, oldIndicies, newIndicies, recordsMoved, recordsMovedTo) {
 	application.output('ON SORT *************************');
 
-	// TODO Auto-generated method stub
 	application.output(oldIndicies)
 	application.output(newIndicies)
 	for (var i = 0; i < recordsMoved.length; i++) {
@@ -178,7 +177,6 @@ function onSortEnd(event, oldIndicies, newIndicies, recordsMoved, recordsMovedTo
 function onSortEnd2(event, oldIndicies, newIndicies, recordsMoved, recordsMovedTo) {
 	application.output('ON SORT *************************');
 
-	// TODO Auto-generated method stub
 	application.output(oldIndicies)
 	application.output(newIndicies)
 	for (var i = 0; i < recordsMoved.length; i++) {
@@ -198,16 +196,14 @@ function onSortEnd2(event, oldIndicies, newIndicies, recordsMoved, recordsMovedT
  * @param {Array<number>} newIndicies
  * @param {Array<JSRecord<db:/example_data/products>>} recordsMoved
  * @param {Array<JSRecord<db:/example_data/products>>} recordsMovedTo
- * @param {boolean} cloned
  *
  * @protected
  *
  * @properties={typeid:24,uuid:"C062E940-44C5-46E9-A271-568DB64F2C41"}
  */
-function onDrop(event, oldIndicies, newIndicies, recordsMoved, recordsMovedTo, cloned) {
+function onDropList2(event, oldIndicies, newIndicies, recordsMoved, recordsMovedTo) {
 	application.output('ON DROP --------------------');
 	application.output(event.getElementName())
-//	application.output(eventFrom.getElementName()) // TODO how to get the event for a different element ?
 	application.output(oldIndicies)
 	application.output(newIndicies);
 	for (var i = 0; i < recordsMoved.length; i++) {
@@ -219,47 +215,30 @@ function onDrop(event, oldIndicies, newIndicies, recordsMoved, recordsMovedTo, c
 		application.output(recordsMovedTo[i])
 	}
 
-	var fs = elements.list2.foundset.foundset;
-
+	// change category for each recordMoved
 	for (var idx = 0; idx < recordsMoved.length; idx++) {
 		var record = recordsMoved[idx];
-		if (cloned) {
-			var newRecord = fs.getRecord(fs.newRecord())
-			databaseManager.copyMatchingFields(record, newRecord);
-			newRecord.categoryid = cat2;
-			databaseManager.saveData(newRecord);
-		} else {
-			record.categoryid = cat2;
-			databaseManager.saveData(record);
-		}
+		record.categoryid = cat2;
+		databaseManager.saveData(record);
 	}
 
-	if (cloned) {
-		filterCat2();
-		filterCat1();
-	} else {
-		filterCat1();
-		filterCat2();
-	}
-
-	//	filterCat1();
-	//	filterCat2();
+	// refresh foundset
+	filterCat1();
+	filterCat2();
 }
 
 /**
  * @param {JSEvent} event
- * @param {JSEvent} eventFrom
  * @param {Array<number>} oldIndicies
  * @param {Array<number>} newIndicies
  * @param {Array<JSRecord<db:/example_data/products>>} recordsMoved
  * @param {Array<JSRecord<db:/example_data/products>>} recordsMovedTo
- * @param {boolean} cloned
  *
  * @protected
  *
  * @properties={typeid:24,uuid:"FEAC62FA-10BF-401F-AF9B-6D57F63C7144"}
  */
-function onDropList1(event, oldIndicies, newIndicies, recordsMoved, recordsMovedTo, cloned) {
+function onDropList1(event, oldIndicies, newIndicies, recordsMoved, recordsMovedTo) {
 	application.output('ON DROP --------------------');
 	application.output(event.getElementName())
 	application.output(oldIndicies)
@@ -273,43 +252,14 @@ function onDropList1(event, oldIndicies, newIndicies, recordsMoved, recordsMoved
 		application.output(recordsMovedTo[i])
 	}
 
-	var fs = elements.list1.foundset.foundset;
+	// change category for each recordMoved
 	for (var idx = 0; idx < recordsMoved.length; idx++) {
 		var record = recordsMoved[idx];
-		if (cloned) {
-			var newRecord = fs.getRecord(fs.newRecord())
-			databaseManager.copyMatchingFields(record, newRecord);
-			newRecord.categoryid = cat1;
-			databaseManager.saveData(newRecord);
-		} else {
-			record.categoryid = cat1;
-			databaseManager.saveData(record);
-
-		}
-	}
-	
-	if (cloned) {
-		filterCat1();
-		filterCat2();
-	} else {
-		filterCat1();
-		filterCat2();
+		record.categoryid = cat1;
+		databaseManager.saveData(record);
 	}
 
-}
-
-/**
- * @param {JSEvent} event
- * @param {Array<number>} oldIndicies
- * @param {Array<JSRecord<db:/example_data/products>>} recordsMoved
- *
- * @protected
- *
- * @properties={typeid:24,uuid:"5023D16E-7755-4104-9CBF-ED255401DA24"}
- */
-function onRemove(event, oldIndicies, recordsMoved) {
-	application.output('ON REMOVE -----------------');
-	application.output(event.getElementName())
-	application.output(oldIndicies)
-	application.output(recordsMoved[0])
+	// refresh the foundsets
+	filterCat1();
+	filterCat2();
 }
