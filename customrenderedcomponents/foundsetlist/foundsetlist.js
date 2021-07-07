@@ -338,6 +338,11 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 							pull: $scope.model.dragEnabled, // can drag into other lists
 							put: $scope.model.dropEnabled, // can drop from other lists
 						};
+						
+						// copy data upon drag
+						if ($scope.model.dragEnabled) {
+							opts.setData = setData;
+						}
 
 						// group name
 						if ($scope.model.dragEnabled || $scope.model.dropEnabled) {
@@ -363,7 +368,6 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 
 						/** Events */
 						if ($scope.handlers.onDrop) {
-							opts.setData = setData;
 							opts.onAdd = onAdd;
 						}
 

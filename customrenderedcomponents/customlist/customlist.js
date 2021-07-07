@@ -196,6 +196,11 @@ angular.module('customrenderedcomponentsCustomlist',['servoy'])
 						pull: $scope.model.dragEnabled, // can drag into other lists
 						put: $scope.model.dropEnabled, // can drop from other lists
 					};
+					
+					// copy data upon drag
+					if ($scope.model.dragEnabled) {
+						opts.setData = setData;
+					}
 
 					// group name
 					if ($scope.model.dragEnabled || $scope.model.dropEnabled) {
@@ -228,7 +233,6 @@ angular.module('customrenderedcomponentsCustomlist',['servoy'])
 					// opts.onChoose = onChoose;
 
 					if ($scope.handlers.onDrop) {
-						opts.setData = setData;
 						opts.onAdd = onAdd;
 						opts.onRemove = onRemove;
 					}
