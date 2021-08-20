@@ -5,7 +5,6 @@
 	<projects>
 		<project>resources</project>
 		<project>customrenderedcomponents</project>
-		<project>servoy-extra-components</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

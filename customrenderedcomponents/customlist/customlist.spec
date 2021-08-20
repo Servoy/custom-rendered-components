@@ -13,10 +13,7 @@
 	"model":
 	{
 		"data": 							{ "type": "object[]", "tags": {"scope" : "private"}, "pushToServer": "allow" },
-		"selectedIndex": 					{ "type": "int", "default": 0, "tags": {"scope" : "private"}, "pushToServer": "allow" },
-		"entryStyleClassFunction": 			{ "type": "tagstring" },
-		"entryRendererFunction": 			{ "type": "tagstring" },
-		"visible": 							{ "type": "visible" },
+		"entryRendererFunction": 			{ "type": "clientfunction" },
 		"responsiveHeight": 				{ "type": "int", "default": 500 },
 		"responsiveDynamicHeight": 			{ "type": "boolean", "default": false },
 		"styleClass": 						{ "type": "styleclass", "tags": { "scope" :"design" } },
@@ -27,7 +24,10 @@
 		"dragEnabled" : 					{ "type" : "boolean", "default" : false, "tags": { "scope" :"design", "doc": "When set to true, allows to drag entries into another Custom List element"}},
 		"dropEnabled" : 					{ "type" : "boolean", "default" : false, "tags": { "scope" :"design", "doc": "When set to true, allows to drop entries from another Custom List element"}},
 		"sortableEnabled" : 				{ "type" : "boolean", "default" : false, "tags": { "scope" :"design", "doc": "When set to true, allows to reorder entries within the Custom List element using drag & drop"}},
-		"dragSortableOptions":				{ "type": "sortableOptions", "tags": { "scope" :"design", "doc": "Customize options for the drag n'drop and sortable"}}	
+		"dragSortableOptions":				{ "type": "sortableOptions", "tags": { "scope" :"design", "doc": "Customize options for the drag n'drop and sortable"}},	
+		"visible": 							{ "type": "visible" },
+		"selectedIndex": 					{ "type": "int", "default": 0, "tags": {"scope" : "private"}, "pushToServer": "allow" },
+		"entryStyleClassFunction": 			{ "type": "clientfunction" }
 	},
 	"handlers" : {
 		"onClick": {

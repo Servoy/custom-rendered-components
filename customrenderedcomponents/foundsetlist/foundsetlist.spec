@@ -12,24 +12,24 @@
 	"model":
 	{
 		"data": 								{ "type": "object[]", "tags": {"scope" : "private"} },
-		"entryRendererFunction": 				{ "type": "tagstring" },
-		"visible": 								{ "type": "visible" },
-		"foundset": 							{ "type": "foundset", "dynamicDataproviders": true, "default" : {"foundsetSelector": ""} , "pushToServer": "allow", "initialPreferredViewPortSize": 130, "sendSelectionViewportInitially": true },
-		"entryStyleClassDataProvider":			{ "type": "dataprovider", "forFoundset": "foundset" }, 
+		"entryRendererFunction": 				{ "type": "clientfunction" },
 		"responsiveHeight": 					{ "type": "int", "default": 500 },
 		"responsiveDynamicHeight": 				{ "type": "boolean", "default": false },
 		"styleClass": 							{ "type": "styleclass", "tags": { "scope" :"design" } },
 		"selectionClass": 						{ "type": "styleclass" },
 		"enabled": 								{ "type": "enabled", "blockingOn": false, "default": true, "for": ["onClick", "onFirstItemClick", "onLastItemClick"] },
-		"firstItemHtml":						{ "type": "tagstring" },
-		"lastItemHtml":							{ "type": "tagstring" },
-		"tooltipDataProvider":					{ "type": "dataprovider", "forFoundset": "foundset" },
-		"tooltipFunction":						{ "type": "tagstring" },
+		"tooltipFunction":						{ "type": "clientfunction" },
 		"showAs": 								{ "type": "string", "values": ["html", "trusted_html"], "default" : "html", "tags": { "scope" :"design","doc" :"Option whether text is shown as sanitized html or trusted html (as is)." }},
 		"dragEnabled" : 						{ "type" : "boolean", "default" : false, "tags": { "scope" :"design", "doc": "When set to true, allows to drag records into another FoundSet List element"}},
 		"dropEnabled" : 						{ "type" : "boolean", "default" : false, "tags": { "scope" :"design", "doc": "When set to true, allows to drop records from another FoundSet List element"}},
 		"sortableEnabled" : 					{ "type" : "boolean", "default" : false, "tags": { "scope" :"design", "doc": "When set to true, allows to reorder records within the FoundSet List element using drag & drop"}},
-		"dragSortableOptions":					{ "type": "sortableOptions", "tags": { "scope" :"design", "doc": "Customize options for the drag n'drop and sortable"}}	
+		"dragSortableOptions":					{ "type": "sortableOptions", "tags": { "scope" :"design", "doc": "Customize options for the drag n'drop and sortable"}},	
+		"visible": 								{ "type": "visible" },
+		"foundset": 							{ "type": "foundset", "dynamicDataproviders": true, "default" : {"foundsetSelector": ""} , "pushToServer": "allow", "initialPreferredViewPortSize": 130, "sendSelectionViewportInitially": true },
+		"entryStyleClassDataProvider":			{ "type": "dataprovider", "forFoundset": "foundset" }, 
+		"tooltipDataProvider":					{ "type": "dataprovider", "forFoundset": "foundset" },
+		"firstItemHtml":						{ "type": "tagstring" },
+		"lastItemHtml":							{ "type": "tagstring" }
 	},
 	"handlers" : {
 		"onClick": {
