@@ -1,7 +1,10 @@
 Manifest-Version: 1.0
+NPM-PackageName: @servoy/customrenderedcomponents
+NG2-Module: CustomRenderedComponentsModule
+Entry-Point: dist/servoy/customrenderedcomponents
 Bundle-SymbolicName: customrenderedcomponents
 Bundle-Name: Advanced Renderers
-Bundle-Version: 1.1.0
+Bundle-Version: 1.2.0
 Package-Type: Web-Component
 
 Name: listcomponent/listcomponent.spec

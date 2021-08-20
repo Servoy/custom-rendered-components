@@ -1,0 +1,20 @@
+<div class="svy-extra-listcomponent" [ngClass]="styleClass" [id]="servoyApi.getMarkupId()" [ngStyle]="getLayoutStyle()" #element>
+	<div class="first-list-item"
+        *ngIf="firstItemHtml"
+        [innerHTML]="getSanitizedHtml(firstItemHtml)" 
+        (click)='onFirstItemClicked($event)'>
+    </div>
+	<div class="list-item"
+        [ngClass]="getEntryStyleClass($index, entry)"
+        [innerHTML]="getEntryRenderer(entry, $index + 1)"
+        [attr.data-idx]="$index"
+		[svyTooltip]="getTooltip($index)" 
+        *ngFor="let entry of data;let $index = index;"
+        (click)='onEntryClick($index, $event)'>
+    </div>
+	<div class="last-list-item"
+        *ngIf="lastItemHtml"
+        [innerHTML]="getSanitizedHtml(lastItemHtml)" 
+        (click)='onLastItemClicked($event)'>
+    </div>
+</div>

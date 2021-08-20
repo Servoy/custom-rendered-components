@@ -1,0 +1,9 @@
+<div class="svy-extra-listcomponent" [ngClass]="styleClass" [id]="servoyApi.getMarkupId()"  [ngStyle]="getLayoutStyle()" #element>
+    <div class="list-item"
+       *ngFor="let entry of data;let $index = index;"
+        [innerHTML]="getEntryRenderer(getSanitizedData(entry), $index)"
+        [ngClass]="getEntryStyleClass(entry, $index)"
+        (click)='onEntryClick(entry, $index, $event)'
+        [attr.data-idx]="$index">
+    </div>
+</div>
