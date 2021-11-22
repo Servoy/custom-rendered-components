@@ -13,5 +13,5 @@
       "sortablejs": "sortablejs"
     }
   },
-  "allowedNonPeerDependencies": ["sortablejs"]
+  "allowedNonPeerDependencies": ["sortablejs","@angular/cdk"]
 }
