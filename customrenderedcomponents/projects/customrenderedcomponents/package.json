@@ -2,14 +2,14 @@
   "name": "@servoy/customrenderedcomponents",
   "version": "1.2.1",
   "peerDependencies": {
-    "@angular/animations": ">=12",
-    "@angular/cdk": ">=12",
-    "@angular/common": ">=12",
-    "@angular/core": ">=12",
-    "@angular/forms": ">=12"
+    "@angular/animations": "^13",
+    "@angular/common": "^13",
+    "@angular/core": "^13",
+    "@angular/forms": "^13"
   },
   "dependencies": {
-    "sortablejs": ">=1",
+    "@angular/cdk": "^13",
+    "sortablejs": "^1",
     "tslib": "*"
   },
   "license": "MIT",
