@@ -8,8 +8,8 @@
     "@angular/forms": "^13"
   },
   "dependencies": {
-    "@angular/cdk": "^13",
-    "sortablejs": "^1",
+    "@angular/cdk": "<14",
+    "sortablejs": "<2",
     "tslib": "*"
   },
   "license": "MIT",
