@@ -4,7 +4,7 @@ NG2-Module: CustomRenderedComponentsModule
 Entry-Point: dist/servoy/customrenderedcomponents
 Bundle-SymbolicName: customrenderedcomponents
 Bundle-Name: Advanced Renderers
-Bundle-Version: 2022.3.0
+Bundle-Version: 2022.3.1
 Package-Type: Web-Component
 
 Name: listcomponent/listcomponent.spec
