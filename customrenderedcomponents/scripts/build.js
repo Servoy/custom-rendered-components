@@ -10,5 +10,6 @@ zip.addLocalFolder("./customlist/", "/customlist/");
 zip.addLocalFolder("./foundsetlist/", "/foundsetlist/");
 zip.addLocalFolder("./listcomponent/", "/listcomponent/");
 zip.addLocalFolder("./sortable/", "/sortable/");
+zip.addLocalFile('./arc-icon-16.png');
 
 zip.writeZip("customrenderedcomponents.zip");
