@@ -13,6 +13,7 @@
         {"version":"1.0.0","url":"https://github.com/Servoy/custom-rendered-components/releases/download/v1.0.0/customrenderedcomponents.zip", "servoy-version":"2019.6"},
         {"version":"1.2.0","url":"https://github.com/Servoy/custom-rendered-components/releases/download/v1.2.0/customrenderedcomponents.zip", "servoy-version":"2021.9"},
         {"version":"1.2.1","url":"https://github.com/Servoy/custom-rendered-components/releases/download/v1.2.1/customrenderedcomponents.zip", "servoy-version":"2021.12"},
-        {"version":"2022.03.0","url":"https://github.com/Servoy/custom-rendered-components/releases/download/v2022.03.0/customrenderedcomponents.zip", "servoy-version":"2022.3"}    
+        {"version":"2022.03.0","url":"https://github.com/Servoy/custom-rendered-components/releases/download/v2022.03.0/customrenderedcomponents.zip", "servoy-version":"2022.3"},
+        {"version":"2022.03.1","url":"https://github.com/Servoy/custom-rendered-components/releases/download/v2022.03.1/customrenderedcomponents.zip", "servoy-version":"2022.3"}
     ]
 }
