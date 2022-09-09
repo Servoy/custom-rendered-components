@@ -60,7 +60,7 @@ export class BaseList extends ServoyBaseComponent<HTMLDivElement> {
 
     public svyOnChanges(changes: SimpleChanges) {
         super.svyOnChanges(changes);
-        if (changes.data) {
+        if (changes.data || changes.entryRendererFunction) {
             this.cache = [];
         }
     }
