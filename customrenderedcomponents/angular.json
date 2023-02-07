@@ -23,27 +23,16 @@
               "tsConfig": "projects/customrenderedcomponents/tsconfig.lib.prod.json"
             }
           }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "preserveSymlinks": true,
-            "main": "projects/customrenderedcomponents/src/test.ts",
-            "tsConfig": "projects/customrenderedcomponents/tsconfig.spec.json",
-            "karmaConfig": "projects/customrenderedcomponents/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "preserveSymlinks": true,
-            "lintFilePatterns": [
-              "projects/customrenderedcomponents/src/**/*.ts",
-              "projects/customrenderedcomponents/src/**/*.html"
-            ]
-          }
         }
       }
+    }
+  },
+  "schematics": {
+    "@angular-eslint/schematics:application": {
+      "setParserOptionsProject": true
+    },
+    "@angular-eslint/schematics:library": {
+      "setParserOptionsProject": true
     }
   }
 }
