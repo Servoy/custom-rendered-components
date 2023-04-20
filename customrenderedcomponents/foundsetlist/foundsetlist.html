@@ -6,7 +6,7 @@
     </div>
 	<div class="list-item"
         ng-class="getEntryStyleClass(entry, $index)"
-        ng-repeat="entry in model.data"
+        ng-repeat="entry in data"
         bind-list-html-compile="getEntryRenderer(entry, $index)"
 		svy-tooltip="getTooltip($index)" 
         svy-click='onEntryClick(entry, $index, $event)'

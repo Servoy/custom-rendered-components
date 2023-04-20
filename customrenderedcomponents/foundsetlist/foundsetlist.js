@@ -24,7 +24,7 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 				var elementList = $element.find('.svy-extra-listcomponent');
 				
 				if ($scope.svyServoyapi.isInDesigner()) {
-					$scope.model.data = [{ dp0: "dp0", dp1: "dp1" }];
+					$scope.data = [{ dp0: "dp0", dp1: "dp1" }];
 				}
 
 				$scope.getEntryStyleClass = function(entry, fsIndex) {
@@ -266,7 +266,7 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 							var sanitizedRow = $scope.getSanitizedData($scope.model.foundset.viewPort.rows[i]);
 							data.push(sanitizedRow);
 						}
-						$scope.model.data = data;
+						$scope.data = data;
 						
 						// init the Sortable object
 						initSortable();

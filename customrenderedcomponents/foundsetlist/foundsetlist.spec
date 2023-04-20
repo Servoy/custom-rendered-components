@@ -11,7 +11,6 @@
 	],
 	"model":
 	{
-		"data": 								{ "type": "object[]", "tags": {"scope" : "private"} },
 		"entryRendererFunction": 				{ "type": "clientfunction" },
 		"responsiveHeight": 					{ "type": "int", "default": 500 },
 		"responsiveDynamicHeight": 				{ "type": "boolean", "default": false },
