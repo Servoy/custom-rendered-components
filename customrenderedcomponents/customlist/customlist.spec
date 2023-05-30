@@ -5,6 +5,7 @@
 	"version": 1,
 	"icon" :"customrenderedcomponents/arc-icon-16.png",
 	"definition": "customrenderedcomponents/customlist/customlist.js",
+	"doc": "customrenderedcomponents/customlist/customlist_doc.js",
 	"serverscript": "customrenderedcomponents/customlist/customlist_server.js",
 	"libraries": [
 		{ "name": "listcomponent.css", "version": "1.0", "url": "customrenderedcomponents/css/listcomponent.css", "mimetype": "text/css" },

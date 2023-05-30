@@ -5,6 +5,7 @@
 	"version": 1,
 	"icon" :"customrenderedcomponents/arc-icon-16.png",
 	"definition": "customrenderedcomponents/foundsetlist/foundsetlist.js",
+	"doc": "customrenderedcomponents/foundsetlist/foundsetlist_doc.js",
 	"libraries": [
 		{ "name": "listcomponent.css", "version": "1.0", "url": "customrenderedcomponents/css/listcomponent.css", "mimetype": "text/css" },
 		{ "name": "Sortable.js", "version": "1.13.0", "url": "customrenderedcomponents/sortable/Sortable.js", "mimetype": "text/javascript" }
