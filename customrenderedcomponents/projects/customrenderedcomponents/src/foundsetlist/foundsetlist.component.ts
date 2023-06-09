@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, Renderer2, ChangeDetectorRef, SimpleChanges } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, Renderer2, ChangeDetectorRef, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FoundsetChangeListener, IFoundset } from '@servoy/public';
 import { SortableEvent } from 'sortablejs';
@@ -7,6 +7,8 @@ import { BaseList } from '../baselist.component';
 @Component({
     selector: 'customrenderedcomponents-foundsetlist',
     templateUrl: './foundsetlist.html',
+    styleUrls: ['./foundsetlist.css'],
+    encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CustomRenderedComponentsFoundsetList extends BaseList {

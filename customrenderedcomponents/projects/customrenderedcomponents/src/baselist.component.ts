@@ -97,8 +97,19 @@ export class BaseList extends ServoyBaseComponent<HTMLDivElement> {
             }
             return html;
         }
-        return '';
+        return this.sanitizer.bypassSecurityTrustHtml(this.defaultRenderer(entry, index));
     }
+    
+    public defaultRenderer(entry: any, index: number) {
+		var template = '<div>';
+		for (var prop in entry) {
+			if (prop.indexOf('dp') === 0) {
+				template += '<div data-target="' + prop + '" innerHTML="entry.' + prop + '">'+entry[prop]+'</div>';
+			}
+		}
+		template += '</div>';
+		return template;
+	}
 
     public getSanitizedData(entry: any) {
         // return it as is
