@@ -1,14 +1,14 @@
 {
   "name": "@servoy/customrenderedcomponents",
-  "version": "2023.6.1",
+  "version": "2023.9.0",
   "peerDependencies": {
-    "@angular/animations": "^15",
-    "@angular/common": "^15",
-    "@angular/core": "^15",
-    "@angular/forms": "^15"
+    "@angular/animations": "^16",
+    "@angular/common": "^16",
+    "@angular/core": "^16",
+    "@angular/forms": "^16"
   },
   "dependencies": {
-    "@angular/cdk": "<16",
+    "@angular/cdk": "^16",
     "sortablejs": "<2",
     "tslib": "*"
   },
