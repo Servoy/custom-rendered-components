@@ -84,8 +84,11 @@ dp4:"productid"
 foundsetSelector:"db:/example_data/products",
 loadAllRecords:true
 },
+onClick:"BBDD74FB-2379-4B80-9C6A-90B1E2932593",
+onDoubleClickMethodID:"1E91495A-253B-4666-80AF-6E726474933E",
 onDrop:"FEAC62FA-10BF-401F-AF9B-6D57F63C7144",
 onRemove:"5023D16E-7755-4104-9CBF-ED255401DA24",
+onRightClickMethodID:"C1F629D9-F775-4780-9E7E-C7D5CF47CA4F",
 onSortEnd:"9CFE2313-1924-4A07-ABB1-2F886444ACB8",
 sortableEnabled:true,
 sortableOptions:{
@@ -136,7 +139,10 @@ dp4:"productid"
 foundsetSelector:"db:/example_data/products",
 loadAllRecords:true
 },
+onClick:"BBDD74FB-2379-4B80-9C6A-90B1E2932593",
+onDoubleClickMethodID:"1E91495A-253B-4666-80AF-6E726474933E",
 onDrop:"C062E940-44C5-46E9-A271-568DB64F2C41",
+onRightClickMethodID:"C1F629D9-F775-4780-9E7E-C7D5CF47CA4F",
 onSortEnd:"651C797C-3F5F-4A60-87AA-75FC496543AD",
 sortableOptions:{
 dragToOtherList:true,

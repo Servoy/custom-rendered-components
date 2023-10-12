@@ -318,3 +318,77 @@ function onSortEnd2(event, oldIndicies, newIndicies, oldEntries, newEntries) {
 		application.output(newEntries[i])
 	}
 }
+
+/**
+ * Called when the mouse is clicked on a list entry.
+ *
+ * @param {JSRecord} record
+ * @param {Number} foundSetIndex
+ * @param {String} dataTarget
+ * @param {JSEvent} event
+ *
+ * @properties={typeid:24,uuid:"4BF50AD8-CEB0-45EC-9B76-507AA11CA580"}
+ */
+function onClick1(record, foundSetIndex, dataTarget, event) {
+	plugins.webnotificationsToastr.info('Click '  + record.productname)
+}
+
+/**
+ * Called upon double click on a list entry.
+ *
+ * @param {JSRecord} record
+ * @param {Number} foundSetIndex
+ * @param {String} dataTarget
+ * @param {JSEvent} event
+ *
+ * @protected
+ *
+ * @properties={typeid:24,uuid:"3F96A455-A9C3-472B-8999-875E09A78C6D"}
+ */
+function onDoubleClick(record, foundSetIndex, dataTarget, event) {
+	plugins.webnotificationsToastr.error('Double Click ' + record.productname)
+}
+
+/**
+ * Called upon right click on a list entry.
+ *
+ * @param {JSRecord} record
+ * @param {Number} foundSetIndex
+ * @param {String} dataTarget
+ * @param {JSEvent} event
+ *
+ * @protected
+ *
+ * @properties={typeid:24,uuid:"AC9C0616-A1EF-4458-A131-7380F1E61459"}
+ */
+function onRightClick(record, foundSetIndex, dataTarget, event) {
+	plugins.webnotificationsToastr.warning('Right Click '+ record.productname)
+}
+
+/**
+ * Click event. dataTarget parameter is used to identify inner html elements (by their data-target attribute).
+ *
+ * @param {JSEvent} event
+ * @param {String} dataTarget
+ *
+ * @properties={typeid:24,uuid:"346467B0-5C4E-4E5E-97E0-70D9397CBA2D"}
+ */
+function onAction(event, dataTarget) {
+	plugins.webnotificationsToastr.info('click')
+
+}
+
+/**
+ * DoubleClick event. dataTarget parameter is used to identify inner html elements (by their data-target attribute).
+ *
+ * @param {JSEvent} event
+ * @param {String} dataTarget
+ *
+ * @protected
+ *
+ * @properties={typeid:24,uuid:"DB2A4CA1-3FE6-402F-8961-235B5D96529F"}
+ */
+function onDoubleClick1(event, dataTarget) {
+	plugins.webnotificationsToastr.error('DOUBLE click')
+
+}

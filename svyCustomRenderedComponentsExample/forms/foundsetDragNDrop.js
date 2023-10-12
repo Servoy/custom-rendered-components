@@ -263,3 +263,49 @@ function onDropList1(event, oldIndicies, newIndicies, recordsMoved, recordsMoved
 	filterCat1();
 	filterCat2();
 }
+
+/**
+ * Called when the mouse is clicked on a list entry.
+ *
+ * @param {JSRecord} record
+ * @param {Number} foundSetIndex
+ * @param {String} dataTarget
+ * @param {JSEvent} event
+ *
+ * @properties={typeid:24,uuid:"BBDD74FB-2379-4B80-9C6A-90B1E2932593"}
+ */
+function onClick1(record, foundSetIndex, dataTarget, event) {
+	plugins.webnotificationsToastr.info('Click ' + record.getPKs().join(' ') + ' ' + record.productname)
+}
+
+/**
+ * Called upon double click on a list entry.
+ *
+ * @param {JSRecord} record
+ * @param {Number} foundSetIndex
+ * @param {String} dataTarget
+ * @param {JSEvent} event
+ *
+ * @protected
+ *
+ * @properties={typeid:24,uuid:"1E91495A-253B-4666-80AF-6E726474933E"}
+ */
+function onDoubleClick(record, foundSetIndex, dataTarget, event) {
+	plugins.webnotificationsToastr.error('Double Click ' + record.getPKs().join(' ') + ' ' + record.productname)
+}
+
+/**
+ * Called upon right click on a list entry.
+ *
+ * @param {JSRecord} record
+ * @param {Number} foundSetIndex
+ * @param {String} dataTarget
+ * @param {JSEvent} event
+ *
+ * @protected
+ *
+ * @properties={typeid:24,uuid:"C1F629D9-F775-4780-9E7E-C7D5CF47CA4F"}
+ */
+function onRightClick(record, foundSetIndex, dataTarget, event) {
+	plugins.webnotificationsToastr.warning('Right Click ' + record.getPKs().join(' ') + ' ' + record.productname)
+}

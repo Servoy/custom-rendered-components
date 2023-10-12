@@ -13,6 +13,8 @@ right:"-1",
 top:"8",
 width:"445"
 },
+onActionMethodID:"346467B0-5C4E-4E5E-97E0-70D9397CBA2D",
+onDoubleClickMethodID:"DB2A4CA1-3FE6-402F-8961-235B5D96529F",
 size:{
 height:30,
 width:80
@@ -47,7 +49,10 @@ dragSortableOptions:{
 svyUUID:"2BC92812-1FF7-4ACA-8465-CFBE90893CDD"
 },
 dropEnabled:true,
+onClick:"4BF50AD8-CEB0-45EC-9B76-507AA11CA580",
+onDoubleClickMethodID:"3F96A455-A9C3-472B-8999-875E09A78C6D",
 onDrop:"83EF2FA7-C9E8-4C27-B349-ADB5B0CFEDCE",
+onRightClickMethodID:"AC9C0616-A1EF-4458-A131-7380F1E61459",
 onSortEnd:"A8147619-6EAA-4D6B-902A-E0A33E01C011",
 sortableEnabled:true,
 tooltipFunction:"function getTooltip(dataTarget, entry) {\r\
@@ -104,7 +109,10 @@ multiDrag:true,
 svyUUID:"198BBD57-404B-44A5-AB49-E9665CFAC621"
 },
 dropEnabled:true,
+onClick:"4BF50AD8-CEB0-45EC-9B76-507AA11CA580",
+onDoubleClickMethodID:"3F96A455-A9C3-472B-8999-875E09A78C6D",
 onDrop:"241F0138-FC9F-45BD-8EFB-A1118E7AC39F",
+onRightClickMethodID:"AC9C0616-A1EF-4458-A131-7380F1E61459",
 onSortEnd:"26EEBA45-94AE-4D84-B758-608A3090C122",
 sortableEnabled:true,
 tooltipFunction:"function getTooltip(dataTarget, entry) {\r\
