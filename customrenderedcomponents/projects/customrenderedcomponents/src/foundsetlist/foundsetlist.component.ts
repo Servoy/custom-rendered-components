@@ -22,6 +22,8 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
 
     @Input() onFirstItemClick: (event: Event, dataTarget: string) => void;
     @Input() onLastItemClick: (event: Event, dataTarget: string) => void;
+    
+    timeoutID: number;
 
     constructor(renderer: Renderer2, cdRef: ChangeDetectorRef, sanitizer: DomSanitizer) {
         super(renderer, cdRef, sanitizer);
@@ -49,9 +51,11 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
         super.ngOnDestroy();
         if (this.foundset) this.foundset.removeChangeListener(this.foundsetListener);
     }
-
+    
+    
     public onEntryClick(index: number, event: MouseEvent) {
-        let newSelection = [index];
+		
+		let newSelection = [index];
 
         if (this.foundset && this.foundset.multiSelect === true && event.ctrlKey) {
             newSelection = this.foundset.selectedRowIndexes ? this.foundset.selectedRowIndexes.slice() : [];
@@ -84,7 +88,27 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
         if (this.foundset) {
             this.foundset.requestSelectionUpdate(newSelection);
         }
-
+		
+		// trigger click only if is not a double click
+        if (this.onClick) {
+			if (this.onDoubleClickMethodID) {
+				if (this.timeoutID) {
+                	window.clearTimeout(this.timeoutID);
+                    this.timeoutID = null;
+                    // double click, do nothing will be done in sub classes
+                } else {
+    	            this.timeoutID = window.setTimeout(() => {
+                    	this.timeoutID = null;
+                    	this.onEntryClickHandler(index, event);
+                    }, 250);
+                }
+            } else {
+            	this.onEntryClickHandler(index, event);
+            }
+        }
+    }
+    
+    public onEntryClickHandler(index: number, event: MouseEvent) {
         if (this.onClick) {
             const target = event.target as Element;
             const dataTarget = target.closest('[data-target]');
@@ -94,6 +118,34 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
             }
             const record = this.foundset.viewPort.rows[index];
             this.onClick(record, index + 1, data, event);
+        }
+    }
+    
+    public onEntryRightClick(index: number, event: MouseEvent) {
+        if (this.onRightClickMethodID) {
+			event.preventDefault();
+			event.stopPropagation();
+            const target = event.target as Element;
+            const dataTarget = target.closest('[data-target]');
+            let data: string;
+            if (dataTarget) {
+                data = dataTarget.getAttribute('data-target');
+            }
+            const record = this.foundset.viewPort.rows[index];
+            this.onRightClickMethodID(record, index + 1, data, event);
+        }
+    }
+    
+    public onEntryDoubleClick(index: number, event: Event) {
+        if (this.onDoubleClickMethodID) {
+            const target = event.target as Element;
+            const dataTarget = target.closest('[data-target]');
+            let data: string;
+            if (dataTarget) {
+                data = dataTarget.getAttribute('data-target');
+            }
+            const record = this.foundset.viewPort.rows[index];
+            this.onDoubleClickMethodID(record, index + 1, data, event);
         }
     }
 

@@ -10,7 +10,9 @@
         [attr.data-idx]="$index"
 		[svyTooltip]="getTooltip($index)" 
         *ngFor="let entry of data;let $index = index;"
-        (click)='onEntryClick($index, $event)'>
+        (click)='onEntryClick($index, $event)'
+		(contextmenu)="onEntryRightClick($index, $event)"
+		(dblclick)='onEntryDoubleClick($index, $event)'>
     </div>
 	<div class="last-list-item"
         *ngIf="lastItemHtml"

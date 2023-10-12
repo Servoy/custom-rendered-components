@@ -41,6 +41,24 @@
 				{ "name": "event", "type": "JSEvent" }
 			]
 		},
+		"onRightClickMethodID": {
+			"doc": "Called upon right click on a list entry",
+			"parameters": [
+				{ "name": "record", "type": "record" },
+				{ "name": "foundSetIndex", "type": "int" },
+				{ "name": "dataTarget", "type": "string" },
+				{ "name": "event", "type": "JSEvent" }
+			]
+		},
+		"onDoubleClickMethodID": {
+			"doc": "Called upon double click on a list entry",
+			"parameters": [
+				{ "name": "record", "type": "record" },
+				{ "name": "foundSetIndex", "type": "int" },
+				{ "name": "dataTarget", "type": "string" },
+				{ "name": "event", "type": "JSEvent" }
+			]
+		},
 		"onFirstItemClick": {
 			"doc": "Called when the mouse is clicked on the optional firstItemHtml",
 			"parameters": [

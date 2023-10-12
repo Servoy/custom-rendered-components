@@ -12,6 +12,7 @@ export class CustomRenderedComponentsCustomList extends BaseList {
     @Input() selectedIndex: number;
     @Input() entryStyleClassFunction: (entry: any) => string;
 
+	timeoutID: number;
 
     constructor(renderer: Renderer2, cdRef: ChangeDetectorRef, sanitizer: DomSanitizer) {
         super(renderer, cdRef, sanitizer);
@@ -24,14 +25,57 @@ export class CustomRenderedComponentsCustomList extends BaseList {
 
     public onEntryClick(entry: any, index: number, event: MouseEvent) {
         this.selectedIndex = index;
-        if (this.onClick) {
+        if (this.onClick) {		
+			if (this.onDoubleClickMethodID) {
+				if (this.timeoutID) {
+                	window.clearTimeout(this.timeoutID);
+                    this.timeoutID = null;
+                    // double click, do nothing will be done in sub classes
+                } else {
+    	            this.timeoutID = window.setTimeout(() => {
+                    	this.timeoutID = null;
+                    	this.onEntryClickHandler(entry, index, event);
+                    }, 250);
+                }
+            } else {
+            	this.onEntryClickHandler(entry, index, event);
+            }
+        }
+    }
+    
+    private onEntryClickHandler(entry: any, index: number, event: MouseEvent) {
+		const target = event.target as Element;
+        const dataTarget = target.closest('[data-target]');
+        let data: string;
+        if (dataTarget) {
+        	data = dataTarget.getAttribute('data-target');
+        }
+        this.onClick(entry, index, data, event);
+	}
+    
+    public onEntryRightClick(entry: any, index: number, event: MouseEvent) {
+        if (this.onRightClickMethodID) {
+			event.preventDefault();
+			event.stopPropagation();
             const target = event.target as Element;
             const dataTarget = target.closest('[data-target]');
             let data: string;
             if (dataTarget) {
                 data = dataTarget.getAttribute('data-target');
             }
-            this.onClick(entry, index, data, event);
+            this.onRightClickMethodID(entry, index, data, event);
+        }
+    }
+    
+    public onEntryDoubleClick(entry: any, index: number, event: Event) {
+        if (this.onDoubleClickMethodID) {
+            const target = event.target as Element;
+            const dataTarget = target.closest('[data-target]');
+            let data: string;
+            if (dataTarget) {
+                data = dataTarget.getAttribute('data-target');
+            }
+            this.onDoubleClickMethodID(entry, index, data, event);
         }
     }
 

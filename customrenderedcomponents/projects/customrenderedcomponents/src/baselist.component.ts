@@ -21,6 +21,8 @@ export class BaseList extends ServoyBaseComponent<HTMLDivElement> {
     @Input() dragSortableOptions: SortableOptions;
 
     @Input() onClick: (entry: any, index: number, dataTarget: string, event: Event) => void;
+    @Input() onRightClickMethodID: (entry: any, index: number, dataTarget: string, event: Event) => void;
+    @Input() onDoubleClickMethodID: (entry: any, index: number, dataTarget: string, event: Event) => void;
     @Input() onSortEnd: (event: Event, oldIndicies: Array<number>, newIndicies: Array<number>, entriesMoved: Array<any>, entriesMovedTo: Array<any>) => void;
     @Input() onDrop: (event: Event, oldIndicies: Array<number>, newIndicies: Array<number>, entriesMoved: Array<any>, entriesMovedTo: Array<any>) => Promise<any>;
 

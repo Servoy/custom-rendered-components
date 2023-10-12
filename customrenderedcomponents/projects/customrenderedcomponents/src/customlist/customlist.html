@@ -4,6 +4,8 @@
         [innerHTML]="getEntryRenderer(getSanitizedData(entry), $index)"
         [ngClass]="getEntryStyleClass(entry, $index)"
         (click)='onEntryClick(entry, $index, $event)'
+		(contextmenu)="onEntryRightClick(entry, $index, $event)"
+        (dblclick)="onEntryDoubleClick(entry, $index, $event)"
         [attr.data-idx]="$index">
     </div>
 </div>

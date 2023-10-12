@@ -40,6 +40,24 @@
 				{ "name": "event", "type": "JSEvent" }
 			]
 		},
+		"onRightClickMethodID": {
+			"doc": "Called upon right click on a list entry",
+			"parameters": [
+				{ "name": "entry", "type": "object" },
+				{ "name": "index", "type": "int" },
+				{ "name": "dataTarget", "type": "string" },
+				{ "name": "event", "type": "JSEvent" }
+			]
+		},
+		"onDoubleClickMethodID": {
+			"doc": "Called upon double click on a list entry",
+			"parameters": [
+				{ "name": "entry", "type": "object" },
+				{ "name": "index", "type": "int" },
+				{ "name": "dataTarget", "type": "string" },
+				{ "name": "event", "type": "JSEvent" }
+			]
+		},
 		"onSortEnd": {
 			"doc": "Called when Custom List entries are reordered by drag&drop.",
 			"parameters": [
