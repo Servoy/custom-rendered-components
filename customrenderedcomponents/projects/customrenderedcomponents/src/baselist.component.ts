@@ -142,7 +142,7 @@ export class BaseList extends ServoyBaseComponent<HTMLDivElement> {
                         entryValue[i] = this.getSanitizedData(entryValue[i]);
                     }
                     data[dp] = entryValue;
-                } else if ((typeof entryValue) === 'object') {
+                } else if ((typeof entryValue) === 'object' && !(entryValue instanceof Date)) {
                     // nested object
                     entryValue = this.getSanitizedData(entryValue);
                     data[dp] = entryValue;

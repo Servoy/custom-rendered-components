@@ -110,7 +110,7 @@ angular.module('customrenderedcomponentsFoundsetlist', ['servoy'])
 									entryValue[i] = $scope.getSanitizedData(entryValue[i]);
 								}
 								data[dp] = entryValue;
-							} else if ((typeof entryValue) === 'object') {
+							} else if ((typeof entryValue) === 'object' && !(entryValue instanceof Date)) {
 								// nested object
 								entryValue = $scope.getSanitizedData(entryValue);
 								data[dp] = entryValue;
