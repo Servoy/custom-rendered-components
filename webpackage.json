@@ -3,7 +3,7 @@
     "displayName":"Advanced Renderers",
     "packageType": "Web-Component",
     "icon": "https://raw.githubusercontent.com/Servoy/custom-rendered-components/master/arc-icon-64.png",
-    "description": "Simple repeating renderer components for FoundSets or custom data",
+    "description": "Simple repeating renderer components for FoundSets or custom data. They can be used to generate HTML directly from data.",
     "wikiUrl": "https://github.com/Servoy/custom-rendered-components/wiki",
     "sourceUrl" : "https://github.com/Servoy/custom-rendered-components",
     "releases" : [
