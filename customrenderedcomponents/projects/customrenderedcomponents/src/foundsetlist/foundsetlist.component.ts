@@ -31,18 +31,14 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
 
     svyOnChanges(changes: SimpleChanges) {
         super.svyOnChanges(changes);
-        if (changes.foundset && changes.foundset.currentValue !== changes.foundset.previousValue) {
+        if (changes.foundset) {
             if (this.servoyApi.isInDesigner()) return;
-            const prevValue = changes.foundset.previousValue as IFoundset;
-            if (prevValue) {
-                prevValue.removeChangeListener(this.foundsetListener);
-            }
-
+            
             // load data
             this.loadDataFromFoundset();
 
             // addFoundsetListener
-            this.foundset.addChangeListener(this.foundsetListener);
+            this.foundset && this.foundset.addChangeListener(this.foundsetListener);
         }
     }
 
