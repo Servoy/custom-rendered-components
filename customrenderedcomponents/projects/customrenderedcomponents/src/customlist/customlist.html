@@ -6,6 +6,7 @@
         (click)='onEntryClick(entry, $index, $event)'
 		(contextmenu)="onEntryRightClick(entry, $index, $event)"
         (dblclick)="onEntryDoubleClick(entry, $index, $event)"
-        [attr.data-idx]="$index">
+        [attr.data-idx]="$index"
+        (pointermove)="showtooltip($event, entry)">
     </div>
 </div>

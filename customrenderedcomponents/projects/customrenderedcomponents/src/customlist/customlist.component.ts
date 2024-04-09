@@ -2,6 +2,7 @@ import { Component, Input, ChangeDetectionStrategy, Renderer2, ChangeDetectorRef
 import { DomSanitizer } from '@angular/platform-browser';
 import { BaseList } from '../baselist.component';
 import { SortableEvent } from 'sortablejs';
+import { ServoyPublicService, TooltipService } from '@servoy/public';
 
 @Component({
     selector: 'customrenderedcomponents-customlist',
@@ -14,8 +15,9 @@ export class CustomRenderedComponentsCustomList extends BaseList {
 
 	timeoutID: number;
 
-    constructor(renderer: Renderer2, cdRef: ChangeDetectorRef, sanitizer: DomSanitizer) {
-        super(renderer, cdRef, sanitizer);
+    constructor(renderer: Renderer2, cdRef: ChangeDetectorRef, sanitizer: DomSanitizer, 
+    	tooltipService: TooltipService, servoyService: ServoyPublicService) {
+        super(renderer, cdRef, sanitizer,tooltipService,servoyService);
     }
 
     svyOnInit() {

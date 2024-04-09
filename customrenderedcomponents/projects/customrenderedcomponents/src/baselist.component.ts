@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Directive, Input, Renderer2, SecurityContext, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { ServoyBaseComponent } from '@servoy/public';
+import { ServoyBaseComponent, ServoyPublicService, TooltipService } from '@servoy/public';
 import { SortableOptions } from './sortableoptions';
 import Sortable, { Options, SortableEvent } from 'sortablejs';
 
@@ -13,7 +13,7 @@ export class BaseList extends ServoyBaseComponent<HTMLDivElement> {
     @Input() styleClass: string;
     @Input() selectionClass: string;
     @Input() enabled: boolean;
-    @Input() tooltipFunction: () => void;
+    @Input() tooltipFunction: (dataTarget: string,entry:any) => string;
     @Input() showAs: string;
     @Input() dragEnabled: boolean;
     @Input() dropEnabled: boolean;
@@ -30,9 +30,21 @@ export class BaseList extends ServoyBaseComponent<HTMLDivElement> {
 
     private sortableObj: Sortable;
     private layoutStyle: { position?: string; maxHeight?: string; height?: string } = {};
+    
+    private initialDelay = 750;
+    private dismissDelay = 5000;
+    
+    public dataTarget: string;
 
-    constructor(renderer: Renderer2, cdRef: ChangeDetectorRef, private sanitizer: DomSanitizer) {
+    constructor(renderer: Renderer2, cdRef: ChangeDetectorRef, private sanitizer: DomSanitizer, 
+    		private tooltipService: TooltipService, servoyService: ServoyPublicService) {
         super(renderer, cdRef);
+        
+		this.initialDelay = servoyService.getUIProperty("tooltipInitialDelay");
+        if (this.initialDelay === null || isNaN(this.initialDelay)) this.initialDelay = 750;
+        this.dismissDelay = servoyService.getUIProperty("tooltipDismissDelay");
+        if (this.dismissDelay === null || isNaN(this.dismissDelay)) this.dismissDelay = 5000;
+
     }
 
     // api
@@ -64,6 +76,22 @@ export class BaseList extends ServoyBaseComponent<HTMLDivElement> {
         super.svyOnChanges(changes);
         if (changes.data || changes.entryRendererFunction) {
             this.cache = [];
+        }
+    }
+    
+    public showtooltip(event: MouseEvent, entry: any) {
+		if (!this.tooltipFunction) return;
+        const element = (event.target as Element).closest('[data-target]');
+        if (element) {
+			const target = element.getAttribute('data-target');
+			if (target == this.dataTarget) return;
+            this.dataTarget = target;
+            this.tooltipService.hideTooltip();
+            const message = this.tooltipFunction(this.dataTarget,entry);
+            if (message) this.tooltipService.showTooltip(event,message, this.initialDelay, this.dismissDelay);
+        } else {
+            this.dataTarget = null;
+            this.tooltipService.hideTooltip();
         }
     }
 

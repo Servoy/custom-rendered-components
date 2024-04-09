@@ -5,14 +5,15 @@
         (click)='onFirstItemClicked($event)'>
     </div>
 	<div class="list-item"
+        *ngFor="let entry of data;let $index = index;"
         [ngClass]="getEntryStyleClass($index, entry)"
         [innerHTML]="getEntryRenderer(entry, $index + 1)"
         [attr.data-idx]="$index"
 		[svyTooltip]="getTooltip($index)" 
-        *ngFor="let entry of data;let $index = index;"
         (click)='onEntryClick($index, $event)'
 		(contextmenu)="onEntryRightClick($index, $event)"
-		(dblclick)='onEntryDoubleClick($index, $event)'>
+		(dblclick)='onEntryDoubleClick($index, $event)'
+        (pointermove)="showtooltip($event, entry)">
     </div>
 	<div class="last-list-item"
         *ngIf="lastItemHtml"

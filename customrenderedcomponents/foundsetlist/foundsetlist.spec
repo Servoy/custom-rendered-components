@@ -18,7 +18,7 @@
 		"styleClass": 							{ "type": "styleclass", "tags": { "scope" :"design" } },
 		"selectionClass": 						{ "type": "styleclass" },
 		"enabled": 								{ "type": "enabled", "blockingOn": false, "default": true, "for": ["onClick", "onFirstItemClick", "onLastItemClick"] },
-		"tooltipFunction":						{ "type": "clientfunction" },
+		"tooltipFunction":						{ "type": "clientfunction" , "doc": "This is a client side function that gets 2 arguments: first is the data-target (this should be set in the entry renderer) and second is the entry of the data"},
 		"showAs": 								{ "type": "string", "values": ["html", "trusted_html"], "default" : "html", "tags": { "scope" :"design","doc" :"Option whether text is shown as sanitized html or trusted html (as is)." }},
 		"dragEnabled" : 						{ "type" : "boolean", "default" : false, "tags": { "scope" :"design", "doc": "When set to true, allows to drag records into another FoundSet List element"}},
 		"dropEnabled" : 						{ "type" : "boolean", "default" : false, "tags": { "scope" :"design", "doc": "When set to true, allows to drop records from another FoundSet List element"}},
