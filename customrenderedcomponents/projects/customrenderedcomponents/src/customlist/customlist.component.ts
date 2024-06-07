@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, Renderer2, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, Renderer2, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BaseList } from '../baselist.component';
 import { SortableEvent } from 'sortablejs';
@@ -7,6 +7,8 @@ import { ServoyPublicService, TooltipService } from '@servoy/public';
 @Component({
     selector: 'customrenderedcomponents-customlist',
     templateUrl: './customlist.html',
+	styleUrls: ['./customlist.css'],
+	encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CustomRenderedComponentsCustomList extends BaseList {
@@ -87,7 +89,7 @@ export class CustomRenderedComponentsCustomList extends BaseList {
             this.cache[index] = cache = {};
         }
         let result = cache.style;
-        if (result === undefined) {
+        if (result === undefined && entry !== undefined) {
             result = '';
             if (this.entryStyleClassFunction) {
                 result = this.entryStyleClassFunction(entry);

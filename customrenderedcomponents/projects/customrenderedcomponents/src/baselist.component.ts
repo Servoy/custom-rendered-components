@@ -121,7 +121,7 @@ export class BaseList extends ServoyBaseComponent<HTMLDivElement> {
                 this.cache[index] = cache = {};
             }
             let html = cache.html;
-            if (html === undefined) {
+            if (html === undefined && entry !== undefined) {
                 html = this.sanitizer.bypassSecurityTrustHtml(this.entryRendererFunction(entry, index));
                 cache.html = html;
             }
