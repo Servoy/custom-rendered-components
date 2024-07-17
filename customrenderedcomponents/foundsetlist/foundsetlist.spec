@@ -25,7 +25,7 @@
 		"sortableEnabled" : 					{ "type" : "boolean", "default" : false, "tags": { "scope" :"design", "doc": "When set to true, allows to reorder records within the FoundSet List element using drag & drop"}},
 		"dragSortableOptions":					{ "type": "sortableOptions", "tags": { "scope" :"design", "doc": "Customize options for the drag n'drop and sortable"}},	
 		"visible": 								{ "type": "visible" },
-		"foundset": 							{ "type": "foundset", "dynamicDataproviders": true, "default" : {"foundsetSelector": ""} , "pushToServer": "allow", "initialPreferredViewPortSize": 130, "sendSelectionViewportInitially": true },
+		"foundset": 							{ "type": "foundset", "dynamicDataproviders": true, "default" : {"foundsetSelector": ""} , "initialPreferredViewPortSize": 130, "sendSelectionViewportInitially": true },
 		"entryStyleClassDataProvider":			{ "type": "dataprovider", "forFoundset": "foundset" }, 
 		"tooltipDataProvider":					{ "type": "dataprovider", "forFoundset": "foundset" },
 		"firstItemHtml":						{ "type": "tagstring" },
