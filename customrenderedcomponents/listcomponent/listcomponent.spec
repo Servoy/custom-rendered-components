@@ -15,7 +15,7 @@
 		"entryRendererFunc": 			{ "type": "tagstring" },
 		"entryRendererFunction": 		{ "type": "tagstring" },
 		"visible": 						{ "type": "visible" },
-		"foundset": 					{ "type": "foundset", "dynamicDataproviders": true, "default" : {"foundsetSelector": ""} , "pushToServer": "allow", "initialPreferredViewPortSize": 130, "sendSelectionViewportInitially": true },
+		"foundset": 					{ "type": "foundset", "dynamicDataproviders": true, "default" : {"foundsetSelector": ""} ,"initialPreferredViewPortSize": 130, "sendSelectionViewportInitially": true },
 		"responsiveHeight": 			{ "type": "int", "default": 500 },
 		"responsiveDynamicHeight": 		{ "type": "boolean", "default": false },
 		"styleClass": 					{ "type": "styleclass", "tags": { "scope" :"design" } },
