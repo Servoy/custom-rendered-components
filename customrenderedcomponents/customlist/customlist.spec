@@ -123,6 +123,16 @@
 			]
         }
 	},
+	"internalApi": {
+		"callMethod": {
+			"parameters": [
+				{ "name": "methodName", "type": "string" },
+			 	{ "name": "index", "type": "int"},
+			 	{ "name": "dataTarget", "type": "string" },
+				{ "name": "event", "type": "JSEvent" }
+			]
+		}
+	},
 	"types" : {
 		"sortableOptions" : {
 			"dragType" : { "type" : "string", "default" : "MOVE", "values": [{"MOVE": "MOVE"}, {"COPY": "COPY"}], "tags": { "scope" :"private"}},

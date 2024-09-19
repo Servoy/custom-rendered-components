@@ -37,3 +37,13 @@ $scope.api.removeEntry = function (index) {
 $scope.api.setEntries = function (entries) {
 	$scope.model.data = entries;
 }
+
+$scope.callMethod = function (methodName, index, dataTarget, event) {
+	if (methodName == 'onClick') {
+		$scope.handlers.onClick($scope.api.getEntry(index), index, dataTarget, event);
+	} else if (methodName == 'onRightClickMethodID') {
+		$scope.handlers.onRightClickMethodID($scope.api.getEntry(index), index, dataTarget, event);
+	}	else if (methodName == 'onDoubleClickMethodID') {
+		$scope.handlers.onDoubleClickMethodID($scope.api.getEntry(index), index, dataTarget, event);
+	}
+}

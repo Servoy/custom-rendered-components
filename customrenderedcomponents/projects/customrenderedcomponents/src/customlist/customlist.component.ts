@@ -54,7 +54,7 @@ export class CustomRenderedComponentsCustomList extends BaseList {
         if (dataTarget) {
         	data = dataTarget.getAttribute('data-target');
         }
-        this.onClick(entry, index, data, event);
+		this.servoyApi.callServerSideApi('callMethod', ['onClick', index, data, event]);
 	}
     
     public onEntryRightClick(entry: any, index: number, event: MouseEvent) {
@@ -67,7 +67,7 @@ export class CustomRenderedComponentsCustomList extends BaseList {
             if (dataTarget) {
                 data = dataTarget.getAttribute('data-target');
             }
-            this.onRightClickMethodID(entry, index, data, event);
+			this.servoyApi.callServerSideApi('callMethod', ['onRightClickMethodID', index, data, event]);
         }
     }
     
@@ -79,7 +79,7 @@ export class CustomRenderedComponentsCustomList extends BaseList {
             if (dataTarget) {
                 data = dataTarget.getAttribute('data-target');
             }
-            this.onDoubleClickMethodID(entry, index, data, event);
+			this.servoyApi.callServerSideApi('callMethod', ['onDoubleClickMethodID', index, data, event]);
         }
     }
 
