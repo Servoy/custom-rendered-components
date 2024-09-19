@@ -1,4 +1,4 @@
-<div class="svy-extra-listcomponent" [ngClass]="styleClass" [id]="servoyApi.getMarkupId()" [ngStyle]="getLayoutStyle()" #element>
+<div class="svy-extra-listcomponent" [ngClass]="styleClass" [id]="servoyApi.getMarkupId()" [ngStyle]="getLayoutStyle()" (scroll)="onElementScroll($event)" #element>
 	<div class="first-list-item"
         *ngIf="firstItemHtml"
         [innerHTML]="getSanitizedHtml(firstItemHtml)" 

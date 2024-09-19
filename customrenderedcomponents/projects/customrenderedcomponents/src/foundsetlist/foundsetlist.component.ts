@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, Renderer2, ChangeDetectorRef, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, Renderer2, ChangeDetectorRef, SimpleChanges, ViewEncapsulation, HostListener} from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FoundsetChangeListener, IFoundset, ServoyPublicService, TooltipService } from '@servoy/public';
 import { SortableEvent } from 'sortablejs';
@@ -49,7 +49,31 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
         if (this.foundset) this.foundset.removeChangeListener(this.foundsetListener);
     }
     
+    loadingExtraRecords: boolean = false;
+
+    onElementScroll($event) {
+        // scroll
+        const scrollParent = this.getNativeElement();
+        const scrollTop = scrollParent.scrollTop;
+        const scrollHeight = scrollParent.scrollHeight;
+        const offsetHeight = scrollParent.offsetHeight;
+        const scrollDiff = scrollHeight - scrollTop;
+        const offsetDiff = scrollDiff - offsetHeight;
+
+        if (!this.loadingExtraRecords && offsetDiff < 25 && this.hasMoreRows()) {
+            this.loadingExtraRecords = true;
+            this.foundset.loadExtraRecordsAsync(70, false).finally(() => this.loadingExtraRecords = false);
+        }
+    }
     
+    private hasMoreRows(): boolean {
+        if (this.foundset) {
+            var viewPortLastIndex = this.foundset.viewPort.startIndex + this.foundset.viewPort.size;
+            return this.foundset.hasMoreRows || viewPortLastIndex < this.foundset.serverSize;
+        }
+        return false;
+    }
+
     public onEntryClick(index: number, event: MouseEvent) {
 		
 		let newSelection = [index];
