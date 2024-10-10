@@ -29,7 +29,8 @@
 		"entryStyleClassDataProvider":			{ "type": "dataprovider", "forFoundset": "foundset" }, 
 		"tooltipDataProvider":					{ "type": "dataprovider", "forFoundset": "foundset" },
 		"firstItemHtml":						{ "type": "tagstring" },
-		"lastItemHtml":							{ "type": "tagstring" }
+		"lastItemHtml":							{ "type": "tagstring" },
+		"reverseOrder":                         { "type": "boolean", "default": false }
 	},
 	"handlers" : {
 		"onClick": {

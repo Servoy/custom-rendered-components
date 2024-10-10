@@ -7,3 +7,8 @@
 .svy-extra-listcomponent {
 	overflow: auto;
 }
+
+.svy-extra-listcomponent-reverse {
+    display: flex;
+    flex-flow: column-reverse;
+}

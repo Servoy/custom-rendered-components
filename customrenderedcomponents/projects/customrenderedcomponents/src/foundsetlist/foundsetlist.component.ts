@@ -19,6 +19,8 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
     @Input() tooltipDataProvider: any;
     @Input() firstItemHtml: string;
     @Input() lastItemHtml: string;
+    
+    @Input() reverseOrder: boolean;
 
     @Input() onFirstItemClick: (event: Event, dataTarget: string) => void;
     @Input() onLastItemClick: (event: Event, dataTarget: string) => void;
@@ -41,6 +43,13 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
             // addFoundsetListener
             this.foundset && this.foundset.addChangeListener(this.foundsetListener);
         }
+        if (changes.reverseOrder) {
+            if (changes.reverseOrder.currentValue) {
+                this.renderer.addClass(this.elementRef.nativeElement, 'svy-extra-listcomponent-reverse');
+            } else {
+                this.renderer.removeClass(this.elementRef.nativeElement, 'svy-extra-listcomponent-reverse');
+            }
+        }
     }
 
 
@@ -54,7 +63,7 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
     onElementScroll($event) {
         // scroll
         const scrollParent = this.getNativeElement();
-        const scrollTop = scrollParent.scrollTop;
+        const scrollTop = this.reverseOrder ? scrollParent.scrollTop * -1 : scrollParent.scrollTop;
         const scrollHeight = scrollParent.scrollHeight;
         const offsetHeight = scrollParent.offsetHeight;
         const scrollDiff = scrollHeight - scrollTop;
