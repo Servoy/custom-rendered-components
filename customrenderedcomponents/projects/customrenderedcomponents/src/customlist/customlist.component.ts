@@ -2,7 +2,7 @@ import { Component, Input, ChangeDetectionStrategy, Renderer2, ChangeDetectorRef
 import { DomSanitizer } from '@angular/platform-browser';
 import { BaseList } from '../baselist.component';
 import { SortableEvent } from 'sortablejs';
-import { ServoyPublicService, TooltipService } from '@servoy/public';
+import { ServoyPublicService, JSEvent, EventLike, TooltipService } from '@servoy/public';
 
 @Component({
     selector: 'customrenderedcomponents-customlist',
@@ -18,7 +18,7 @@ export class CustomRenderedComponentsCustomList extends BaseList {
 	timeoutID: number;
 
     constructor(renderer: Renderer2, cdRef: ChangeDetectorRef, sanitizer: DomSanitizer, 
-    	tooltipService: TooltipService, servoyService: ServoyPublicService) {
+    	tooltipService: TooltipService, private servoyService: ServoyPublicService) {
         super(renderer, cdRef, sanitizer,tooltipService,servoyService);
     }
 
@@ -54,7 +54,10 @@ export class CustomRenderedComponentsCustomList extends BaseList {
         if (dataTarget) {
         	data = dataTarget.getAttribute('data-target');
         }
-		this.servoyApi.callServerSideApi('callMethod', ['onClick', index, data, event]);
+
+        const jsEvent: JSEvent = this.servoyService.createJSEvent( event  as EventLike, 'onEntryClick' );
+
+		this.servoyApi.callServerSideApi('callMethod', ['onClick', index, data, jsEvent]);
 	}
     
     public onEntryRightClick(entry: any, index: number, event: MouseEvent) {
@@ -67,11 +70,14 @@ export class CustomRenderedComponentsCustomList extends BaseList {
             if (dataTarget) {
                 data = dataTarget.getAttribute('data-target');
             }
-			this.servoyApi.callServerSideApi('callMethod', ['onRightClickMethodID', index, data, event]);
+
+            const jsEvent: JSEvent = this.servoyService.createJSEvent( event  as EventLike, 'onEntryRightClick' );
+
+			this.servoyApi.callServerSideApi('callMethod', ['onRightClickMethodID', index, data, jsEvent]);
         }
     }
     
-    public onEntryDoubleClick(entry: any, index: number, event: Event) {
+    public onEntryDoubleClick(entry: any, index: number, event: MouseEvent) {
         if (this.onDoubleClickMethodID) {
             const target = event.target as Element;
             const dataTarget = target.closest('[data-target]');
@@ -79,7 +85,10 @@ export class CustomRenderedComponentsCustomList extends BaseList {
             if (dataTarget) {
                 data = dataTarget.getAttribute('data-target');
             }
-			this.servoyApi.callServerSideApi('callMethod', ['onDoubleClickMethodID', index, data, event]);
+
+            const jsEvent: JSEvent = this.servoyService.createJSEvent( event  as EventLike, 'onEntryDoubleClick' );
+
+			this.servoyApi.callServerSideApi('callMethod', ['onDoubleClickMethodID', index, data, jsEvent]);
         }
     }
 
