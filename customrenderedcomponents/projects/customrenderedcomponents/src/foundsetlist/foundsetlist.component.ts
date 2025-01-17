@@ -9,7 +9,8 @@ import { BaseList } from '../baselist.component';
     templateUrl: './foundsetlist.html',
     styleUrls: ['./foundsetlist.css'],
     encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CustomRenderedComponentsFoundsetList extends BaseList {
 

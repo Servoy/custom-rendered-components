@@ -13,7 +13,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "builder": "@angular/build:ng-packagr",
           "options": {
             "tsConfig": "projects/customrenderedcomponents/tsconfig.lib.json",
             "project": "projects/customrenderedcomponents/ng-package.json"

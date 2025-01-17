@@ -7,9 +7,10 @@ import { ServoyPublicService, JSEvent, EventLike, TooltipService } from '@servoy
 @Component({
     selector: 'customrenderedcomponents-customlist',
     templateUrl: './customlist.html',
-	styleUrls: ['./customlist.css'],
-	encapsulation: ViewEncapsulation.None,
-    changeDetection: ChangeDetectionStrategy.OnPush
+    styleUrls: ['./customlist.css'],
+    encapsulation: ViewEncapsulation.None,
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class CustomRenderedComponentsCustomList extends BaseList {
     @Input() selectedIndex: number;
