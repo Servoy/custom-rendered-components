@@ -5,6 +5,7 @@
 	"icon" :"customrenderedcomponents/arc-icon-16.png",
 	"deprecated": "This component should be replaced by either the FoundSet (customrenderedcomponents-foundsetlist) or Custom List (customrenderedcomponents-customlist).",
 	"definition": "customrenderedcomponents/listcomponent/listcomponent.js",
+	"doc": "customrenderedcomponents/listcomponent/listcomponent_doc.js",
 	"serverscript": "customrenderedcomponents/listcomponent/listcomponent_server.js",
 	"libraries": [{ "name": "listcomponent.css", "version": "1.0", "url": "customrenderedcomponents/listcomponent/listcomponent.css", "mimetype": "text/css" }],
 	"model":
