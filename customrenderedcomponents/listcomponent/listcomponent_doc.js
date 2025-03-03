@@ -1,26 +1,3 @@
-var data;
-
-var styleClass;
-
-/**
- * Option whether text is shown as sanitized html or trusted html (as is).
- */
-var showAs;
-
-
-
-var handlers = {
-    /**
-     * Called when the mouse is clicked on a list entry
-     * 
-     * @param {Object} entry
-     * @param {Number} index
-     * @param {String} dataTarget
-     * @param {JSEvent} event
-     */
-    onClick: function() {}
-};
-
 /**
  * Creates a new entry in the `data` model of the List Component. 
  * If the `data` model is not initialized, it will initialize it as an empty array before adding the entry.
