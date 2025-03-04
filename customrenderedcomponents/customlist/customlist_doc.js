@@ -1,3 +1,104 @@
+var entryRendererFunction;
+
+var responsiveHeight;
+
+var responsiveDynamicHeight;
+
+var styleClass;
+
+var selectionClass;
+
+var enabled;
+
+/**
+ * This is a client side function that gets 2 arguments: first is the data-target (this should be set in the entry renderer) and second is the entry of the data
+ */
+var tooltipFunction;
+
+/**
+ * Option whether text is shown as sanitized html or trusted html (as is).
+ */
+var showAs;
+
+/**
+ * When set to true, allows to drag entries into another Custom List element
+ */
+var dragEnabled;
+
+/**
+ * When set to true, allows to drop entries from another Custom List element
+ */
+var dropEnabled;
+
+/**
+ * When set to true, allows to reorder entries within the Custom List element using drag & drop
+ */
+var sortableEnabled;
+
+/**
+ * Customize options for the drag n'drop and sortable
+ */
+var dragSortableOptions;
+
+var visible;
+
+var entryStyleClassFunction;
+
+
+var handlers = {
+    /**
+     * Called when the mouse is clicked on a list entry
+     *
+     * @param {Object} entry
+     * @param {Number} index
+     * @param {String} dataTarget
+     * @param {JSEvent} event
+     */
+    onClick: function() {},
+
+    /**
+     * Called upon right click on a list entry
+     *
+     * @param {Object} entry
+     * @param {Number} index
+     * @param {String} dataTarget
+     * @param {JSEvent} event
+     */
+    onRightClickMethodID: function() {},
+
+    /**
+     * Called upon double click on a list entry
+     *
+     * @param {Object} entry
+     * @param {Number} index
+     * @param {String} dataTarget
+     * @param {JSEvent} event
+     */
+    onDoubleClickMethodID: function() {},
+
+    /**
+     * Called when Custom List entries are reordered by drag&drop.
+     *
+     * @param {JSEvent} event the JSEvent for this element
+     * @param {Array<Number>} oldIndicies the original indexes of the moved entries
+     * @param {Array<Number>} newIndicies the new entries indexes
+     * @param {Array<Object>} entriesMoved the entries sorted
+     * @param {Array<Object>} entriesMovedTo the entries whom have been shifted upon sort end
+     */
+    onSortEnd: function() {},
+
+    /**
+     * Called when entries dragged from another Custom List are dropped into this Custom list element.
+     *
+     * @param {JSEvent} event the JSEvent for this element
+     * @param {Array<Number>} oldIndicies the original indexes, when drag started, of the dropped entries
+     * @param {Array<Number>} newIndicies the new indexes of entries upon drop
+     * @param {Array<Object>} entriesMoved the entries dragged and dropped
+     * @param {Array<Object>} entriesMovedTo the entries whom have been shifted upon drop
+     */
+    onDrop: function() {}
+};
+
 /**
  * Creates a new entry in the Custom List and adds it to the `data` model.
  * If the `data` model is uninitialized, it initializes it as an empty array before adding the entry.
