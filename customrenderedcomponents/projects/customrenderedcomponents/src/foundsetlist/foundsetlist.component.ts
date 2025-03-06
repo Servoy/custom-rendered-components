@@ -27,6 +27,7 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
     @Input() onLastItemClick: (event: Event, dataTarget: string) => void;
     
     timeoutID: number;
+    isNewSelection: boolean = false;
 
     constructor(renderer: Renderer2, cdRef: ChangeDetectorRef, sanitizer: DomSanitizer, 
     	tooltipService: TooltipService, servoyService: ServoyPublicService) {
@@ -35,7 +36,7 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
 
     svyOnChanges(changes: SimpleChanges) {
         super.svyOnChanges(changes);
-        if (changes.foundset) {
+        if (changes.foundset && !this.isNewSelection) {
             if (this.servoyApi.isInDesigner()) return;
             
             // load data
@@ -51,6 +52,7 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
                 this.renderer.removeClass(this.elementRef.nativeElement, 'svy-extra-listcomponent-reverse');
             }
         }
+        this.isNewSelection = false;
     }
 
 
@@ -117,6 +119,7 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
         }
 
         if (this.foundset) {
+            this.isNewSelection = true;
             this.foundset.requestSelectionUpdate(newSelection);
         }
 		
