@@ -144,3 +144,19 @@ function addStyleClassForSelector(selector, styleClass) {
  */
 function removeStyleClassForSelector(selector, styleClass) {
 }				
+
+
+var svy_types = {
+
+    sortableOptions: {
+
+        multiDrag : null,
+
+        multiDragKey : null,
+
+        handle : null,
+
+        animation : null,
+
+    }
+}
