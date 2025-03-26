@@ -27,7 +27,6 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
     @Input() onLastItemClick: (event: Event, dataTarget: string) => void;
     
     timeoutID: number;
-    isNewSelection: boolean = false;
 
     constructor(renderer: Renderer2, cdRef: ChangeDetectorRef, sanitizer: DomSanitizer, 
     	tooltipService: TooltipService, servoyService: ServoyPublicService) {
@@ -36,12 +35,14 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
 
     svyOnChanges(changes: SimpleChanges) {
         super.svyOnChanges(changes);
-        if (changes.foundset && !this.isNewSelection) {
+        if (changes.foundset) {
             if (this.servoyApi.isInDesigner()) return;
             
-            // load data
-            this.loadDataFromFoundset();
-
+            if (changes.foundset.currentValue !== changes.foundset.previousValue) {
+                // load data
+                this.loadDataFromFoundset();
+            }
+            
             // addFoundsetListener
             this.foundset && this.foundset.addChangeListener(this.foundsetListener);
         }
@@ -52,7 +53,6 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
                 this.renderer.removeClass(this.elementRef.nativeElement, 'svy-extra-listcomponent-reverse');
             }
         }
-        this.isNewSelection = false;
     }
 
 
@@ -119,7 +119,6 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
         }
 
         if (this.foundset) {
-            this.isNewSelection = true;
             this.foundset.requestSelectionUpdate(newSelection);
         }
 		
@@ -237,8 +236,9 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
 
     private foundsetListener: FoundsetChangeListener = (changes) => {
         // check to see what actually changed and update what is needed in browser
-        if (changes.viewportRowsCompletelyChanged || changes.viewportRowsUpdated) {
+        if (changes.viewportRowsCompletelyChanged || changes.viewportRowsUpdated || changes.fullValueChanged || changes.serverFoundsetSizeChanged) {
             this.loadDataFromFoundset();
+            this.cdRef.detectChanges();
         }
     };
 

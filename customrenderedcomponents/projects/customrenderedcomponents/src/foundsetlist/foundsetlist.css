@@ -10,5 +10,6 @@
 
 .svy-extra-listcomponent-reverse {
     display: flex;
-    flex-flow: column-reverse;
+    flex-flow: column-reverse !important;
+    overflow-anchor: none;
 }
