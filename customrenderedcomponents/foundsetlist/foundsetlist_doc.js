@@ -1,13 +1,35 @@
+/**
+ * A Custom List Component that displays a foundset of records with custom rendering, drag & drop sorting, and HTML customization.
+ */
+
+/**
+ * A client-side function used to render each entry in the list.
+ */
 var entryRendererFunction;
 
+/**
+ * Responsive height for the list component in pixels.
+ */
 var responsiveHeight;
 
+/**
+ * Flag indicating whether the list height adjusts dynamically based on its content.
+ */
 var responsiveDynamicHeight;
 
+/**
+ * CSS style classes applied to the list component.
+ */
 var styleClass;
 
+/**
+ * CSS style class applied to a selected list entry.
+ */
 var selectionClass;
 
+/**
+ * Flag indicating whether the list is enabled for user interaction.
+ */
 var enabled;
 
 /**
@@ -40,18 +62,39 @@ var sortableEnabled;
  */
 var dragSortableOptions;
 
+/**
+ * Flag indicating whether the list component is visible.
+ */
 var visible;
 
+/**
+ * The foundset of records bound to this component.
+ */
 var foundset;
 
+/**
+ * Data provider used to determine the CSS style class for each list entry.
+ */
 var entryStyleClassDataProvider;
 
+/**
+ * Data provider used to determine the tooltip content for each list entry.
+ */
 var tooltipDataProvider;
 
+/**
+ * Optional HTML content to be displayed for the first item in the list.
+ */
 var firstItemHtml;
 
+/**
+ * Optional HTML content to be displayed for the last item in the list.
+ */
 var lastItemHtml;
 
+/**
+ * When true, the list displays records in reverse order.
+ */
 var reverseOrder;
 
 
@@ -59,46 +102,46 @@ var handlers = {
     /**
      * Called when the mouse is clicked on a list entry
      *
-     * @param {JSRecord} record
-     * @param {Number} foundSetIndex
-     * @param {String} dataTarget
-     * @param {JSEvent} event
+     * @param {JSRecord} record The record corresponding to the clicked entry.
+     * @param {Number} foundSetIndex The index of the clicked entry in the foundset.
+     * @param {String} dataTarget The data target identifier set in the entry renderer.
+     * @param {JSEvent} event The event object associated with the click.
      */
     onClick: function() {},
 
     /**
      * Called upon right click on a list entry
      *
-     * @param {JSRecord} record
-     * @param {Number} foundSetIndex
-     * @param {String} dataTarget
-     * @param {JSEvent} event
+     * @param {JSRecord} record The record corresponding to the right-clicked entry.
+     * @param {Number} foundSetIndex The index of the entry in the foundset.
+     * @param {String} dataTarget The data target identifier set in the entry renderer.
+     * @param {JSEvent} event The event object associated with the right-click.
      */
     onRightClickMethodID: function() {},
 
     /**
      * Called upon double click on a list entry
      *
-     * @param {JSRecord} record
-     * @param {Number} foundSetIndex
-     * @param {String} dataTarget
-     * @param {JSEvent} event
+     * @param {JSRecord} record The record corresponding to the double-clicked entry.
+     * @param {Number} foundSetIndex The index of the entry in the foundset.
+     * @param {String} dataTarget The data target identifier set in the entry renderer.
+     * @param {JSEvent} event The event object associated with the double-click.
      */
     onDoubleClickMethodID: function() {},
 
     /**
      * Called when the mouse is clicked on the optional firstItemHtml
      *
-     * @param {JSEvent} event
-     * @param {String} dataTarget
+     * @param {JSEvent} event The event object associated with the click.
+     * @param {String} dataTarget The data target identifier defined in the entry renderer.
      */
     onFirstItemClick: function() {},
 
     /**
      * Called when the mouse is clicked on the optional lastItemHtml
      *
-     * @param {JSEvent} event
-     * @param {String} dataTarget
+     * @param {JSEvent} event The event object associated with the click.
+     * @param {String} dataTarget The data target identifier.
      */
     onLastItemClick: function() {},
 
@@ -148,15 +191,30 @@ function removeStyleClassForSelector(selector, styleClass) {
 
 var svy_types = {
 
+    /**
+     * Configuration options for sortable behavior in the FoundSet List.
+     */
     sortableOptions: {
 
-        multiDrag : null,
+        /**
+         * When true, allows multiple records to be dragged simultaneously.
+         */
+        multiDrag: null,
 
-        multiDragKey : null,
+        /**
+         * The key used to enable multiple selection during drag (e.g. CTRL).
+         */
+        multiDragKey: null,
 
-        handle : null,
+        /**
+         * CSS style class used to define the drag handle.
+         */
+        handle: null,
 
-        animation : null,
+        /**
+         * Animation duration in milliseconds for drag transitions.
+         */
+        animation: null,
 
     }
 }

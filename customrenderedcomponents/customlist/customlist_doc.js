@@ -1,13 +1,35 @@
+/**
+ * A Custom List Component that displays a list of entries with custom rendering, drag & drop sorting, and dynamic styling.
+ */
+
+/**
+ * A client-side function used to render each entry. It should return HTML for the entry.
+ */
 var entryRendererFunction;
 
+/**
+ * The responsive height for the list component, specified in pixels.
+ */
 var responsiveHeight;
 
+/**
+ * Flag indicating whether the list component should adjust its height dynamically based on its content.
+ */
 var responsiveDynamicHeight;
 
+/**
+ * CSS style classes applied to the list component.
+ */
 var styleClass;
 
+/**
+ * CSS style classes applied to the selected list entry.
+ */
 var selectionClass;
 
+/**
+ * Flag indicating whether the Custom List component is enabled for user interaction.
+ */
 var enabled;
 
 /**
@@ -40,8 +62,14 @@ var sortableEnabled;
  */
 var dragSortableOptions;
 
+/**
+ * Flag indicating whether the Custom List component is visible.
+ */
 var visible;
 
+/**
+ * A client-side function that returns a CSS style class for a list entry based on its data.
+ */
 var entryStyleClassFunction;
 
 
@@ -49,30 +77,30 @@ var handlers = {
     /**
      * Called when the mouse is clicked on a list entry
      *
-     * @param {Object} entry
-     * @param {Number} index
-     * @param {String} dataTarget
-     * @param {JSEvent} event
+     * @param {Object} entry The entry object that was clicked.
+     * @param {Number} index The 0-based index of the clicked entry.
+     * @param {String} dataTarget The identifier for the data target set in the entry renderer.
+     * @param {JSEvent} event The event object associated with the click.
      */
     onClick: function() {},
 
     /**
      * Called upon right click on a list entry
      *
-     * @param {Object} entry
-     * @param {Number} index
-     * @param {String} dataTarget
-     * @param {JSEvent} event
+     * @param {Object} entry The entry object that was right-clicked.
+     * @param {Number} index The 0-based index of the right-clicked entry.
+     * @param {String} dataTarget The identifier for the data target set in the entry renderer.
+     * @param {JSEvent} event The event object associated with the right-click.
      */
     onRightClickMethodID: function() {},
 
     /**
      * Called upon double click on a list entry
      *
-     * @param {Object} entry
-     * @param {Number} index
-     * @param {String} dataTarget
-     * @param {JSEvent} event
+     * @param {Object} entry The entry object that was double-clicked.
+     * @param {Number} index The 0-based index of the double-clicked entry.
+     * @param {String} dataTarget The identifier for the data target set in the entry renderer.
+     * @param {JSEvent} event The event object associated with the double-click.
      */
     onDoubleClickMethodID: function() {},
 
@@ -165,16 +193,30 @@ function removeStyleClassForSelector(selector, styleClass) {
 }
 
 var svy_types = {
-
+    /**
+     * Configuration options for sortable behavior in the Custom List.
+     */
     sortableOptions: {
 
-        multiDrag : null,
+        /**
+         * When true, multiple entries can be dragged simultaneously.
+         */
+        multiDrag: null,
 
-        multiDragKey : null,
+        /**
+         * The key used to enable multiple selection during drag (e.g., CTRL).
+         */
+        multiDragKey: null,
 
-        handle : null,
+        /**
+         * A CSS style class used to define the drag handle.
+         */
+        handle: null,
 
-        animation : null,
+        /**
+         * Animation duration (in milliseconds) for drag transitions.
+         */
+        animation: null,
 
     }
 }

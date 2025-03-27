@@ -1,21 +1,55 @@
+/**
+ * A Custom List Component that displays a list of entries with custom rendering and dynamic styling.
+ */
+
+/**
+ * A client-side function that returns a CSS style class for a list entry.
+ */
 var entryStyleClassFunc;
 
+/**
+ * A client-side function that returns a CSS style class for a list entry.
+ */
 var entryStyleClassFunction;
 
+/**
+ * A client-side function used to render each list entry.
+ */
 var entryRendererFunc;
 
+/**
+ * A client-side function used to render each list entry.
+ */
 var entryRendererFunction;
 
+/**
+ * Flag indicating whether the list component is visible.
+ */
 var visible;
 
+/**
+ * The foundset of records bound to this list component.
+ */
 var foundset;
 
+/**
+ * Responsive height for the list component in pixels.
+ */
 var responsiveHeight;
 
+/**
+ * Flag indicating whether the list height adjusts dynamically based on its content.
+ */
 var responsiveDynamicHeight;
 
+/**
+ * CSS style classes applied to the list component.
+ */
 var styleClass;
 
+/**
+ * CSS style class applied to a selected list entry.
+ */
 var selectionClass;
 
 /**
@@ -23,17 +57,21 @@ var selectionClass;
  */
 var showAs;
 
+/**
+ * Flag indicating whether the list component is enabled for user interaction.
+ */
 var enabled;
+
 
 
 var handlers = {
     /**
      * Called when the mouse is clicked on a list entry
      *
-     * @param {Object} entry
-     * @param {Number} index
-     * @param {String} dataTarget
-     * @param {JSEvent} event
+     * @param {Object} entry The entry object that was clicked.
+     * @param {Number} index The 0-based index of the clicked entry.
+     * @param {String} dataTarget The identifier for the data target set in the entry renderer.
+     * @param {JSEvent} event The event object associated with the click.
      */
     onClick: function() {}
 };
