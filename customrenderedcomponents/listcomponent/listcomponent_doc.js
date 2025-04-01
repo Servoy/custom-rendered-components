@@ -1,5 +1,7 @@
 /**
  * A Custom List Component that displays a list of entries with custom rendering and dynamic styling.
+ * 
+ * DEPRECATED: This component should be replaced by either the FoundSet (customrenderedcomponents-foundsetlist) or Custom List (customrenderedcomponents-customlist).
  */
 
 /**
