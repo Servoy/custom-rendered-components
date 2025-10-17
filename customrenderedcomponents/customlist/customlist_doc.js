@@ -1,4 +1,4 @@
-/**
+/*
  * A Custom List Component that displays a list of entries with custom rendering, drag & drop sorting, and dynamic styling.
  */
 

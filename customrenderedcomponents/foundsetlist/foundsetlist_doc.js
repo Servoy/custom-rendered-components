@@ -1,4 +1,4 @@
-/**
+/*
  * A Custom List Component that displays a foundset of records with custom rendering, drag & drop sorting, and HTML customization.
  */
 
