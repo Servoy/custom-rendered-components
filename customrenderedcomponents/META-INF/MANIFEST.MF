@@ -7,9 +7,6 @@ Bundle-Name: Advanced Renderers
 Bundle-Version: 2025.3.1
 Package-Type: Web-Component
 
-Name: listcomponent/listcomponent.spec
-Web-Component: True
-
 Name: foundsetlist/foundsetlist.spec
 Web-Component: True
 
