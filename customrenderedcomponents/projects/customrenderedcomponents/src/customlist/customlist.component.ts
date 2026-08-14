@@ -1,9 +1,8 @@
-import { Component, inject, input, ChangeDetectionStrategy, Renderer2, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
+import { Component, inject, input, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { NgClass, NgStyle } from '@angular/common';
-import { DomSanitizer } from '@angular/platform-browser';
 import { BaseList } from '../baselist.component';
 import { SortableEvent } from 'sortablejs';
-import { ServoyPublicService, JSEvent, EventLike, TooltipService } from '@servoy/public';
+import { JSEvent, EventLike } from '@servoy/public';
 
 @Component({
     selector: 'customrenderedcomponents-customlist',
@@ -20,10 +19,8 @@ export class CustomRenderedComponentsCustomList extends BaseList {
 
 	timeoutID: number | null = null;
 
-    private servoyService = inject(ServoyPublicService);
-
-    constructor(renderer: Renderer2, cdRef: ChangeDetectorRef) {
-        super(renderer, cdRef);
+    constructor() {
+        super();
     }
 
     svyOnInit() {

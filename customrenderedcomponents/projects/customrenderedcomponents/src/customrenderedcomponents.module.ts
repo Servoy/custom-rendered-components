@@ -6,6 +6,9 @@ import { CustomRenderedComponentsFoundsetList } from './foundsetlist/foundsetlis
 import {SortableOptions} from './sortableoptions';
 import Sortable, { MultiDrag, Swap} from 'sortablejs';
 
+Sortable.mount(new MultiDrag());
+Sortable.mount(new Swap());
+
 @NgModule({
     imports: [
         CustomRenderedComponentsCustomList,
@@ -20,7 +23,5 @@ export class CustomRenderedComponentsModule {
       constructor( specTypesService: SpecTypesService ) {
          specTypesService.registerType('customrenderedcomponents-foundsetlist.sortableOptions', SortableOptions);
          specTypesService.registerType('customrenderedcomponents-customlist.sortableOptions', SortableOptions);
-         Sortable.mount(new MultiDrag());
-         Sortable.mount(new Swap());
       }
 }

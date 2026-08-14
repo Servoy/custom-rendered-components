@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Directive, inject, input, Renderer2, SecurityContext, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Directive, inject, input, SecurityContext, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ServoyBaseComponent, ServoyPublicService, TooltipService } from '@servoy/public';
 import { SortableOptions } from './sortableoptions';
@@ -38,13 +38,13 @@ export class BaseList extends ServoyBaseComponent<HTMLDivElement> {
 
     private sanitizer = inject(DomSanitizer);
     private tooltipService = inject(TooltipService);
+    protected servoyService = inject(ServoyPublicService);
 
-    constructor(renderer: Renderer2, cdRef: ChangeDetectorRef) {
-        super(renderer, cdRef);
-        const servoyService = inject(ServoyPublicService);
-		this.initialDelay = servoyService.getUIProperty("tooltipInitialDelay");
+    constructor() {
+        super();
+		this.initialDelay = this.servoyService.getUIProperty("tooltipInitialDelay");
         if (this.initialDelay === null || isNaN(this.initialDelay)) this.initialDelay = 750;
-        this.dismissDelay = servoyService.getUIProperty("tooltipDismissDelay");
+        this.dismissDelay = this.servoyService.getUIProperty("tooltipDismissDelay");
         if (this.dismissDelay === null || isNaN(this.dismissDelay)) this.dismissDelay = 5000;
     }
 

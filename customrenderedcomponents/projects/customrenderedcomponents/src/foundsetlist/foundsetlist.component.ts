@@ -1,7 +1,6 @@
-import { Component, inject, input, ChangeDetectionStrategy, Renderer2, ChangeDetectorRef, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { Component, inject, input, ChangeDetectionStrategy, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { NgClass, NgStyle } from '@angular/common';
-import { DomSanitizer } from '@angular/platform-browser';
-import { FoundsetChangeListener, IFoundset, ServoyPublicService, TooltipDirective, TooltipService } from '@servoy/public';
+import { FoundsetChangeListener, IFoundset, TooltipDirective } from '@servoy/public';
 import { SortableEvent } from 'sortablejs';
 import { BaseList } from '../baselist.component';
 
@@ -29,8 +28,8 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
     
     timeoutID: number | null = null;
 
-    constructor(renderer: Renderer2, cdRef: ChangeDetectorRef) {
-        super(renderer, cdRef);
+    constructor() {
+        super();
     }
 
     svyOnChanges(changes: SimpleChanges) {
