@@ -1,4 +1,5 @@
-import { Component, Input, ChangeDetectionStrategy, Renderer2, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
+import { Component, inject, input, ChangeDetectionStrategy, Renderer2, ChangeDetectorRef, ViewEncapsulation } from '@angular/core';
+import { NgClass, NgStyle } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { BaseList } from '../baselist.component';
 import { SortableEvent } from 'sortablejs';
@@ -10,17 +11,19 @@ import { ServoyPublicService, JSEvent, EventLike, TooltipService } from '@servoy
     styleUrls: ['./customlist.css'],
     encapsulation: ViewEncapsulation.None,
     changeDetection: ChangeDetectionStrategy.OnPush,
-    standalone: false
+    standalone: true,
+    imports: [NgClass, NgStyle]
 })
 export class CustomRenderedComponentsCustomList extends BaseList {
-    @Input() selectedIndex: number;
-    @Input() entryStyleClassFunction: (entry: any) => string;
+    readonly selectedIndex = input<number>(undefined as any);
+    readonly entryStyleClassFunction = input<(entry: any) => string>(undefined as any);
 
-	timeoutID: number;
+	timeoutID: number | null = null;
 
-    constructor(renderer: Renderer2, cdRef: ChangeDetectorRef, sanitizer: DomSanitizer, 
-    	tooltipService: TooltipService, private servoyService: ServoyPublicService) {
-        super(renderer, cdRef, sanitizer,tooltipService,servoyService);
+    private servoyService = inject(ServoyPublicService);
+
+    constructor(renderer: Renderer2, cdRef: ChangeDetectorRef) {
+        super(renderer, cdRef);
     }
 
     svyOnInit() {
@@ -29,13 +32,11 @@ export class CustomRenderedComponentsCustomList extends BaseList {
     }
 
     public onEntryClick(entry: any, index: number, event: MouseEvent) {
-        this.selectedIndex = index;
-        if (this.onClick) {		
-			if (this.onDoubleClickMethodID) {
+        if (this.onClick()) {		
+			if (this.onDoubleClickMethodID()) {
 				if (this.timeoutID) {
                 	window.clearTimeout(this.timeoutID);
                     this.timeoutID = null;
-                    // double click, do nothing will be done in sub classes
                 } else {
     	            this.timeoutID = window.setTimeout(() => {
                     	this.timeoutID = null;
@@ -51,45 +52,36 @@ export class CustomRenderedComponentsCustomList extends BaseList {
     private onEntryClickHandler(entry: any, index: number, event: MouseEvent) {
 		const target = event.target as Element;
         const dataTarget = target.closest('[data-target]');
-        let data: string;
-        if (dataTarget) {
-        	data = dataTarget.getAttribute('data-target');
-        }
+        const data: string = dataTarget?.getAttribute('data-target') ?? '';
 
         const jsEvent: JSEvent = this.servoyService.createJSEvent( event  as EventLike, 'onEntryClick' );
 
-		this.servoyApi.callServerSideApi('callMethod', ['onClick', index, data, jsEvent]);
+		this.servoyApi().callServerSideApi('callMethod', ['onClick', index, data, jsEvent]);
 	}
     
     public onEntryRightClick(entry: any, index: number, event: MouseEvent) {
-        if (this.onRightClickMethodID) {
+        if (this.onRightClickMethodID()) {
 			event.preventDefault();
 			event.stopPropagation();
             const target = event.target as Element;
             const dataTarget = target.closest('[data-target]');
-            let data: string;
-            if (dataTarget) {
-                data = dataTarget.getAttribute('data-target');
-            }
+            const data: string = dataTarget?.getAttribute('data-target') ?? '';
 
             const jsEvent: JSEvent = this.servoyService.createJSEvent( event  as EventLike, 'onEntryRightClick' );
 
-			this.servoyApi.callServerSideApi('callMethod', ['onRightClickMethodID', index, data, jsEvent]);
+			this.servoyApi().callServerSideApi('callMethod', ['onRightClickMethodID', index, data, jsEvent]);
         }
     }
     
     public onEntryDoubleClick(entry: any, index: number, event: MouseEvent) {
-        if (this.onDoubleClickMethodID) {
+        if (this.onDoubleClickMethodID()) {
             const target = event.target as Element;
             const dataTarget = target.closest('[data-target]');
-            let data: string;
-            if (dataTarget) {
-                data = dataTarget.getAttribute('data-target');
-            }
+            const data: string = dataTarget?.getAttribute('data-target') ?? '';
 
             const jsEvent: JSEvent = this.servoyService.createJSEvent( event  as EventLike, 'onEntryDoubleClick' );
 
-			this.servoyApi.callServerSideApi('callMethod', ['onDoubleClickMethodID', index, data, jsEvent]);
+			this.servoyApi().callServerSideApi('callMethod', ['onDoubleClickMethodID', index, data, jsEvent]);
         }
     }
 
@@ -101,156 +93,122 @@ export class CustomRenderedComponentsCustomList extends BaseList {
         let result = cache.style;
         if (result === undefined && entry !== undefined) {
             result = '';
-            if (this.entryStyleClassFunction) {
-                result = this.entryStyleClassFunction(entry);
+            if (this.entryStyleClassFunction()) {
+                result = this.entryStyleClassFunction()(entry);
             }
             cache.style = result;
         }
-        if (this.selectionClass && this.selectedIndex === index) {
-            result += ' ' + this.selectionClass;
+        if (this.selectionClass() && this.selectedIndex() === index) {
+            result += ' ' + this.selectionClass();
         }
         return result;
     }
 
-    /**
-     * @private
-     * Store draggable data when dragEnabled=true
-     *  */
     private setData = (dataTransfer: DataTransfer, dragEl: HTMLElement) => {
 
         let idx: string;
-        let evtOldIndices = [];
-        let dragElSelected: NodeListOf<Element> = null;
-        if (this.dragSortableOptions && this.dragSortableOptions.multiDrag) {
-            // when multiDrag enabled, find all selected elements. Are the one having the selected class equal to svyextra-listcomponent-dragselected
+        let evtOldIndices: any[] = [];
+        let dragElSelected: NodeListOf<Element> | null = null;
+        if (this.dragSortableOptions() && this.dragSortableOptions().multiDrag) {
             dragElSelected = this.getNativeElement().querySelectorAll('.svyextra-listcomponent-dragselected');
             for (const node of dragElSelected) {
-                idx = node.getAttribute('data-idx');
+                idx = node.getAttribute('data-idx') ?? '';
                 evtOldIndices.push(idx);
             }
         }
 
-        // get the idx of the selected element
         if (!dragElSelected || !dragElSelected.length) {
-            idx = dragEl.getAttribute('data-idx');
+            idx = dragEl.getAttribute('data-idx') ?? '';
             evtOldIndices = [idx];
         }
 
-        const originalArray = this.data.concat([]);
+        const originalArray = this.data().concat([]);
 
-        // get the record reference based on svyRowId
         const entries = [];
         for (const row of evtOldIndices) {
             const entry = originalArray[row];
             entries.push(entry);
         }
 
-        dataTransfer.setData('entries', JSON.stringify(entries)); // `dataTransfer` object of HTML5 DragEvent
+        dataTransfer.setData('entries', JSON.stringify(entries));
     };
 
-    /**
-     * @private
-     * When item is dropped into list (MOVED or COPIED)
-     *  */
     private onAdd = (evt: SortableEvent) => {
 
-        // get the dragged data from the DataTransfer object (see setData)
         const event = evt as any;
         const entries = JSON.parse(event.originalEvent.dataTransfer.getData('entries'));
 
         const evtOldIndices = (evt.oldIndicies.length ? evt.oldIndicies : null) || [{ index: evt.oldIndex }];
         const evtNewIndices = (evt.newIndicies.length ? evt.newIndicies : null) || [{ index: evt.newIndex }];
-        const oldIndicies = [];
-        const newIndicies = [];
-        const entriesMovedTo = [];
+        const oldIndicies: number[] = [];
+        const newIndicies: number[] = [];
+        const entriesMovedTo: any[] = [];
 
-        const originalArray = this.data.concat([]);
+        const originalArray = this.data().concat([]);
 
         for (let o = 0; o < evtNewIndices.length; o++) {
-            // track old entries indexes (0-based)
-            oldIndicies.push(evtOldIndices[o].index);
+            oldIndicies.push(evtOldIndices[o].index!);
 
-            // track new entries indexes (0-based)
-            const newIdx = evtNewIndices[o].index;
+            const newIdx = evtNewIndices[o].index!;
             newIndicies.push(newIdx);
             entriesMovedTo.push(originalArray[newIdx]);
         }
 
-        // add the entry into data
+        const currentData = this.data().concat([]);
         for (let o = 0; o < newIndicies.length; o++) {
-            this.data.splice(newIndicies[o], 0, entries[o]);
+            currentData.splice(newIndicies[o], 0, entries[o]);
         }
-        this.servoyApi.apply('data', this.data);
+        this.servoyApi().apply('data', currentData);
 
-        let cloned = false;
-
-        if (evt.pullMode === 'clone') {
-            cloned = true;
-        } else if (evt.pullMode === true) {
-            cloned = false;
-        }
-
-        // if handler is available
-        if (this.onDrop) {
-            this.onDrop(evt, oldIndicies, newIndicies, entries, entriesMovedTo);
+        if (this.onDrop()) {
+            this.onDrop()(evt, oldIndicies, newIndicies, entries, entriesMovedTo);
         }
         this.cdRef.detectChanges();
     };
 
-    /**
-     * @private
-     * When item is dropped into list (MOVED or COPIED)
-     *  */
     private onRemove = (evt: SortableEvent) => {
 
         const evtOldIndices = (evt.oldIndicies.length ? evt.oldIndicies : null) || [{ index: evt.oldIndex }];
-        const oldIndicies = [];
+        const oldIndicies: number[] = [];
 
         for (const row of evtOldIndices) {
-            // track old entries indexes (0-based)
-            oldIndicies.push(row.index);
+            oldIndicies.push(row.index!);
         }
 
-        let cloned = false;
-
-        if (evt.pullMode === 'clone') {
-            cloned = true;
-        } else if (evt.pullMode === true) {
-            cloned = false;
-
-            // remove the entry from the list since has been moved to a different list
+        if (evt.pullMode === true) {
+            const currentData = this.data().concat([]);
             for (const row of oldIndicies) {
-                this.data.splice(row, 1);
+                currentData.splice(row, 1);
             }
-            this.servoyApi.apply('data', this.data);
+            this.servoyApi().apply('data', currentData);
         }
     };
 
     private sortEnd = (evt: SortableEvent) => {
         const evtOldIndices = (evt.oldIndicies.length ? evt.oldIndicies : null) || [{ index: evt.oldIndex }];
         const evtNewIndices = (evt.newIndicies.length ? evt.newIndicies : null) || [{ index: evt.newIndex }];
-        const oldIndicies = [];
-        const newIndicies = [];
-        const oldEntries = [];
-        const newEntries = [];
+        const oldIndicies: number[] = [];
+        const newIndicies: number[] = [];
+        const oldEntries: any[] = [];
+        const newEntries: any[] = [];
 
-        const originalArray = this.data.concat([]);
+        const originalArray = this.data().concat([]);
+        const currentData = this.data().concat([]);
 
         for (let o = 0; o < evtOldIndices.length; o++) {
-            const oldItem = originalArray[evtOldIndices[o].index];
-            const newItem = originalArray[evt.newIndex];
+            const oldItem = originalArray[evtOldIndices[o].index!];
+            const newItem = originalArray[evt.newIndex!];
 
-            //reorder the data
-            this.data.splice(originalArray.indexOf(oldItem), 1);
-            this.data.splice(originalArray.indexOf(newItem), 0, oldItem);
+            currentData.splice(originalArray.indexOf(oldItem), 1);
+            currentData.splice(originalArray.indexOf(newItem), 0, oldItem);
 
-            oldIndicies.push(evtOldIndices[o].index);
-            newIndicies.push(evtNewIndices[o].index);
+            oldIndicies.push(evtOldIndices[o].index!);
+            newIndicies.push(evtNewIndices[o].index!);
             newEntries.push(newItem);
             oldEntries.push(oldItem);
         }
 
-        this.servoyApi.apply('data', this.data);
-        this.onSortEnd(evt, oldIndicies, newIndicies, oldEntries, newEntries);
+        this.servoyApi().apply('data', currentData);
+        this.onSortEnd()(evt, oldIndicies, newIndicies, oldEntries, newEntries);
     };
 }

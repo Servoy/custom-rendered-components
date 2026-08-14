@@ -1,23 +1,26 @@
-<div class="svy-extra-listcomponent" [ngClass]="styleClass" [id]="servoyApi.getMarkupId()" [ngStyle]="getLayoutStyle()" (scroll)="onElementScroll($event)" #element>
-	<div class="first-list-item"
-        *ngIf="firstItemHtml"
-        [innerHTML]="getSanitizedHtml(firstItemHtml)" 
-        (click)='onFirstItemClicked($event)'>
+<div class="svy-extra-listcomponent" [ngClass]="styleClass()" [id]="servoyApi().getMarkupId()" [ngStyle]="getLayoutStyle()" (scroll)="onElementScroll($event)" #element>
+  @if (firstItemHtml()) {
+    <div class="first-list-item"
+      [innerHTML]="getSanitizedHtml(firstItemHtml())"
+      (click)='onFirstItemClicked($event)'>
     </div>
-	<div class="list-item"
-        *ngFor="let entry of data;let $index = index;"
-        [ngClass]="getEntryStyleClass($index, entry)"
-        [innerHTML]="getEntryRenderer(entry, $index + 1)"
-        [attr.data-idx]="$index"
-		[svyTooltip]="getTooltip($index)" 
-        (click)='onEntryClick($index, $event)'
-		(contextmenu)="onEntryRightClick($index, $event)"
-		(dblclick)='onEntryDoubleClick($index, $event)'
-        (pointermove)="showtooltip($event, entry)">
+  }
+  @for (entry of data(); track entry) {
+    <div class="list-item"
+      [ngClass]="getEntryStyleClass($index, entry)"
+      [innerHTML]="getEntryRenderer(entry, $index + 1)"
+      [attr.data-idx]="$index"
+      [svyTooltip]="getTooltip($index)"
+      (click)='onEntryClick($index, $event)'
+      (contextmenu)="onEntryRightClick($index, $event)"
+      (dblclick)='onEntryDoubleClick($index, $event)'
+      (pointermove)="showtooltip($event, entry)">
     </div>
-	<div class="last-list-item"
-        *ngIf="lastItemHtml"
-        [innerHTML]="getSanitizedHtml(lastItemHtml)" 
-        (click)='onLastItemClicked($event)'>
+  }
+  @if (lastItemHtml()) {
+    <div class="last-list-item"
+      [innerHTML]="getSanitizedHtml(lastItemHtml())"
+      (click)='onLastItemClicked($event)'>
     </div>
+  }
 </div>

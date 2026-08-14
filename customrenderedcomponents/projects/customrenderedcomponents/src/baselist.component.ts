@@ -1,72 +1,58 @@
-import { ChangeDetectorRef, Directive, Input, Renderer2, SecurityContext, SimpleChanges } from '@angular/core';
+import { ChangeDetectorRef, Directive, inject, input, Renderer2, SecurityContext, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ServoyBaseComponent, ServoyPublicService, TooltipService } from '@servoy/public';
 import { SortableOptions } from './sortableoptions';
 import Sortable, { Options, SortableEvent } from 'sortablejs';
 
-@Directive()
+@Directive({ standalone: true })
 export class BaseList extends ServoyBaseComponent<HTMLDivElement> {
-    @Input() data: Array<any>;
-    @Input() entryRendererFunction: (entry: any, index: number) => string;
-    @Input() responsiveHeight: number;
-    @Input() responsiveDynamicHeight: boolean;
-    @Input() styleClass: string;
-    @Input() selectionClass: string;
-    @Input() enabled: boolean;
-    @Input() tooltipFunction: (dataTarget: string,entry:any) => string;
-    @Input() showAs: string;
-    @Input() dragEnabled: boolean;
-    @Input() dropEnabled: boolean;
-    @Input() sortableEnabled: boolean;
-    @Input() dragSortableOptions: SortableOptions;
+    readonly data = input<Array<any>>(undefined as any);
+    readonly entryRendererFunction = input<(entry: any, index: number) => string>(undefined as any);
+    readonly responsiveHeight = input<number>(undefined as any);
+    readonly responsiveDynamicHeight = input<boolean>(undefined as any);
+    readonly styleClass = input<string>(undefined as any);
+    readonly selectionClass = input<string>(undefined as any);
+    readonly enabled = input<boolean>(undefined as any);
+    readonly tooltipFunction = input<(dataTarget: string, entry: any) => string>(undefined as any);
+    readonly showAs = input<string>(undefined as any);
+    readonly dragEnabled = input<boolean>(undefined as any);
+    readonly dropEnabled = input<boolean>(undefined as any);
+    readonly sortableEnabled = input<boolean>(undefined as any);
+    readonly dragSortableOptions = input<SortableOptions>(undefined as any);
 
-    @Input() onClick: (entry: any, index: number, dataTarget: string, event: Event) => void;
-    @Input() onRightClickMethodID: (entry: any, index: number, dataTarget: string, event: Event) => void;
-    @Input() onDoubleClickMethodID: (entry: any, index: number, dataTarget: string, event: Event) => void;
-    @Input() onSortEnd: (event: Event, oldIndicies: Array<number>, newIndicies: Array<number>, entriesMoved: Array<any>, entriesMovedTo: Array<any>) => void;
-    @Input() onDrop: (event: Event, oldIndicies: Array<number>, newIndicies: Array<number>, entriesMoved: Array<any>, entriesMovedTo: Array<any>) => Promise<any>;
+    readonly onClick = input<(entry: any, index: number, dataTarget: string, event: Event) => void>(undefined as any);
+    readonly onRightClickMethodID = input<(entry: any, index: number, dataTarget: string, event: Event) => void>(undefined as any);
+    readonly onDoubleClickMethodID = input<(entry: any, index: number, dataTarget: string, event: Event) => void>(undefined as any);
+    readonly onSortEnd = input<(event: Event, oldIndicies: Array<number>, newIndicies: Array<number>, entriesMoved: Array<any>, entriesMovedTo: Array<any>) => void>(undefined as any);
+    readonly onDrop = input<(event: Event, oldIndicies: Array<number>, newIndicies: Array<number>, entriesMoved: Array<any>, entriesMovedTo: Array<any>) => Promise<any>>(undefined as any);
 
     protected cache: Array<{ html?: SafeHtml; style?: string }> = [];
 
-    private sortableObj: Sortable;
+    private sortableObj!: Sortable;
     private layoutStyle: { position?: string; maxHeight?: string; height?: string } = {};
     
     private initialDelay = 750;
     private dismissDelay = 5000;
     
-    public dataTarget: string;
+    public dataTarget: string | null = null;
 
-    constructor(renderer: Renderer2, cdRef: ChangeDetectorRef, private sanitizer: DomSanitizer, 
-    		private tooltipService: TooltipService, servoyService: ServoyPublicService) {
+    private sanitizer = inject(DomSanitizer);
+    private tooltipService = inject(TooltipService);
+
+    constructor(renderer: Renderer2, cdRef: ChangeDetectorRef) {
         super(renderer, cdRef);
-        
+        const servoyService = inject(ServoyPublicService);
 		this.initialDelay = servoyService.getUIProperty("tooltipInitialDelay");
         if (this.initialDelay === null || isNaN(this.initialDelay)) this.initialDelay = 750;
         this.dismissDelay = servoyService.getUIProperty("tooltipDismissDelay");
         if (this.dismissDelay === null || isNaN(this.dismissDelay)) this.dismissDelay = 5000;
-
     }
 
-    // api
-    /**
-     * Adds the given style class to all items in the list's children that match the selector.
-     * Note that tag selectors are not supported.
-     *
-     * @param String selector
-     * @param String styleClass
-     */
     public addStyleClassForSelector(selector: string, styleClass: string) {
         const list = this.getNativeElement().querySelectorAll(selector);
         list.forEach(element => element.classList.add(styleClass));
     }
 
-    /**
-     * Removes the given style class from all items in the list's children that match the selector.
-     * Note that tag selectors are not supported.
-     *
-     * @param String selector
-     * @param String styleClass
-     */
     public removeStyleClassForSelector(selector: string, styleClass: string) {
         const list = this.getNativeElement().querySelectorAll(selector);
         list.forEach(element => element.classList.remove(styleClass));
@@ -80,15 +66,15 @@ export class BaseList extends ServoyBaseComponent<HTMLDivElement> {
     }
     
     public showtooltip(event: MouseEvent, entry: any) {
-		if (!this.tooltipFunction) return;
+		if (!this.tooltipFunction()) return;
         const element = (event.target as Element).closest('[data-target]');
         if (element) {
 			const target = element.getAttribute('data-target');
 			if (target == this.dataTarget) return;
             this.dataTarget = target;
             this.tooltipService.hideTooltip();
-            const message = this.tooltipFunction(this.dataTarget,entry);
-            if (message) this.tooltipService.showTooltip(event,message, this.initialDelay, this.dismissDelay);
+            const message = this.tooltipFunction()(this.dataTarget!, entry);
+            if (message) this.tooltipService.showTooltip(event, message, this.initialDelay, this.dismissDelay);
         } else {
             this.dataTarget = null;
             this.tooltipService.hideTooltip();
@@ -96,18 +82,17 @@ export class BaseList extends ServoyBaseComponent<HTMLDivElement> {
     }
 
     public getLayoutStyle() {
-        if (!this.servoyApi.isInAbsoluteLayout()) {
+        if (!this.servoyApi().isInAbsoluteLayout()) {
             this.layoutStyle.position = 'relative';
-            if (this.responsiveDynamicHeight) {
-                if (this.responsiveHeight > 0) {
-                    this.layoutStyle.maxHeight = this.responsiveHeight + 'px';
+            if (this.responsiveDynamicHeight()) {
+                if (this.responsiveHeight() > 0) {
+                    this.layoutStyle.maxHeight = this.responsiveHeight() + 'px';
                 }
             } else {
-                if (this.responsiveHeight === 0) {
-                    //                 $element.css("height", "100%");
+                if (this.responsiveHeight() === 0) {
                     this.layoutStyle.height = 100 + '%';
                 } else {
-                    this.layoutStyle.height = this.responsiveHeight + 'px';
+                    this.layoutStyle.height = this.responsiveHeight() + 'px';
                 }
             }
         }
@@ -115,14 +100,14 @@ export class BaseList extends ServoyBaseComponent<HTMLDivElement> {
     }
 
     public getEntryRenderer(entry: any, index: number) {
-        if (this.entryRendererFunction) {
+        if (this.entryRendererFunction()) {
             let cache = this.cache[index];
             if (!cache) {
                 this.cache[index] = cache = {};
             }
             let html = cache.html;
             if (html === undefined && entry !== undefined) {
-                html = this.sanitizer.bypassSecurityTrustHtml(this.entryRendererFunction(entry, index));
+                html = this.sanitizer.bypassSecurityTrustHtml(this.entryRendererFunction()(entry, index));
                 cache.html = html;
             }
             return html;
@@ -131,8 +116,8 @@ export class BaseList extends ServoyBaseComponent<HTMLDivElement> {
     }
     
     public defaultRenderer(entry: any, index: number) {
-		var template = '<div>';
-		for (var prop in entry) {
+		let template = '<div>';
+		for (const prop in entry) {
 			if (prop.indexOf('dp') === 0) {
 				template += '<div data-target="' + prop + '" innerHTML="entry.' + prop + '">'+entry[prop]+'</div>';
 			}
@@ -142,36 +127,28 @@ export class BaseList extends ServoyBaseComponent<HTMLDivElement> {
 	}
 
     public getSanitizedData(entry: any) {
-        // return it as is
         if (this.isTrustedHTML()) {
-            // avoid cycling the object if trusted
             return entry;
         }
 
-        let data = {};
+        let data: any = {};
         if ((typeof entry) === 'string') {
-            // if is a string sanitize the string
             if (this.isTrustedHTML()) {
                 data = this.sanitizer.bypassSecurityTrustHtml(entry);
             } else {
                 data = this.sanitizer.sanitize(SecurityContext.HTML, entry);
             }
         } else if ((typeof entry) === 'object' || entry instanceof Array) {
-            // sanitize items of entry
-            // eslint-disable-next-line guard-for-in
             for (const dp in entry) {
                 let entryValue = entry[dp];
                 if (entryValue === null || entryValue === undefined) {
                     data[dp] = entryValue;
                 } else if (entryValue instanceof Array) {
-                    // handle arrays
-                    // eslint-disable-next-line guard-for-in
                     for (const i in entryValue) {
                         entryValue[i] = this.getSanitizedData(entryValue[i]);
                     }
                     data[dp] = entryValue;
                 } else if ((typeof entryValue) === 'object' && !(entryValue instanceof Date)) {
-                    // nested object
                     entryValue = this.getSanitizedData(entryValue);
                     data[dp] = entryValue;
                 } else if ((typeof entryValue) === 'string' && !this.isTrustedHTML()) {
@@ -183,7 +160,6 @@ export class BaseList extends ServoyBaseComponent<HTMLDivElement> {
                 }
             }
         } else {
-            // if is a number or boolean
             data = entry;
         }
         return data;
@@ -202,54 +178,46 @@ export class BaseList extends ServoyBaseComponent<HTMLDivElement> {
         onRemove: (event: SortableEvent) => void,
         onSortEnd: (event: SortableEvent) => void, groupName: string) {
 
-        /* Enable Sorting */
-        if (this.dragEnabled || this.dropEnabled || this.sortableEnabled) {
-            const sortOptions = this.dragSortableOptions || {} as SortableOptions;
+        if (this.dragEnabled() || this.dropEnabled() || this.sortableEnabled()) {
+            const sortOptions = this.dragSortableOptions() || {} as SortableOptions;
             const opts: Options = {};
 
-            /** Drag Options */
-            opts.sort = this.sortableEnabled;
+            opts.sort = this.sortableEnabled();
 
             opts.group = {
                 name: '',
-                pull: this.dragEnabled, // can drag into other lists
-                put: this.dropEnabled, // can drop from other lists
+                pull: this.dragEnabled(),
+                put: this.dropEnabled(),
             };
 
-            // copy data upon drag
-            if (this.dragEnabled) {
+            if (this.dragEnabled()) {
                 opts.setData = setData;
             }
 
-            // group name
-            if (this.dragEnabled || this.dropEnabled) {
-                opts.group.name = sortOptions.group || groupName;;
+            if (this.dragEnabled() || this.dropEnabled()) {
+                opts.group.name = sortOptions.group || groupName;
             }
 
-            // if drag type is copy
-            if (this.dragEnabled && sortOptions.dragType === 'COPY') {
+            if (this.dragEnabled() && sortOptions.dragType === 'COPY') {
                 opts.group.pull = 'clone';
             }
 
-            /** Common options */
             if (sortOptions.handle) opts.handle = sortOptions.handle;
             if (sortOptions.animation) opts.animation = sortOptions.animation;
             if (sortOptions.selectedClass) opts.selectedClass = sortOptions.selectedClass;
 
-            /** Enable Multi Drag */
             if (sortOptions.multiDrag) {
                 opts.multiDrag = true;
                 opts.selectedClass = 'svyextra-listcomponent-dragselected';
                 if (sortOptions.multiDragKey) opts.multiDragKey = sortOptions.multiDragKey;
             }
 
-            /** Events */
-            if (this.onDrop) {
+            if (this.onDrop()) {
                 opts.onAdd = onAdd;
                 opts.onRemove = onRemove;
             }
 
-            if (this.onSortEnd) {
+            if (this.onSortEnd()) {
                 opts.onEnd = onSortEnd;
             }
 
@@ -261,7 +229,7 @@ export class BaseList extends ServoyBaseComponent<HTMLDivElement> {
     }
 
     private isTrustedHTML() {
-        if (this.servoyApi.trustAsHtml() || this.showAs === 'trusted_html') {
+        if (this.servoyApi().trustAsHtml() || this.showAs() === 'trusted_html') {
             return true;
         }
         return false;
