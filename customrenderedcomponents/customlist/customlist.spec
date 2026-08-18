@@ -13,6 +13,7 @@
 	],
 	"model":
 	{
+		"designsize" : {"type" :"dimension", "tags": {"serveronly": true}, "default" : {"width":300, "height":200}},
 		"data": 							{ "type": "object[]", "tags": {"scope" : "private"}, "pushToServer": "allow" },
 		"entryRendererFunction": 			{ "type": "clientfunction" },
 		"responsiveHeight": 				{ "type": "int", "default": 500 },
