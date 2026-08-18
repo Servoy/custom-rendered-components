@@ -12,7 +12,7 @@
 	],
 	"model":
 	{
-		"designsize" : {"type" :"dimension", "tags": {"serveronly": true}, "default" : {"width":300, "height":200}},
+		"designsize" : {"type" :"dimension", "tags": {"serveronly": true, "scope": "private"}, "default" : {"width":300, "height":200}},
 		"entryRendererFunction": 				{ "type": "clientfunction" },
 		"responsiveHeight": 					{ "type": "int", "default": 500 },
 		"responsiveDynamicHeight": 				{ "type": "boolean", "default": false },

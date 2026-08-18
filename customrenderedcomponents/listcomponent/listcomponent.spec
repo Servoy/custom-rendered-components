@@ -10,7 +10,7 @@
 	"libraries": [{ "name": "listcomponent.css", "version": "1.0", "url": "customrenderedcomponents/listcomponent/listcomponent.css", "mimetype": "text/css" }],
 	"model":
 	{
-		"designsize" : {"type" :"dimension", "tags": {"serveronly": true}, "default" : {"width":300, "height":200}},
+		"designsize" : {"type" :"dimension", "tags": {"serveronly": true, "scope": "private"}, "default" : {"width":300, "height":200}},
 		"data": 						{ "type": "object[]", "tags": {"scope" : "private"} },
 		"entryStyleClassFunc": 			{ "type": "tagstring" },
 		"entryStyleClassFunction": 		{ "type": "tagstring" },
