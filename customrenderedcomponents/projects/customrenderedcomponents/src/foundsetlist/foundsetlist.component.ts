@@ -1,4 +1,4 @@
-import { Component, inject, input, ChangeDetectionStrategy, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { Component, inject, input, signal, ChangeDetectionStrategy, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { NgClass, NgStyle } from '@angular/common';
 import { FoundsetChangeListener, IFoundset, TooltipDirective } from '@servoy/public';
 import { SortableEvent } from 'sortablejs';
@@ -45,9 +45,9 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
         }
         if (changes.reverseOrder) {
             if (changes.reverseOrder.currentValue) {
-                this.renderer.addClass(this.elementRef()?.nativeElement, 'svy-extra-listcomponent-reverse');
+                this.elementRef()?.nativeElement.classList.add('svy-extra-listcomponent-reverse');
             } else {
-                this.renderer.removeClass(this.elementRef()?.nativeElement, 'svy-extra-listcomponent-reverse');
+                this.elementRef()?.nativeElement.classList.remove('svy-extra-listcomponent-reverse');
             }
         }
     }
@@ -58,7 +58,7 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
         if (this.foundset()) this.foundset().removeChangeListener(this.foundsetListener);
     }
     
-    loadingExtraRecords: boolean = false;
+    private loadingExtraRecords = signal(false);
 
     onElementScroll($event: any) {
         const scrollParent = this.getNativeElement();
@@ -68,9 +68,9 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
         const scrollDiff = scrollHeight - scrollTop;
         const offsetDiff = scrollDiff - offsetHeight;
 
-        if (!this.loadingExtraRecords && offsetDiff < 25 && this.hasMoreRows()) {
-            this.loadingExtraRecords = true;
-            this.foundset().loadExtraRecordsAsync(70, false).finally(() => this.loadingExtraRecords = false);
+        if (!this.loadingExtraRecords() && offsetDiff < 25 && this.hasMoreRows()) {
+            this.loadingExtraRecords.set(true);
+            this.foundset().loadExtraRecordsAsync(70, false).finally(() => this.loadingExtraRecords.set(false));
         }
     }
     

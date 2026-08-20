@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Directive, inject, input, SecurityContext, SimpleChanges } from '@angular/core';
+import { Directive, inject, input, SecurityContext, SimpleChanges } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ServoyBaseComponent, ServoyPublicService, TooltipService } from '@servoy/public';
 import { SortableOptions } from './sortableoptions';
