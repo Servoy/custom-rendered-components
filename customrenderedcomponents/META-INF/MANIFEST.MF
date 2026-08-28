@@ -1,6 +1,5 @@
 Manifest-Version: 1.0
 NPM-PackageName: @servoy/customrenderedcomponents
-NG2-Module: CustomRenderedComponentsModule
 NG2-Components: CustomRenderedComponentsCustomList,CustomRenderedComponentsFoundsetList
 Entry-Point: dist/servoy/customrenderedcomponents
 Bundle-SymbolicName: customrenderedcomponents

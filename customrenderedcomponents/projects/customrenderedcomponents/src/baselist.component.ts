@@ -2,7 +2,10 @@ import { Directive, inject, input, SecurityContext, SimpleChanges } from '@angul
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ServoyBaseComponent, ServoyPublicService, TooltipService } from '@servoy/public';
 import { SortableOptions } from './sortableoptions';
-import Sortable, { Options, SortableEvent } from 'sortablejs';
+import Sortable, { MultiDrag, Swap, Options, SortableEvent } from 'sortablejs';
+
+Sortable.mount(new MultiDrag());
+Sortable.mount(new Swap());
 
 @Directive({ standalone: true })
 export class BaseList extends ServoyBaseComponent<HTMLDivElement> {
