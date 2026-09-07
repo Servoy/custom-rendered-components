@@ -1,6 +1,6 @@
 {
   "name": "@servoy/customrenderedcomponents",
-  "version": "2026.6.0",
+  "version": "2026.9.0",
   "dependencies": {
     "@angular/cdk": "^22",
     "@types/sortablejs": "^1.15.0",
