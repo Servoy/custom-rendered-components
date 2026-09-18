@@ -66,7 +66,6 @@ describe('CustomRenderedComponentsFoundsetList', () => {
         ];
         const foundset = createMockFoundset(rows);
         componentRef.setInput('foundset', foundset);
-        componentRef.setInput('data', rows);
         await runOnPushChangeDetection(fixture);
 
         const items = fixture.nativeElement.querySelectorAll('.list-item');
@@ -125,7 +124,6 @@ describe('CustomRenderedComponentsFoundsetList', () => {
         ];
         const foundset = createMockFoundset(rows, { selectedRowIndexes: [1] });
         componentRef.setInput('foundset', foundset);
-        componentRef.setInput('data', rows);
         componentRef.setInput('selectionClass', 'active');
         await runOnPushChangeDetection(fixture);
 
@@ -141,7 +139,6 @@ describe('CustomRenderedComponentsFoundsetList', () => {
         ];
         const foundset = createMockFoundset(rows);
         componentRef.setInput('foundset', foundset);
-        componentRef.setInput('data', rows);
         componentRef.setInput('entryStyleClassDataProvider', ['cls-a', 'cls-b']);
         await runOnPushChangeDetection(fixture);
 
@@ -168,7 +165,6 @@ describe('CustomRenderedComponentsFoundsetList', () => {
         ];
         const foundset = createMockFoundset(rows);
         componentRef.setInput('foundset', foundset);
-        componentRef.setInput('data', rows);
         componentRef.setInput('onClick', () => {});
         await runOnPushChangeDetection(fixture);
 
@@ -186,7 +182,6 @@ describe('CustomRenderedComponentsFoundsetList', () => {
         ];
         const foundset = createMockFoundset(rows, { multiSelect: true, selectedRowIndexes: [0] });
         componentRef.setInput('foundset', foundset);
-        componentRef.setInput('data', rows);
         componentRef.setInput('onClick', () => {});
         await runOnPushChangeDetection(fixture);
 
@@ -222,12 +217,79 @@ describe('CustomRenderedComponentsFoundsetList', () => {
         expect(lastClickSpy).toHaveBeenCalled();
     });
 
+    it('should render from foundset rows and not from the data input', async () => {
+        const rows = [
+            { dp1: 'Row 1', _svyRowId: '1' },
+            { dp1: 'Row 2', _svyRowId: '2' }
+        ];
+        const foundset = createMockFoundset(rows);
+        componentRef.setInput('foundset', foundset);
+        await runOnPushChangeDetection(fixture);
+        expect(fixture.nativeElement.querySelectorAll('.list-item').length).toBe(2);
+    });
+
+    it('should render nothing when only the data input is set', async () => {
+        componentRef.setInput('data', [
+            { dp1: 'A', _svyRowId: '1' },
+            { dp1: 'B', _svyRowId: '2' },
+            { dp1: 'C', _svyRowId: '3' }
+        ]);
+        await runOnPushChangeDetection(fixture);
+        expect(fixture.nativeElement.querySelectorAll('.list-item').length).toBe(0);
+    });
+
+    it('should refresh entries when the foundset viewport changes via the change listener', async () => {
+        let listener: any;
+        const foundset = createMockFoundset(
+            [{ dp1: 'A', _svyRowId: '1' }],
+            { addChangeListener: vi.fn().mockImplementation((cb: any) => { listener = cb; return () => {}; }) }
+        );
+        componentRef.setInput('foundset', foundset);
+        component.svyOnChanges({
+            foundset: { currentValue: foundset, previousValue: undefined, firstChange: true, isFirstChange: () => true }
+        });
+        await runOnPushChangeDetection(fixture);
+        expect(fixture.nativeElement.querySelectorAll('.list-item').length).toBe(1);
+
+        foundset.viewPort.rows = [
+            { dp1: 'A', _svyRowId: '1' },
+            { dp1: 'B', _svyRowId: '2' },
+            { dp1: 'C', _svyRowId: '3' }
+        ];
+        foundset.viewPort.size = 3;
+        listener({ viewportRowsCompletelyChanged: true });
+        await runOnPushChangeDetection(fixture);
+        expect(fixture.nativeElement.querySelectorAll('.list-item').length).toBe(3);
+    });
+
+    it('should render rows tracked by _svyRowId without throwing', async () => {
+        const rows = [
+            { dp1: 'A', _svyRowId: 'a' },
+            { dp1: 'B', _svyRowId: 'b' }
+        ];
+        const foundset = createMockFoundset(rows);
+        componentRef.setInput('foundset', foundset);
+        await runOnPushChangeDetection(fixture);
+        expect(fixture.nativeElement.querySelectorAll('.list-item').length).toBe(2);
+
+        foundset.viewPort.rows = [
+            { dp1: 'A', _svyRowId: 'a' },
+            { dp1: 'B2', _svyRowId: 'b' },
+            { dp1: 'C', _svyRowId: 'c' }
+        ];
+        foundset.viewPort.size = 3;
+        expect(() => (foundset.addChangeListener as any).mock.calls[0][0]({ viewportRowsUpdated: true })).not.toThrow();
+        await runOnPushChangeDetection(fixture);
+        expect(fixture.nativeElement.querySelectorAll('.list-item').length).toBe(3);
+    });
+
     it('should set data-idx attribute on each entry', async () => {
         const rows = [
             { dp1: 'A', _svyRowId: '1' },
             { dp1: 'B', _svyRowId: '2' }
         ];
-        componentRef.setInput('data', rows);
+        const foundset = createMockFoundset(rows);
+        componentRef.setInput('foundset', foundset);
         await runOnPushChangeDetection(fixture);
 
         const items = fixture.nativeElement.querySelectorAll('.list-item');
@@ -250,7 +312,6 @@ describe('CustomRenderedComponentsFoundsetList', () => {
         const rows = [{ dp1: 'A', _svyRowId: '1' }];
         const foundset = createMockFoundset(rows);
         componentRef.setInput('foundset', foundset);
-        componentRef.setInput('data', rows);
 
         component.svyOnChanges({
             foundset: { currentValue: foundset, previousValue: undefined, firstChange: true, isFirstChange: () => true }
@@ -263,7 +324,6 @@ describe('CustomRenderedComponentsFoundsetList', () => {
         const rows = [{ dp1: 'A', _svyRowId: '1' }];
         const foundset = createMockFoundset(rows);
         componentRef.setInput('foundset', foundset);
-        componentRef.setInput('data', rows);
         await runOnPushChangeDetection(fixture);
 
         component.ngOnDestroy();

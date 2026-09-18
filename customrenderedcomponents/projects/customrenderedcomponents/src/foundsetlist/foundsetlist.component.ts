@@ -25,6 +25,8 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
 
     readonly onFirstItemClick = input<(event: Event, dataTarget: string) => void>(undefined as any);
     readonly onLastItemClick = input<(event: Event, dataTarget: string) => void>(undefined as any);
+
+    protected readonly rows = signal<Array<any>>([]);
     
     timeoutID: number | null = null;
 
@@ -36,7 +38,11 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
         super.svyOnChanges(changes);
         if (changes.foundset) {
             if (this.servoyApi().isInDesigner()) return;
-            
+
+            if (changes.foundset.previousValue) {
+                (changes.foundset.previousValue as IFoundset).removeChangeListener(this.foundsetListener);
+            }
+
             if (changes.foundset.currentValue !== changes.foundset.previousValue) {
                 this.loadDataFromFoundset();
             }
@@ -222,12 +228,12 @@ export class CustomRenderedComponentsFoundsetList extends BaseList {
 
     private loadDataFromFoundset() {
         if (this.foundset()) {
-            const data = [];
+            const rows = [];
             for (const row of this.foundset().viewPort.rows) {
-                const sanitizedRow = this.getSanitizedData(row);
-                data.push(sanitizedRow);
+                rows.push(this.getSanitizedData(row));
             }
             this.cache = [];
+            this.rows.set(rows);
 
             this.initSortable(this.setData, this.onAdd, null as any, this.onSort, 'shared-foundsetlist');
         }

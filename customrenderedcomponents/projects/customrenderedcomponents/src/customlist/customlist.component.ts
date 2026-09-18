@@ -131,6 +131,7 @@ export class CustomRenderedComponentsCustomList extends BaseList {
     };
 
     private onAdd = (evt: SortableEvent) => {
+        this.removeSortableElementsFrom(evt, evt.to);
 
         const event = evt as any;
         const entries = JSON.parse(event.originalEvent.dataTransfer.getData('entries'));
@@ -160,7 +161,16 @@ export class CustomRenderedComponentsCustomList extends BaseList {
         if (this.onDrop()) {
             this.onDrop()(evt, oldIndicies, newIndicies, entries, entriesMovedTo);
         }
-        this.cdRef.detectChanges();
+        // SortableJS attaches its own native DOM listeners directly (bypassing Angular's
+        // event binding), so this whole handler runs without notifying Angular's zoneless
+        // scheduler. servoyApi().apply() above mutates the Servoy form's component model
+        // directly; that mutation only reaches this component's `data` input the next time
+        // the ancestor _FormComponent's view is checked and re-evaluates its `[data]` binding.
+        // markForCheck() marks this component and all its ancestors (including _FormComponent)
+        // as needing a check and notifies the scheduler, so that re-evaluation happens on the
+        // next microtask instead of only on some later, unrelated Angular-tracked event (which
+        // is what caused both the NG0100 error and the "need to move the mouse to see it" delay).
+        this.cdRef.markForCheck();
     };
 
     private onRemove = (evt: SortableEvent) => {
@@ -173,15 +183,31 @@ export class CustomRenderedComponentsCustomList extends BaseList {
         }
 
         if (evt.pullMode === true) {
+            this.restoreSortableElementsInto(evt, evt.from);
+
             const currentData = this.data().concat([]);
             for (const row of oldIndicies) {
                 currentData.splice(row, 1);
             }
             this.servoyApi().apply('data', currentData);
+            // See the comment in onAdd: notify the scheduler (and mark ancestors, including
+            // _FormComponent, for check) so the `data` input picks up the applied change on
+            // the next microtask instead of only on some later, unrelated Angular-tracked event.
+            this.cdRef.markForCheck();
         }
     };
 
     private sortEnd = (evt: SortableEvent) => {
+        // onEnd fires on the source list for every drag, including a cross-list move-out;
+        // that case is already fully handled by onAdd (destination)/onRemove (source) above,
+        // so bail here to avoid re-processing it as an intra-list sort (double DOM move,
+        // double servoyApi().apply(), duplicated entries and NG0100).
+        if (evt.pullMode === true || evt.pullMode === 'clone') {
+            return;
+        }
+
+        this.restoreSortableElementsInto(evt, evt.from);
+
         const evtOldIndices = (evt.oldIndicies.length ? evt.oldIndicies : null) || [{ index: evt.oldIndex }];
         const evtNewIndices = (evt.newIndicies.length ? evt.newIndicies : null) || [{ index: evt.newIndex }];
         const oldIndicies: number[] = [];
@@ -206,6 +232,8 @@ export class CustomRenderedComponentsCustomList extends BaseList {
         }
 
         this.servoyApi().apply('data', currentData);
+        // See the comment in onAdd.
+        this.cdRef.markForCheck();
         this.onSortEnd()(evt, oldIndicies, newIndicies, oldEntries, newEntries);
     };
 }

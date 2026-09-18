@@ -5,7 +5,7 @@
       (click)='onFirstItemClicked($event)'>
     </div>
   }
-  @for (entry of data(); track entry) {
+  @for (entry of rows(); track entry._svyRowId) {
     <div class="list-item"
       [ngClass]="getEntryStyleClass($index, entry)"
       [innerHTML]="getEntryRenderer(entry, $index + 1)"

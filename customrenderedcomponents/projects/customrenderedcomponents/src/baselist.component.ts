@@ -231,6 +231,53 @@ export class BaseList extends ServoyBaseComponent<HTMLDivElement> {
         }
     }
 
+    /**
+     * SortableJS moves the dragged element's actual DOM node directly (outside Angular's
+     * knowledge) while dragging, live as the user drags. By the time onAdd/onRemove/onEnd fire,
+     * the node is already wherever it was dropped. Angular's `@for` still believes the DOM
+     * matches its last render, so once the data model changes and Angular reconciles, it can
+     * throw ("insertBefore ... not a child of this node") or leave duplicate/misplaced nodes.
+     * These two helpers undo Sortable's raw DOM move before the data model is updated, so the
+     * DOM is back to what Angular expects and the subsequent data-driven re-render is the only
+     * thing that touches the DOM.
+     *
+     * Both are guarded on the element's *current* parent so they are safe to call from either
+     * side of a cross-list drag regardless of the order in which the source list's onRemove vs.
+     * the destination list's onAdd fire. `removeSortableElementsFrom` also considers `evt.clone`
+     * so `dragType: 'COPY'` drags (which insert a clone rather than the dragged item) are handled.
+     */
+    protected removeSortableElementsFrom(evt: SortableEvent, container: HTMLElement) {
+        const candidates = (evt.oldIndicies && evt.oldIndicies.length)
+            ? evt.oldIndicies.map(i => i.multiDragElement)
+            : [evt.item, evt.clone];
+
+        for (const el of candidates) {
+            if (el && el.parentNode === container) {
+                container.removeChild(el);
+            }
+        }
+    }
+
+    /**
+     * Restores the dragged element(s) into `container` at their original index.
+     * Processed highest-index-first: inserting at a lower index first would shift the
+     * positions of the not-yet-restored higher-index elements, throwing off their target
+     * index (only observable with `multiDrag: true` and 2+ selected items in one drag).
+     */
+    protected restoreSortableElementsInto(evt: SortableEvent, container: HTMLElement) {
+        const indices = (evt.oldIndicies && evt.oldIndicies.length)
+            ? [...evt.oldIndicies].sort((a, b) => b.index - a.index)
+            : [{ multiDragElement: evt.item, index: evt.oldIndex ?? 0 }];
+
+        for (const { multiDragElement, index } of indices) {
+            if (!multiDragElement) continue;
+            if (multiDragElement.parentNode === container) {
+                container.removeChild(multiDragElement);
+            }
+            container.insertBefore(multiDragElement, container.children[index] ?? null);
+        }
+    }
+
     private isTrustedHTML() {
         if (this.servoyApi().trustAsHtml() || this.showAs() === 'trusted_html') {
             return true;
