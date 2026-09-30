@@ -104,6 +104,14 @@ Both components use SortableJS for drag-and-drop. The `initSortable()` method in
 - 2 remaining `cdRef.detectChanges()` calls handle external callbacks (SortableJS `onAdd`, foundset change listener) that run outside Angular's awareness
 - These will be removed when the Servoy runtime supports zoneless
 
+## Jira API
+
+For anything Jira — reading, creating, updating, commenting on, linking, searching (JQL),
+assigning or transitioning issues — load the **`servoy-jira`** skill (global opencode skill)
+and follow its instructions. It holds the connection details (base URL, `ATLASSIAN_AUTH_BASIC`
+auth), the per-OS command recipes and the ADF templates. Always load the skill first rather
+than hand-rolling the REST calls.
+
 ## Commands
 
 All commands run from `customrenderedcomponents/`:
