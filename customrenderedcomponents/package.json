@@ -8,6 +8,8 @@
     "build_debug": "ng build --watch",
     "make_release": "ng build --configuration production && node scripts/build.js",
     "test": "ng test --no-watch",
+    "test:coverage": "ng test --no-watch --coverage --coverage-reporters text-summary --coverage-reporters json-summary --coverage-reporters lcov --coverage-reporters cobertura --coverage-include \"projects/customrenderedcomponents/src/**/*.ts\" --coverage-exclude \"**/*.spec.ts\" --coverage-exclude \"**/*.d.ts\" --coverage-exclude \"**/testingutils.ts\" --coverage-exclude \"**/public-api.ts\"",
+    "coverage:summary": "node scripts/coverage-summary.js",
     "test:watch": "ng test",
     "test:ui": "ng test --ui",
     "lint": "ng lint"
@@ -34,6 +36,7 @@
     "@eslint/js": "^10.0.1",
     "@types/luxon": "^3.7.4",
     "@types/sortablejs": "1.15.9",
+    "@vitest/coverage-v8": "^4.1.10",
     "adm-zip": "0.6.0",
     "angular-eslint": "^22.1.0",
     "eslint": "^10.8.1",
